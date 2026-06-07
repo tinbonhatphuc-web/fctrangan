@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Túi Mù FC</title>
+</head>
+<body>
+
+<h1>Túi Mù FC</h1>
+
+<button onclick="openPack()">MỞ TÚI</button>
+
+<div id="result"></div>
+
+<script>
+const cards = [
+{
+    name:"BOLON",
+    chance:30,
+    image:"cards/bolon.png"
+},
+{
+    name:"HUY",
+    chance:30,
+    image:"cards/huy.png"
+},
+{
+    name:"BONHO",
+    chance:20,
+    image:"cards/bonho.png"
+},
+{
+    name:"BU",
+    chance:10,
+    image:"cards/bu.png"
+},
+{
+    name:"PHI",
+    chance:5,
+    image:"cards/phi.png"
+},
+{
+    name:"tin",
+    chance:5,
+    image:"cards/tin.png"
+}
+];
+
+function randomCard() {
+    let total = 0;
+
+    for (const card of cards) {
+        total += card.chance;
+    }
+
+    let rand = Math.random() * total;
+
+    let current = 0;
+
+    for (const card of cards) {
+        current += card.chance;
+
+        if (rand <= current) {
+            return card;
+        }
+    }
+}
+
+function openPack() {
+    const reward = randomCard();
+
+    document.getElementById("result").innerHTML =
+        `
+        <h2>${reward.name}</h2>
+        <img src="${reward.image}" width="250">
+        `;
+}
+</script>
+</body>
+</html>
