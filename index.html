@@ -2,79 +2,269 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Túi Mù FC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Túi Mù FC Premium</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+color:white;
+background:
+radial-gradient(circle at top,#1b4f8c 0%,#081420 45%,#03070c 100%);
+min-height:100vh;
+overflow-x:hidden;
+}
+body::before{
+content:'';
+position:fixed;inset:0;
+background:radial-gradient(circle,#ffffff22 1px,transparent 1px);
+background-size:40px 40px;
+opacity:.25;
+pointer-events:none;
+}
+.header{
+text-align:center;
+font-size:40px;
+font-weight:bold;
+padding:20px;
+text-shadow:0 0 20px gold;
+}
+.layout{
+display:grid;
+grid-template-columns:260px 1fr 280px;
+gap:20px;
+padding:20px;
+}
+.panel{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+border-radius:18px;
+padding:16px;
+border:1px solid rgba(255,255,255,.15);
+}
+.center{text-align:center}
+.pack{
+width:280px;height:380px;margin:auto;
+border-radius:24px;
+display:flex;align-items:center;justify-content:center;
+font-size:30px;font-weight:bold;
+background:linear-gradient(135deg,#123b67,#08131f);
+box-shadow:0 0 40px gold;
+animation:pulse 2s infinite;
+}
+@keyframes pulse{
+50%{transform:scale(1.03);box-shadow:0 0 70px gold}
+}
+button{
+padding:14px 28px;
+border:none;
+border-radius:14px;
+font-size:18px;
+cursor:pointer;
+font-weight:bold;
+}
+.openBtn{
+background:linear-gradient(90deg,gold,#ffcf33);
+}
+.history{max-height:350px;overflow:auto}
+.overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.88);
+z-index:1000;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+.overlay video{
+max-width:90vw;
+max-height:80vh;
+border-radius:18px;
+}
+.card{
+width:260px;
+height:360px;
+margin:20px auto;
+perspective:1000px;
+}
+.card-inner{
+position:relative;
+width:100%;
+height:100%;
+transform-style:preserve-3d;
+animation:flip 1s forwards;
+}
+@keyframes flip{
+from{transform:rotateY(0)}
+to{transform:rotateY(180deg)}
+}
+.face{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:bold;
+}
+.front{
+background:linear-gradient(135deg,#0d1f31,#224e7c);
+}
+.back{
+transform:rotateY(180deg);
+background:linear-gradient(135deg,#ffd700,#b8860b);
+color:black;
+box-shadow:0 0 40px gold;
+}
+</style>
 </head>
 <body>
 
-<h1>Túi Mù FC</h1>
+<div class="header">⚽ TÚI MÙ FC PREMIUM ⚽</div>
 
-<button onclick="openPack()">MỞ TÚI</button>
+<div class="layout">
+<div class="panel">
+<h3>Tỉ lệ</h3>
+<ul>
+<li>BOLON 30%</li>
+<li>HUY 30%</li>
+<li>BONHO 20%</li>
+<li>BU 10%</li>
+<li>PHI 5%</li>
+<li>tin 5%</li>
+</ul>
+<button onclick="adminLogin()">Admin</button>
+</div>
 
-<div id="result"></div>
+<div class="center">
+<div class="pack">MYSTERY PACK</div><br>
+<button class="openBtn" onclick="openPack()">MỞ TÚI</button>
+</div>
+
+<div class="panel">
+<h3>Lịch sử</h3>
+<div id="history" class="history"></div>
+</div>
+</div>
+
+<div id="overlay" class="overlay">
+<div id="videoHolder"></div>
+<div id="cardHolder"></div>
+</div>
 
 <script>
-const cards = [
-{
-    name:"BOLON",
-    chance:30,
-    image:"cards/bolon.png"
-},
-{
-    name:"HUY",
-    chance:30,
-    image:"cards/huy.png"
-},
-{
-    name:"BONHO",
-    chance:20,
-    image:"cards/bonho.png"
-},
-{
-    name:"BU",
-    chance:10,
-    image:"cards/bu.png"
-},
-{
-    name:"PHI",
-    chance:5,
-    image:"cards/phi.png"
-},
-{
-    name:"tin",
-    chance:5,
-    image:"cards/tin.png"
-}
+const ADMIN_PASSWORD="nhatisreal";
+let isAdmin=false;
+
+const cards=[
+{name:"BOLON",chance:30},
+{name:"HUY",chance:30},
+{name:"BONHO",chance:20},
+{name:"BU",chance:10},
+{name:"PHI",chance:5},
+{name:"tin",chance:5}
 ];
 
-function randomCard() {
-    let total = 0;
-
-    for (const card of cards) {
-        total += card.chance;
-    }
-
-    let rand = Math.random() * total;
-
-    let current = 0;
-
-    for (const card of cards) {
-        current += card.chance;
-
-        if (rand <= current) {
-            return card;
-        }
-    }
+function adminLogin(){
+const p=prompt("Mật khẩu Admin:");
+if(p===ADMIN_PASSWORD){isAdmin=true;alert("Đăng nhập thành công");}
 }
 
-function openPack() {
-    const reward = randomCard();
-
-    document.getElementById("result").innerHTML =
-        `
-        <h2>${reward.name}</h2>
-        <img src="${reward.image}" width="250">
-        `;
+function canOpen(){
+if(isAdmin) return true;
+const today=new Date().toDateString();
+return localStorage.getItem("lastOpen")!==today;
 }
+
+function saveOpen(){
+if(!isAdmin){
+localStorage.setItem("lastOpen",new Date().toDateString());
+}
+}
+
+function randomCard(){
+let total=cards.reduce((a,b)=>a+b.chance,0);
+let r=Math.random()*total;
+let cur=0;
+for(const c of cards){
+cur+=c.chance;
+if(r<=cur) return c;
+}
+}
+
+function addHistory(name){
+let h=JSON.parse(localStorage.getItem("history")||"[]");
+h.unshift(new Date().toLocaleString()+" - "+name);
+h=h.slice(0,10);
+localStorage.setItem("history",JSON.stringify(h));
+renderHistory();
+}
+
+function renderHistory(){
+let h=JSON.parse(localStorage.getItem("history")||"[]");
+document.getElementById("history").innerHTML=h.join("<br>");
+}
+
+function openPack(){
+
+if(!canOpen()){
+alert("Bạn đã mở hôm nay rồi!");
+return;
+}
+
+saveOpen();
+
+const reward=randomCard();
+
+const videoMap={
+BOLON:"videos/bolon.mp4",
+HUY:"videos/huy.mp4",
+BONHO:"videos/bonho.mp4",
+BU:"videos/bu.mp4",
+PHI:"videos/phi.mp4",
+tin:"videos/tin.mp4"
+};
+
+const overlay=document.getElementById("overlay");
+overlay.style.display="flex";
+
+document.getElementById("cardHolder").innerHTML="";
+
+document.getElementById("videoHolder").innerHTML=`
+<video id="packVideo" autoplay>
+<source src="${videoMap[reward.name]}" type="video/mp4">
+</video>`;
+
+const video=document.getElementById("packVideo");
+
+video.onended=function(){
+
+document.getElementById("videoHolder").innerHTML="";
+
+document.getElementById("cardHolder").innerHTML=`
+<div class="card">
+<div class="card-inner">
+<div class="face front">FC</div>
+<div class="face back">${reward.name}</div>
+</div>
+</div>
+<button onclick="closeReward('${reward.name}')">ĐÓNG</button>
+`;
+};
+}
+
+function closeReward(name){
+addHistory(name);
+document.getElementById("overlay").style.display="none";
+}
+
+renderHistory();
 </script>
+
 </body>
 </html>
