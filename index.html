@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Túi Mù FC Premium</title>
+<title>FC Premium V2</title>
 
 <style>
 
@@ -16,68 +16,33 @@ box-sizing:border-box;
 
 body{
 font-family:Arial,Helvetica,sans-serif;
+background:
+radial-gradient(circle at top,#1c5fa8 0%,#0c2338 40%,#04080d 100%);
 color:white;
-background:
-radial-gradient(circle at top,
-#1d5ea8 0%,
-#0d233b 35%,
-#050b13 100%);
 min-height:100vh;
-overflow-x:hidden;
-}
-
-body::before{
-content:'';
-position:fixed;
-inset:0;
-background:
-radial-gradient(
-circle,
-rgba(255,255,255,.2) 1px,
-transparent 1px
-);
-background-size:40px 40px;
-opacity:.2;
-pointer-events:none;
 }
 
 .header{
 text-align:center;
-padding:25px;
-font-size:42px;
+padding:20px;
+font-size:36px;
 font-weight:bold;
-text-shadow:0 0 20px gold;
+text-shadow:0 0 15px gold;
 }
 
 .layout{
 display:grid;
-grid-template-columns:280px 1fr 300px;
+grid-template-columns:280px 1fr 320px;
 gap:20px;
 padding:20px;
 }
 
 .panel{
 background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
 border-radius:18px;
 padding:18px;
+backdrop-filter:blur(10px);
 border:1px solid rgba(255,255,255,.12);
-}
-
-.panel h2{
-margin-bottom:12px;
-}
-
-.panel h3{
-margin-bottom:10px;
-}
-
-.panel ul{
-padding-left:20px;
-}
-
-.panel li{
-margin-bottom:8px;
 }
 
 .center{
@@ -87,288 +52,88 @@ text-align:center;
 .pack{
 width:280px;
 height:380px;
-
 margin:auto;
-
 border-radius:24px;
 
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 
-font-size:34px;
+font-size:30px;
 font-weight:bold;
 
 background:
 linear-gradient(
 135deg,
-#143b67,
+#123b67,
 #08131f
 );
 
-box-shadow:
-0 0 25px gold,
-0 0 60px rgba(255,215,0,.3);
-
-animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-
-0%{
-transform:scale(1);
-}
-
-50%{
-transform:scale(1.03);
-}
-
-100%{
-transform:scale(1);
-}
-
+box-shadow:0 0 30px gold;
 }
 
 button{
-
-padding:14px 28px;
-
+padding:12px 20px;
 border:none;
-
-border-radius:14px;
-
-font-size:18px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-transition:.2s;
-}
-
-button:hover{
-transform:translateY(-2px);
-}
-
-.openBtn{
-
-background:
-linear-gradient(
-90deg,
-gold,
-#ffcf33
-);
-
-color:black;
-}
-
-.adminBtn{
-
-background:
-linear-gradient(
-90deg,
-#2c3e50,
-#4b6584
-);
-
-color:white;
-}
-
-.infoBox{
-
-margin-top:15px;
-
-padding:12px;
-
 border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+}
 
-background:
-rgba(255,255,255,.08);
+.inventoryItem,
+.historyItem,
+.notifyItem{
+background:rgba(255,255,255,.05);
+padding:10px;
+border-radius:10px;
+margin-bottom:8px;
 }
 
 .history{
-
-max-height:350px;
-
+max-height:250px;
 overflow-y:auto;
-
-padding-right:8px;
-}
-
-.historyItem{
-
-padding:8px;
-
-margin-bottom:8px;
-
-border-radius:10px;
-
-background:
-rgba(255,255,255,.05);
-}
-
-.inventoryItem{
-
-display:flex;
-
-justify-content:space-between;
-
-padding:8px;
-
-margin-bottom:8px;
-
-border-radius:10px;
-
-background:
-rgba(255,255,255,.05);
 }
 
 .overlay{
-
 display:none;
-
 position:fixed;
-
 inset:0;
-
-background:
-rgba(0,0,0,.92);
-
+background:rgba(0,0,0,.9);
 z-index:9999;
 
-align-items:center;
-
 justify-content:center;
-
+align-items:center;
 flex-direction:column;
 }
 
 .overlay video{
-
 max-width:90vw;
-
 max-height:80vh;
-
-border-radius:18px;
+border-radius:16px;
 }
 
-.card{
-
+.cardResult img{
 width:260px;
-
-height:360px;
-
-perspective:1000px;
-
-margin-bottom:20px;
+max-width:80vw;
+border-radius:18px;
+box-shadow:0 0 30px gold;
 }
 
-.card-inner{
-
-position:relative;
-
-width:100%;
-
-height:100%;
-
-transform-style:preserve-3d;
-
-animation:flipCard 1s forwards;
-}
-
-@keyframes flipCard{
-
-from{
-transform:rotateY(0deg);
-}
-
-to{
-transform:rotateY(180deg);
-}
-
-}
-
-.face{
-
-position:absolute;
-
-width:100%;
-height:100%;
-
-backface-visibility:hidden;
-
-border-radius:20px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:34px;
-
-font-weight:bold;
-}
-
-.front{
-
-background:
-linear-gradient(
-135deg,
-#102a44,
-#234e7b
-);
-}
-
-.back{
-
-transform:rotateY(180deg);
-
-background:
-linear-gradient(
-135deg,
-gold,
-#c89c00
-);
-
-color:black;
-
-box-shadow:
-0 0 30px gold;
-}
-
-.closeBtn{
-
-background:
-linear-gradient(
-90deg,
-#27ae60,
-#2ecc71
-);
-
-color:white;
-}
-
-.username{
-
-font-size:18px;
-margin-bottom:10px;
-}
-
-.opensLeft{
-
-font-size:18px;
-margin-top:10px;
-color:#ffd700;
-font-weight:bold;
-}
-
-@media(max-width:1000px){
+@media(max-width:900px){
 
 .layout{
-
 grid-template-columns:1fr;
+}
 
+.pack{
+width:220px;
+height:300px;
+font-size:24px;
+}
+
+button{
+width:100%;
+margin-bottom:10px;
 }
 
 }
@@ -379,44 +144,47 @@ grid-template-columns:1fr;
 <body>
 
 <div class="header">
-⚽ TÚI MÙ FC PREMIUM ⚽
+⚽ FC PREMIUM V2 ⚽
 </div>
 
 <div class="layout">
 
 <div class="panel">
 
-<h2>Thông tin</h2>
+<h2>Người chơi</h2>
 
-<div id="usernameBox" class="username">
-Chưa đăng nhập
+<div id="usernameBox">
+Đang tải...
 </div>
 
-<div id="opensLeftBox" class="opensLeft">
+<br>
+
+<div id="opensBox">
 Lượt mở: ?
 </div>
 
 <br>
 
-<button
-class="adminBtn"
-onclick="adminLogin()">
+<button id="adminBtn">
 Admin
 </button>
 
-<br><br>
+<hr style="margin:15px 0">
 
-<h3>Tỉ lệ thẻ</h3>
+<h3>Tỉ lệ</h3>
 
 <ul>
-<li>BOLON — 28%</li>
-<li>HUY — 28%</li>
-<li>BONHO — 20%</li>
-<li>BU — 10%</li>
-<li>GAO — 6%</li>
-<li>PHI — 4%</li>
-<li>TIN — 4%</li>
+<li>BOLON - 28%</li>
+<li>HUY - 28%</li>
+<li>BONHO - 20%</li>
+<li>BU - 10%</li>
+<li>GAO - 6%</li>
+<li>PHI - 4%</li>
+<li>TIN - 4%</li>
 </ul>
+
+<div id="adminPanel" style="display:none;margin-top:20px;">
+</div>
 
 </div>
 
@@ -428,16 +196,10 @@ MYSTERY PACK
 
 <br>
 
-<button
-class="openBtn"
-onclick="openPack()">
+<button id="openBtn">
 MỞ TÚI
 </button>
-<br><br>
 
-<button onclick="requestTrade()">
-ĐỔI THẺ
-</button>
 </div>
 
 <div class="panel">
@@ -450,20 +212,24 @@ MỞ TÚI
 
 <hr style="margin:15px 0">
 
+<h2>Thông báo</h2>
+
+<div id="notifications">
+Chưa có thông báo
+</div>
+
+<hr style="margin:15px 0">
+
 <h2>Lịch sử</h2>
 
-<div
-id="history"
-class="history">
+<div id="history" class="history">
 </div>
 
 </div>
 
 </div>
 
-<div
-id="overlay"
-class="overlay">
+<div id="overlay" class="overlay">
 
 <div id="videoHolder"></div>
 
@@ -482,95 +248,114 @@ getDoc,
 setDoc,
 updateDoc,
 collection,
-addDoc,
 getDocs,
+addDoc,
 deleteDoc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
+
 apiKey:"AIzaSyC7zCqjOfpyj3bR37xHj4CA5XIxyc_x_Yk",
+
 authDomain:"fc-mystery-pack.firebaseapp.com",
+
 projectId:"fc-mystery-pack",
+
 storageBucket:"fc-mystery-pack.firebasestorage.app",
+
 messagingSenderId:"64482739800",
+
 appId:"1:64482739800:web:f2fc37048fa577f19cec2d"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const app =
+initializeApp(firebaseConfig);
 
-const ADMIN_PASSWORD="nhatisreal";
+const db =
+getFirestore(app);
 
-let isAdmin=false;
-let username="";
-let deviceId="";
-let opensLeft=0;
+const ADMIN_PASSWORD =
+"nhatisreal";
 
-const cards=[
+let isAdmin = false;
 
-{name:"BOLON",chance:28},
+let username = "";
 
-{name:"HUY",chance:28},
+let deviceId = "";
 
-{name:"BONHO",chance:20},
+let opensLeft = 0;
 
-{name:"BU",chance:10},
+const cards = [
 
-{name:"GAO",chance:6},
+{
+name:"BOLON",
+chance:28,
+image:"cards/bolon.png"
+},
 
-{name:"PHI",chance:4},
+{
+name:"HUY",
+chance:28,
+image:"cards/huy.png"
+},
 
-{name:"TIN",chance:4}
+{
+name:"BONHO",
+chance:20,
+image:"cards/bonho.png"
+},
+
+{
+name:"BU",
+chance:10,
+image:"cards/bu.png"
+},
+
+{
+name:"GAO",
+chance:6,
+image:"cards/gao.png"
+},
+
+{
+name:"PHI",
+chance:4,
+image:"cards/phi.png"
+},
+
+{
+name:"TIN",
+chance:4,
+image:"cards/tin.png"
+}
 
 ];
 
-const videoMap={
+const videoMap = {
 
 BOLON:"videos/bolon.mp4",
-
 HUY:"videos/huy.mp4",
-
 BONHO:"videos/bonho.mp4",
-
 BU:"videos/bu.mp4",
-
 GAO:"videos/gao.mp4",
-
 PHI:"videos/phi.mp4",
-
 TIN:"videos/tin.mp4"
-
-};
-
-window.adminLogin=function(){
-
-const p=prompt("Nhập mật khẩu Admin");
-
-if(p===ADMIN_PASSWORD){
-
-isAdmin=true;
-
-alert("Đăng nhập Admin thành công");
-
-loadTradeRequests();
-
-}else{
-
-alert("Sai mật khẩu");
-
-}
 
 };
 
 async function initUser(){
 
-deviceId=
-localStorage.getItem("deviceId");
+deviceId =
+localStorage.getItem(
+"deviceId"
+);
 
 if(!deviceId){
 
-deviceId=crypto.randomUUID();
+deviceId =
+crypto.randomUUID();
 
 localStorage.setItem(
 "deviceId",
@@ -579,17 +364,22 @@ deviceId
 
 }
 
-username=
-localStorage.getItem("username");
+username =
+localStorage.getItem(
+"username"
+);
 
 if(!username){
 
-username=
-prompt("Nhập tên của bạn");
+username =
+prompt(
+"Nhập tên người chơi"
+);
 
 if(!username){
 
-username="Người chơi";
+username =
+"Người chơi";
 
 }
 
@@ -600,22 +390,29 @@ username
 
 }
 
-const ref=
-doc(db,"users",deviceId);
+const userRef =
+doc(
+db,
+"users",
+deviceId
+);
 
-const snap=
-await getDoc(ref);
+const userSnap =
+await getDoc(
+userRef
+);
 
-if(!snap.exists()){
+if(!userSnap.exists()){
 
-await setDoc(ref,{
+await setDoc(
+userRef,
+{
 
 username:username,
 
 opensLeft:1,
 
 inventory:{
-
 BOLON:0,
 HUY:0,
 BONHO:0,
@@ -623,66 +420,64 @@ BU:0,
 GAO:0,
 PHI:0,
 TIN:0
-
 },
 
 history:[]
 
-});
+}
+);
 
-opensLeft=1;
+opensLeft = 1;
 
 }else{
 
-const data=snap.data();
+const data =
+userSnap.data();
 
-opensLeft=
+opensLeft =
 data.opensLeft || 0;
 
 }
 
 document.getElementById(
 "usernameBox"
-).innerText=
+).innerText =
 "Tên: " + username;
 
 updateOpenText();
-
-renderInventory();
-
-renderHistory();
 
 }
 
 function updateOpenText(){
 
 document.getElementById(
-"opensLeftBox"
-).innerText=
-"Lượt mở: " + opensLeft;
+"opensBox"
+).innerText =
+"Lượt mở: " +
+opensLeft;
 
 }
 
 function randomCard(){
 
-let total=0;
+let total = 0;
 
 for(const card of cards){
 
-total+=card.chance;
+total += card.chance;
 
 }
 
-let rand=
-Math.random()*total;
+let rand =
+Math.random() * total;
 
-let current=0;
+let current = 0;
 
 for(const card of cards){
 
-current+=card.chance;
+current += card.chance;
 
-if(rand<=current){
+if(rand <= current){
 
 return card;
 
@@ -695,94 +490,96 @@ return cards[0];
 }
 async function renderInventory(){
 
-const snap=
-await getDoc(
-doc(db,"users",deviceId)
-);
+const userRef =
+doc(db,"users",deviceId);
 
-if(!snap.exists()) return;
+const userSnap =
+await getDoc(userRef);
 
-const data=snap.data();
+if(!userSnap.exists()) return;
 
-const inv=data.inventory;
+const data =
+userSnap.data();
 
-document.getElementById("inventory").innerHTML=
-`
+const inv =
+data.inventory;
+
+let html = "";
+
+for(const card of cards){
+
+html += `
 <div class="inventoryItem">
-<span>BOLON</span>
-<span>x${inv.BOLON}</span>
+
+<div>
+
+<b>${card.name}</b>
+
+<br>
+
+Sở hữu:
+${inv[card.name] || 0}
+
 </div>
 
-<div class="inventoryItem">
-<span>HUY</span>
-<span>x${inv.HUY}</span>
-</div>
-
-<div class="inventoryItem">
-<span>BONHO</span>
-<span>x${inv.BONHO}</span>
-</div>
-
-<div class="inventoryItem">
-<span>BU</span>
-<span>x${inv.BU}</span>
-</div>
-
-<div class="inventoryItem">
-<span>GAO</span>
-<span>x${inv.GAO}</span>
-</div>
-
-<div class="inventoryItem">
-<span>PHI</span>
-<span>x${inv.PHI}</span>
-</div>
-
-<div class="inventoryItem">
-<span>TIN</span>
-<span>x${inv.TIN}</span>
 </div>
 `;
+
+}
+
+document.getElementById(
+"inventory"
+).innerHTML = html;
 
 }
 
 async function renderHistory(){
 
-const snap=
-await getDoc(
-doc(db,"users",deviceId)
-);
+const userRef =
+doc(db,"users",deviceId);
 
-if(!snap.exists()) return;
+const userSnap =
+await getDoc(userRef);
 
-const data=snap.data();
+if(!userSnap.exists()) return;
 
-let html="";
+const data =
+userSnap.data();
+
+let html = "";
 
 for(const item of data.history){
 
-html+=`
+html += `
 <div class="historyItem">
-${item.time}<br>
+
+${item.time}
+
+<br>
+
 🎴 ${item.card}
+
 </div>
 `;
 
 }
 
-document.getElementById("history").innerHTML=html;
+document.getElementById(
+"history"
+).innerHTML = html;
 
 }
 
 async function addCard(cardName){
 
-const ref=
+const userRef =
 doc(db,"users",deviceId);
 
-const snap=
-await getDoc(ref);
+const userSnap =
+await getDoc(userRef);
 
-const data=snap.data();
+const data =
+userSnap.data();
 
 data.inventory[cardName]++;
 
@@ -790,23 +587,24 @@ data.history.unshift({
 
 card:cardName,
 
-time:new Date().toLocaleString()
+time:new Date()
+.toLocaleString()
 
 });
 
-if(data.history.length>30){
-
+if(
+data.history.length > 50
+){
 data.history.pop();
-
 }
 
-await updateDoc(ref,{
-
+await updateDoc(
+userRef,
+{
 inventory:data.inventory,
-
 history:data.history
-
-});
+}
+);
 
 await renderInventory();
 
@@ -814,17 +612,26 @@ await renderHistory();
 
 }
 
-window.openPack=async function(){
+window.openPack =
+async function(){
 
-if(opensLeft<=0){
+if(
+!isAdmin &&
+opensLeft <= 0
+){
 
-alert("Bạn đã hết lượt mở!");
+alert(
+"Bạn đã hết lượt mở!"
+);
 
 return;
 
 }
 
-const reward=randomCard();
+const reward =
+randomCard();
+
+if(!isAdmin){
 
 opensLeft--;
 
@@ -837,18 +644,24 @@ opensLeft:opensLeft
 }
 );
 
-const overlay=
-document.getElementById("overlay");
+}
 
-overlay.style.display="flex";
+const overlay =
+document.getElementById(
+"overlay"
+);
+
+overlay.style.display =
+"flex";
 
 document.getElementById(
 "cardHolder"
-).innerHTML="";
+).innerHTML = "";
 
 document.getElementById(
 "videoHolder"
-).innerHTML=
+).innerHTML =
+
 `
 <video
 id="packVideo"
@@ -861,248 +674,356 @@ type="video/mp4">
 </video>
 `;
 
-const video=
+const video =
 document.getElementById(
 "packVideo"
 );
 
-video.onended=
-async function(){
+video.onended =
+function(){
 
 document.getElementById(
 "videoHolder"
-).innerHTML="";
+).innerHTML = "";
 
 document.getElementById(
 "cardHolder"
-).innerHTML=
+).innerHTML =
+
 `
-<div class="card">
+<div class="cardResult">
 
-<div class="card-inner">
+<img
+src="${reward.image}"
+alt="${reward.name}">
 
-<div class="face front">
-FC
-</div>
+<br><br>
 
-<div class="face back">
-${reward.name}
-</div>
+<h2>${reward.name}</h2>
 
-</div>
-
-</div>
+<br>
 
 <button
-class="closeBtn"
 onclick="closeReward('${reward.name}')">
+
 NHẬN THẺ
+
 </button>
+
+</div>
 `;
 
 };
 
 };
 
-window.closeReward=
+window.closeReward =
 async function(cardName){
 
 await addCard(cardName);
 
 document.getElementById(
 "overlay"
-).style.display="none";
+).style.display =
+"none";
 
 };
-async function requestTrade(){
+window.sendCardPrompt =
+async function(cardName){
 
-const card=
-prompt(
-"Nhập tên thẻ muốn đổi (BOLON, HUY, BONHO, BU, GAO, PHI, TIN)"
+const receiver =
+prompt("Tên người nhận:");
+
+if(!receiver) return;
+
+const amount =
+parseInt(
+prompt("Số lượng:")
 );
 
-if(!card) return;
-
-const cardName=
-card.toUpperCase();
-
-const userRef=
-doc(db,"users",deviceId);
-
-const userSnap=
-await getDoc(userRef);
-
-const userData=
-userSnap.data();
-
 if(
-!userData.inventory[cardName] ||
-userData.inventory[cardName] <= 0
+isNaN(amount) ||
+amount <= 0
 ){
-alert("Bạn không sở hữu thẻ này!");
 return;
 }
 
+const userRef =
+doc(db,"users",deviceId);
+
+const userSnap =
+await getDoc(userRef);
+
+const user =
+userSnap.data();
+
+if(
+(user.inventory[cardName] || 0)
+< amount
+){
+
+alert("Không đủ thẻ");
+
+return;
+
+}
+
 await addDoc(
-collection(db,"tradeRequests"),
+collection(db,"transfers"),
 {
-username,
-deviceId,
+
+from:username,
+
+fromId:deviceId,
+
+to:receiver,
+
 card:cardName,
+
+amount:amount,
+
 status:"pending",
-time:new Date().toLocaleString()
-}
+
+time:new Date()
+.toLocaleString()
+
+});
+
+alert(
+"Đã gửi yêu cầu"
 );
 
-alert("Đã gửi yêu cầu đổi thẻ!");
-}
+};
 
-window.requestTrade=requestTrade;
+async function loadNotifications(){
 
-async function loadTradeRequests(){
-
-if(!isAdmin) return;
-
-const snap=
+const snap =
 await getDocs(
-collection(db,"tradeRequests")
+collection(db,"transfers")
 );
 
-let html=`
-<h3>Yêu cầu đổi thẻ</h3>
-`;
+let html = "";
 
 snap.forEach(docSnap=>{
 
-const data=
+const data =
 docSnap.data();
 
-html +=
-`
-<div class="historyItem">
+if(
+data.to === username &&
+data.status === "pending"
+){
 
-<b>${data.username}</b>
+html += `
+<div class="notifyItem">
+
+<b>${data.from}</b>
 
 <br>
 
-Thẻ:
 ${data.card}
-
-<br>
-
-${data.time}
+x${data.amount}
 
 <br><br>
 
 <button
-onclick="approveTrade('${docSnap.id}')">
-DUYỆT
+onclick="acceptTransfer('${docSnap.id}')">
+
+NHẬN
+
 </button>
 
 <button
-onclick="rejectTrade('${docSnap.id}')">
+onclick="rejectTransfer('${docSnap.id}')">
+
 TỪ CHỐI
+
 </button>
 
 </div>
 `;
 
-});
-
-html += `
-<hr>
-<h3>Người chơi</h3>
-<div id="adminUsers">
-Đang tải...
-</div>
-`;
-
-document.getElementById(
-"history"
-).innerHTML = html;
-
-loadUsers();
 }
 
-window.approveTrade =
+});
+
+if(html===""){
+
+html =
+"Chưa có thông báo";
+
+}
+
+document.getElementById(
+"notifications"
+).innerHTML =
+html;
+
+}
+
+window.acceptTransfer =
 async function(id){
 
-const tradeRef=
-doc(db,"tradeRequests",id);
+const transferRef =
+doc(db,"transfers",id);
 
-const tradeSnap=
-await getDoc(tradeRef);
+const transferSnap =
+await getDoc(
+transferRef
+);
 
-if(!tradeSnap.exists()) return;
+if(!transferSnap.exists())
+return;
 
-const trade=
-tradeSnap.data();
+const transfer =
+transferSnap.data();
 
-const userRef=
+const senderRef =
 doc(
 db,
 "users",
-trade.deviceId
+transfer.fromId
 );
 
-const userSnap=
-await getDoc(userRef);
+const senderSnap =
+await getDoc(senderRef);
 
-const user=
-userSnap.data();
+const sender =
+senderSnap.data();
 
 if(
-user.inventory[trade.card] > 0
+(sender.inventory[
+transfer.card
+] || 0)
+<
+transfer.amount
 ){
 
-user.inventory[trade.card]--;
+alert(
+"Người gửi không đủ thẻ"
+);
+
+return;
+
+}
+
+sender.inventory[
+transfer.card
+] -= transfer.amount;
 
 await updateDoc(
-userRef,
+senderRef,
 {
-inventory:user.inventory
+inventory:
+sender.inventory
 }
 );
 
+const myRef =
+doc(
+db,
+"users",
+deviceId
+);
+
+const mySnap =
+await getDoc(myRef);
+
+const me =
+mySnap.data();
+
+me.inventory[
+transfer.card
+] += transfer.amount;
+
+await updateDoc(
+myRef,
+{
+inventory:
+me.inventory
 }
+);
 
-await deleteDoc(tradeRef);
+await deleteDoc(
+transferRef
+);
 
-alert("Đã duyệt đổi thẻ");
+await renderInventory();
 
-loadTradeRequests();
+await loadNotifications();
+
+alert(
+"Đã nhận thẻ"
+);
+
 };
 
-window.rejectTrade =
+window.rejectTransfer =
 async function(id){
 
 await deleteDoc(
-doc(db,"tradeRequests",id)
+doc(
+db,
+"transfers",
+id
+)
 );
 
-alert("Đã từ chối");
+await loadNotifications();
 
-loadTradeRequests();
 };
 
-async function loadUsers(){
+window.adminLogin =
+async function(){
+
+const pass =
+prompt(
+"Mật khẩu Admin:"
+);
+
+if(
+pass !==
+ADMIN_PASSWORD
+){
+
+alert(
+"Sai mật khẩu"
+);
+
+return;
+
+}
+
+isAdmin = true;
+
+document.getElementById(
+"adminPanel"
+).style.display =
+"block";
+
+await loadAdminPanel();
+
+};
+
+async function loadAdminPanel(){
 
 if(!isAdmin) return;
 
-const snap=
+const snap =
 await getDocs(
 collection(db,"users")
 );
 
-let html="";
+let html =
+"<h3>Quản trị</h3>";
 
 snap.forEach(userDoc=>{
 
-const data=
+const data =
 userDoc.data();
 
-html +=
-`
+html += `
+
 <div class="historyItem">
 
 <b>
@@ -1132,57 +1053,86 @@ onclick="giveOpen('${userDoc.id}',10)">
 </button>
 
 </div>
+
 `;
 
 });
 
-const target=
 document.getElementById(
-"adminUsers"
-);
+"adminPanel"
+).innerHTML =
+html;
 
-if(target){
-target.innerHTML=html;
-}
 }
 
-window.giveOpen=
-async function(userId,amount){
+window.giveOpen =
+async function(
+userId,
+amount
+){
 
-const ref=
+const userRef =
 doc(
 db,
 "users",
 userId
 );
 
-const snap=
-await getDoc(ref);
+const snap =
+await getDoc(
+userRef
+);
 
-if(!snap.exists()) return;
-
-const data=
+const data =
 snap.data();
 
 await updateDoc(
-ref,
+userRef,
 {
 opensLeft:
-(data.opensLeft||0)+amount
+(data.opensLeft || 0)
++
+amount
 }
 );
 
-loadUsers();
+await loadAdminPanel();
 
 alert(
 "Đã cộng "
-+ amount +
++
+amount
++
 " lượt"
 );
 
 };
 
-initUser();
+document
+.getElementById(
+"openBtn"
+)
+.addEventListener(
+"click",
+openPack
+);
+
+document
+.getElementById(
+"adminBtn"
+)
+.addEventListener(
+"click",
+adminLogin
+);
+
+await initUser();
+
+await renderInventory();
+
+await renderHistory();
+
+await loadNotifications();
 </script>
 
 </body>
