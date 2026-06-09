@@ -35,6 +35,7 @@ display:grid;
 grid-template-columns:280px 1fr 320px;
 gap:20px;
 padding:20px;
+align-items:start;
 }
 
 .panel{
@@ -88,7 +89,7 @@ margin-bottom:8px;
 }
 
 .history{
-max-height:260px;
+max-height:250px;
 overflow-y:auto;
 }
 
@@ -192,6 +193,55 @@ border-radius:20px;
 box-shadow:0 0 30px gold;
 }
 
+details{
+margin-bottom:10px;
+background:rgba(255,255,255,.05);
+border-radius:12px;
+overflow:hidden;
+}
+
+summary{
+padding:12px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+align-items:center;
+user-select:none;
+}
+
+summary:hover{
+background:rgba(255,255,255,.08);
+}
+
+summary::-webkit-details-marker{
+display:none;
+}
+
+details > div{
+padding:10px;
+}
+
+.redDot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:red;
+box-shadow:0 0 10px red;
+display:none;
+}
+
+#inventory{
+max-height:350px;
+overflow-y:auto;
+}
+
+#marketContainer{
+max-height:350px;
+overflow-y:auto;
+}
+
 @media(max-width:900px){
 
 .layout{
@@ -212,8 +262,6 @@ margin-bottom:10px;
 }
 
 </style>
-</head>
-
 <body>
 
 <div class="header">
@@ -247,13 +295,10 @@ Lượt mở: ?
 <br>
 
 <div>
-
 Pity Thường
-
 <span id="normalPityText">
 0/10
 </span>
-
 </div>
 
 <div class="bar">
@@ -263,13 +308,10 @@ Pity Thường
 <br>
 
 <div>
-
 Pity BU+
-
 <span id="highPityText">
 0/30
 </span>
-
 </div>
 
 <div class="bar">
@@ -335,6 +377,7 @@ style="display:none;margin-top:20px;">
 </div>
 
 </div>
+
 <div class="center">
 
 <div class="pack">
@@ -351,57 +394,119 @@ MỞ TÚI
 
 <div class="panel">
 
-<h2>Kho thẻ</h2>
+<details>
+
+<summary>
+📦 Kho thẻ
+</summary>
 
 <div id="inventory">
 Đang tải...
 </div>
 
-<hr style="margin:15px 0">
+</details>
 
-<h2>Chợ Market</h2>
+<details>
+
+<summary>
+🏪 Chợ Market
+</summary>
 
 <div id="marketContainer">
 Đang tải...
 </div>
 
-<hr style="margin:15px 0">
+</details>
 
-<h2>Thông báo</h2>
+<details open>
+
+<summary>
+🔔 Thông báo
+<span id="notifDot" class="redDot"></span>
+</summary>
 
 <div id="notifications">
 Chưa có thông báo
 </div>
 
+</details>
+
 <hr style="margin:15px 0">
 
-<h2>Lịch sử mở</h2>
+<h2 style="text-align:center">
+📚 LỊCH SỬ
+</h2>
+
+<details>
+
+<summary>
+📜 Lịch sử mở
+<span id="historyDot" class="redDot"></span>
+</summary>
 
 <div
 id="history"
 class="history">
-
 </div>
 
-<hr style="margin:15px 0">
+</details>
 
-<h2>Lịch sử Chợ</h2>
+<details>
+
+<summary>
+🏪 Lịch sử Chợ
+<span id="marketDot" class="redDot"></span>
+</summary>
 
 <div
 id="marketHistory"
 class="history">
-
 </div>
 
-<hr style="margin:15px 0">
+</details>
 
-<h2>Lịch sử Chuyển Thẻ</h2>
+<details>
+
+<summary>
+📦 Lịch sử Chuyển Thẻ
+<span id="transferDot" class="redDot"></span>
+</summary>
 
 <div
 id="transferHistory"
 class="history">
+</div>
+
+</details>
 
 </div>
+
+</div>
+
+<div
+id="overlay"
+class="overlay">
+
+<div id="videoHolder"></div>
+
+<div id="cardHolder"></div>
+
+</div>
+
+<div id="cardPreview">
+
+<img
+id="previewImage"
+src="">
+
+<br><br>
+
+<button
+onclick="closeCardPreview()">
+
+ĐÓNG
+
+</button>
 
 </div>
 </div>
@@ -768,7 +873,7 @@ document.getElementById(
 "none";
 
 };
-  async function initUser(){
+async function initUser(){
 
 deviceId=
 localStorage.getItem(
@@ -1394,330 +1499,6 @@ document.getElementById(
 "Tên: "+username;
 
 }
-  async function renderInventory(){
-
-const data=
-await getUserData();
-
-if(!data) return;
-
-let html="";
-
-for(
-const cardName
-of NORMAL_CARDS
-){
-
-const amount=
-data.inventory[
-cardName
-] || 0;
-
-html+=`
-
-<div class="inventoryItem">
-
-<div>
-
-<span
-class="cardName normalCard"
-onclick="openCardImage('${cardName}')">
-
-${cardName}
-
-</span>
-
-<br>
-
-Sở hữu:
-${amount}
-
-</div>
-
-<br>
-
-<button
-onclick="sendCardPrompt('${cardName}')">
-
-GỬI
-
-</button>
-
-</div>
-
-`;
-
-}
-
-document.getElementById(
-"inventory"
-).innerHTML=
-html;
-
-}
-
-async function renderMarket(){
-
-const data=
-await getUserData();
-
-if(!data) return;
-
-let html="";
-
-for(
-const cardName
-of MARKET_CARDS
-){
-
-const amount=
-data.marketInventory[
-cardName
-] || 0;
-
-html+=`
-
-<div class="marketItem">
-
-<div>
-
-<span
-class="cardName marketCard"
-onclick="openCardImage('${cardName}')">
-
-${cardName}
-
-</span>
-
-<br>
-
-Sở hữu:
-${amount}
-
-<br>
-
-<span style="color:gold">
-
-Không giao dịch
-
-</span>
-
-</div>
-
-<br>
-
-<button
-class="marketButton"
-onclick="marketExchange('${cardName}')">
-
-ĐỔI
-
-</button>
-
-</div>
-
-`;
-
-}
-
-document.getElementById(
-"marketContainer"
-).innerHTML=
-html;
-
-}
-
-async function renderHistory(){
-
-const data=
-await getUserData();
-
-if(!data) return;
-
-let html="";
-
-for(
-const item
-of data.history
-){
-
-html+=`
-
-<div class="historyItem">
-
-${item.time}
-
-<br>
-
-🎴 ${item.card}
-
-</div>
-
-`;
-
-}
-
-document.getElementById(
-"history"
-).innerHTML=
-html;
-
-}
-
-async function renderMarketHistory(){
-
-const data=
-await getUserData();
-
-if(!data) return;
-
-let html="";
-
-for(
-const item
-of data.marketHistory
-){
-
-html+=`
-
-<div class="historyItem">
-
-${item.time}
-
-<br>
-
-🏪 ${item.text}
-
-</div>
-
-`;
-
-}
-
-document.getElementById(
-"marketHistory"
-).innerHTML=
-html;
-
-}
-
-async function renderTransferHistory(){
-
-const data=
-await getUserData();
-
-if(!data) return;
-
-let html="";
-
-for(
-const item
-of data.transferHistory
-){
-
-html+=`
-
-<div class="historyItem">
-
-${item.time}
-
-<br>
-
-📦 ${item.text}
-
-</div>
-
-`;
-
-}
-
-document.getElementById(
-"transferHistory"
-).innerHTML=
-html;
-
-}
-
-window.sendCardPrompt=
-async function(cardName){
-
-const receiver=
-prompt(
-"Tên người nhận:"
-);
-
-if(!receiver)
-return;
-
-const amount=
-parseInt(
-prompt(
-"Số lượng:"
-)
-);
-
-if(
-isNaN(amount) ||
-amount<=0
-){
-return;
-}
-
-const data=
-await getUserData();
-
-if(
-(data.inventory[
-cardName
-]||0)
-<
-amount
-){
-
-alert(
-"Không đủ thẻ"
-);
-
-return;
-
-}
-
-await addDoc(
-collection(
-db,
-"transfers"
-),
-{
-
-from:username,
-
-fromId:deviceId,
-
-to:receiver,
-
-card:cardName,
-
-amount:amount,
-
-status:"pending",
-
-time:nowText()
-
-}
-);
-
-await addTransferLog(
-
-`Gửi ${amount} ${cardName} cho ${receiver}`
-
-);
-
-alert(
-"Đã gửi yêu cầu"
-);
-
-};
-
 async function loadNotifications(){
 
 const snap=
@@ -1730,6 +1511,9 @@ db,
 
 let html="";
 
+let hasNotification=
+false;
+
 snap.forEach(
 transferDoc=>{
 
@@ -1740,6 +1524,9 @@ if(
 data.to===username &&
 data.status==="pending"
 ){
+
+hasNotification=
+true;
 
 html+=`
 
@@ -1779,10 +1566,29 @@ TỪ CHỐI
 }
 );
 
-if(html===""){
+const dot=
+document.getElementById(
+"notifDot"
+);
+
+if(
+hasNotification
+){
+
+if(dot){
+dot.style.display=
+"block";
+}
+
+}else{
 
 html=
 "Chưa có thông báo";
+
+if(dot){
+dot.style.display=
+"none";
+}
 
 }
 
@@ -1792,145 +1598,7 @@ document.getElementById(
 html;
 
 }
-
-window.acceptTransfer=
-async function(id){
-
-const transferRef=
-doc(
-db,
-"transfers",
-id
-);
-
-const transferSnap=
-await getDoc(
-transferRef
-);
-
-if(
-!transferSnap.exists()
-)
-return;
-
-const transfer=
-transferSnap.data();
-
-const senderRef=
-doc(
-db,
-"users",
-transfer.fromId
-);
-
-const senderSnap=
-await getDoc(
-senderRef
-);
-
-if(
-!senderSnap.exists()
-)
-return;
-
-const sender=
-senderSnap.data();
-
-if(
-(sender.inventory[
-transfer.card
-]||0)
-<
-transfer.amount
-){
-
-alert(
-"Người gửi không đủ thẻ"
-);
-
-return;
-
-}
-
-sender.inventory[
-transfer.card
-]-=
-transfer.amount;
-
-await updateDoc(
-senderRef,
-{
-inventory:
-sender.inventory
-}
-);
-
-const me=
-await getUserData();
-
-me.inventory[
-transfer.card
-]+=
-transfer.amount;
-
-await saveUserData({
-
-inventory:
-me.inventory
-
-});
-
-await addTransferLog(
-
-`Nhận ${transfer.amount} ${transfer.card} từ ${transfer.from}`
-
-);
-
-await deleteDoc(
-transferRef
-);
-
-await refreshAll();
-
-alert(
-"Đã nhận thẻ"
-);
-
-};
-
-window.rejectTransfer=
-async function(id){
-
-await deleteDoc(
-doc(
-db,
-"transfers",
-id
-)
-);
-
-await loadNotifications();
-
-};
-
-async function refreshAll(){
-
-await renderInventory();
-
-await renderMarket();
-
-await renderHistory();
-
-await renderMarketHistory();
-
-await renderTransferHistory();
-
-await loadNotifications();
-
-await updatePityUI();
-
-}
-  function hasCard(data,normalKey,marketKey){
+function hasCard(data,normalKey,marketKey){
 
 return (
 (data.marketInventory[marketKey]||0)
@@ -2527,7 +2195,7 @@ return;
 }
 
 };
-  window.openPack=
+window.openPack=
 async function(){
 
 if(
