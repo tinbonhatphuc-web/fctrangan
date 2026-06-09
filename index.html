@@ -159,6 +159,12 @@ margin-bottom:10px;
 
 <br>
 
+<button id="changeNameBtn">
+Đổi tên
+</button>
+
+<br>
+
 <div id="opensBox">
 Lượt mở: ?
 </div>
@@ -365,21 +371,27 @@ deviceId
 }
 
 username =
-localStorage.getItem(
-"username"
-);
+localStorage.getItem("username");
 
-if(!username){
-
-username =
-prompt(
-"Nhập tên người chơi"
-);
-
-if(!username){
+while(
+!username ||
+username.trim() === "" ||
+username === "Người chơi"
+){
 
 username =
-"Người chơi";
+prompt("Nhập tên người chơi:");
+
+if(username === null){
+continue;
+}
+
+username =
+username.trim();
+
+if(username.length < 3){
+username = "";
+}
 
 }
 
@@ -387,8 +399,6 @@ localStorage.setItem(
 "username",
 username
 );
-
-}
 
 const userRef =
 doc(
@@ -520,9 +530,7 @@ html += `
 Sở hữu:
 ${inv[card.name] || 0}
 
-<button onclick="sendToAdmin('${card.name}')">
-ĐỔI ADMIN
-</button>
+
 </div>
 
 <button onclick="sendCardPrompt('${card.name}')">
@@ -1040,7 +1048,7 @@ ${data.username}
 <br>
 
 Lượt:
-${data.opensLeft}
+${data.opensLeft || 0}
 
 <br><br>
 
@@ -1132,6 +1140,45 @@ document
 "click",
 adminLogin
 );
+
+
+document
+.getElementById("changeNameBtn")
+.addEventListener("click", async ()=>{
+
+let newName =
+prompt("Tên mới:");
+
+if(!newName) return;
+
+newName =
+newName.trim();
+
+if(newName.length < 3){
+return;
+}
+
+username = newName;
+
+localStorage.setItem(
+"username",
+username
+);
+
+await updateDoc(
+doc(db,"users",deviceId),
+{
+username:username
+}
+);
+
+document.getElementById(
+"usernameBox"
+).innerText =
+"Tên: " + username;
+
+});
+
 
 await initUser();
 
