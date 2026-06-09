@@ -292,6 +292,8 @@ let username = "";
 let deviceId = "";
 
 let opensLeft = 0;
+let rewardClaimed = false;
+const APP_VERSION='2.0';
 
 const cards = [
 
@@ -370,31 +372,20 @@ deviceId
 
 }
 
-username =
-localStorage.getItem(
-"username"
-);
-
-if(!username){
-
-username =
-prompt(
-"Nhập tên người chơi"
-);
-
-if(!username){
-
-username =
-"Người chơi";
-
+if(localStorage.getItem('app_version')!==APP_VERSION){
+localStorage.setItem('app_version',APP_VERSION);
 }
 
-localStorage.setItem(
-"username",
-username
-);
+username = localStorage.getItem("username");
 
+while(!username || username.trim()==="" || username==="Người chơi"){
+username = prompt("Nhập tên người chơi:");
+if(username===null) continue;
+username = username.trim();
+if(username.length<3) username="";
 }
+
+localStorage.setItem("username",username);
 
 const userRef =
 doc(
@@ -642,6 +633,8 @@ return;
 const reward =
 randomCard();
 
+rewardClaimed = false;
+
 if(!isAdmin){
 
 opensLeft--;
@@ -676,7 +669,9 @@ document.getElementById(
 `
 <video
 id="packVideo"
-autoplay>
+autoplay
+playsinline
+preload="auto">
 
 <source
 src="${videoMap[reward.name]}"
@@ -715,6 +710,7 @@ alt="${reward.name}">
 <br>
 
 <button
+id="claimBtn"
 onclick="closeReward('${reward.name}')">
 
 NHẬN THẺ
@@ -730,6 +726,13 @@ NHẬN THẺ
 
 window.closeReward =
 async function(cardName){
+
+if(rewardClaimed) return;
+
+rewardClaimed = true;
+
+const btn=document.getElementById("claimBtn");
+if(btn) btn.disabled=true;
 
 await addCard(cardName);
 
@@ -1143,50 +1146,22 @@ adminLogin
 );
 
 
-document
-.getElementById("changeNameBtn")
-.addEventListener("click", async ()=>{
-
-let newName = prompt("Tên mới:");
-
+document.getElementById("changeNameBtn").addEventListener("click",async()=>{
+let newName=prompt("Tên mới:");
 if(!newName) return;
-
-newName = newName.trim();
-
-if(newName.length < 3) return;
-
-username = newName;
-
+newName=newName.trim();
+if(newName.length<3) return;
+username=newName;
 localStorage.setItem("username",username);
-
-await updateDoc(
-doc(db,"users",deviceId),
-{username:username}
-);
-
-document.getElementById("usernameBox").innerText =
-"Tên: " + username;
-
+await updateDoc(doc(db,"users",deviceId),{username});
+document.getElementById("usernameBox").innerText="Tên: "+username;
 });
 
-
-window.kickUser =
-async function(userId){
-
-if(!confirm("Kick tài khoản này?")){
-return;
-}
-
-await deleteDoc(
-doc(db,"users",userId)
-);
-
+window.kickUser=async function(userId){
+if(!confirm("Kick tài khoản này?")) return;
+await deleteDoc(doc(db,"users",userId));
 await loadAdminPanel();
-
-alert("Đã kick tài khoản");
-
 };
-
 
 await initUser();
 
