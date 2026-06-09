@@ -2,9 +2,9 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>FC Premium V2</title>
+<title>FC Premium V2 - Market Edition</title>
 
 <style>
 
@@ -32,7 +32,7 @@ text-shadow:0 0 15px gold;
 
 .layout{
 display:grid;
-grid-template-columns:280px 1fr 320px;
+grid-template-columns:280px 1fr 340px;
 gap:20px;
 padding:20px;
 }
@@ -54,21 +54,17 @@ width:280px;
 height:380px;
 margin:auto;
 border-radius:24px;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
 font-size:30px;
 font-weight:bold;
-
 background:
 linear-gradient(
 135deg,
 #123b67,
 #08131f
 );
-
 box-shadow:0 0 30px gold;
 }
 
@@ -81,35 +77,66 @@ font-weight:bold;
 }
 
 .inventoryItem,
-.historyItem,
-.notifyItem{
+.marketItem,
+.notifyItem,
+.historyItem{
 background:rgba(255,255,255,.05);
 padding:10px;
 border-radius:10px;
 margin-bottom:8px;
 }
 
+.marketItem{
+border:1px solid gold;
+}
+
+.marketTitle{
+color:gold;
+font-weight:bold;
+}
+
+.cardName{
+cursor:pointer;
+text-decoration:underline;
+}
+
 .history{
-max-height:250px;
+max-height:280px;
 overflow-y:auto;
+}
+
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:12px;
+}
+
+.tabBtn{
+flex:1;
 }
 
 .overlay{
 display:none;
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.9);
+background:rgba(0,0,0,.92);
 z-index:9999;
-
 justify-content:center;
 align-items:center;
 flex-direction:column;
 }
 
+.overlay img{
+max-width:80vw;
+max-height:75vh;
+border-radius:18px;
+box-shadow:0 0 25px gold;
+}
+
 .overlay video{
 max-width:90vw;
 max-height:80vh;
-border-radius:16px;
+border-radius:18px;
 }
 
 .cardResult img{
@@ -117,6 +144,21 @@ width:260px;
 max-width:80vw;
 border-radius:18px;
 box-shadow:0 0 30px gold;
+}
+
+.marketRule{
+background:rgba(255,215,0,.08);
+border:1px solid rgba(255,215,0,.4);
+padding:10px;
+border-radius:12px;
+margin-bottom:12px;
+}
+
+.adminUser{
+background:rgba(255,255,255,.05);
+padding:10px;
+border-radius:10px;
+margin-bottom:10px;
 }
 
 @media(max-width:900px){
@@ -133,7 +175,7 @@ font-size:24px;
 
 button{
 width:100%;
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
 }
@@ -144,7 +186,7 @@ margin-bottom:10px;
 <body>
 
 <div class="header">
-⚽ FC PREMIUM V2 ⚽
+⚽ FC PREMIUM V2 - MARKET EDITION ⚽
 </div>
 
 <div class="layout">
@@ -163,10 +205,10 @@ margin-bottom:10px;
 Đổi tên
 </button>
 
-<br>
+<br><br>
 
 <div id="opensBox">
-Lượt mở: ?
+Lượt mở: 0
 </div>
 
 <br>
@@ -177,19 +219,35 @@ Admin
 
 <hr style="margin:15px 0">
 
-<h3>Tỉ lệ</h3>
+<h3>Tỉ lệ Market Edition</h3>
 
 <ul>
-<li>BOLON - 28%</li>
-<li>HUY - 28%</li>
-<li>BONHO - 20%</li>
-<li>BU - 10%</li>
-<li>GAO - 6%</li>
-<li>PHI - 4%</li>
-<li>TIN - 4%</li>
+
+<li>BOLON 13.5%</li>
+<li>BOLON MARKET 14.5%</li>
+
+<li>HUY 13.5%</li>
+<li>HUY MARKET 14.5%</li>
+
+<li>BONHO 9.5%</li>
+<li>BONHO MARKET 10.5%</li>
+
+<li>BU 4.5%</li>
+<li>BU MARKET 5.5%</li>
+
+<li>GAO 2.5%</li>
+<li>GAO MARKET 3.5%</li>
+
+<li>PHI 1.5%</li>
+<li>PHI MARKET 2.5%</li>
+
+<li>TIN 1.5%</li>
+<li>TIN MARKET 2.5%</li>
+
 </ul>
 
-<div id="adminPanel" style="display:none;margin-top:20px;">
+<div id="adminPanel"
+style="display:none;margin-top:20px;">
 </div>
 
 </div>
@@ -210,10 +268,52 @@ MỞ TÚI
 
 <div class="panel">
 
+<div class="tabs">
+
+<button
+class="tabBtn"
+onclick="showTab('inventory')">
+Kho
+</button>
+
+<button
+class="tabBtn"
+onclick="showTab('market')">
+Chợ
+</button>
+
+</div>
+
+<div id="inventoryTab">
+
 <h2>Kho thẻ</h2>
 
 <div id="inventory">
 Đang tải...
+</div>
+
+</div>
+
+<div id="marketTab" style="display:none;">
+
+<h2>Chợ</h2>
+
+<div class="marketRule">
+
+BOLON MARKET = 1 thẻ bất kỳ<br>
+HUY MARKET = 1 thẻ bất kỳ<br>
+BONHO MARKET = BOLON hoặc HUY<br>
+BU MARKET = BONHO + (BOLON hoặc HUY)<br>
+GAO MARKET = BU + BONHO + (BOLON hoặc HUY)<br>
+PHI MARKET = GAO + BU + BONHO + (BOLON hoặc HUY)<br>
+TIN MARKET = GAO + BU + BONHO + (BOLON hoặc HUY)
+
+</div>
+
+<div id="marketPanel">
+Đang tải...
+</div>
+
 </div>
 
 <hr style="margin:15px 0">
@@ -231,6 +331,13 @@ Chưa có thông báo
 <div id="history" class="history">
 </div>
 
+<hr style="margin:15px 0">
+
+<h2>Lịch sử Chợ</h2>
+
+<div id="marketHistory" class="history">
+</div>
+
 </div>
 
 </div>
@@ -242,8 +349,20 @@ Chưa có thông báo
 <div id="cardHolder"></div>
 
 </div>
-<script type="module">
 
+<div id="imageViewer" class="overlay">
+
+<img id="viewerImage">
+
+<br><br>
+
+<button onclick="closeViewer()">
+Đóng
+</button>
+
+</div>
+
+<script type="module">
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
@@ -260,7 +379,7 @@ deleteDoc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const firebaseConfig = {
+const firebaseConfig={
 
 apiKey:"AIzaSyC7zCqjOfpyj3bR37xHj4CA5XIxyc_x_Yk",
 
@@ -276,172 +395,159 @@ appId:"1:64482739800:web:f2fc37048fa577f19cec2d"
 
 };
 
-const app =
+const app=
 initializeApp(firebaseConfig);
 
-const db =
+const db=
 getFirestore(app);
 
-const ADMIN_PASSWORD =
+const ADMIN_PASSWORD=
 "nhatisreal";
 
-let isAdmin = false;
+const APP_VERSION=
+"MARKET_EDITION";
 
-let username = "";
+let isAdmin=false;
 
-let deviceId = "";
+let username="";
+let deviceId="";
 
-let opensLeft = 0;
-let rewardClaimed = false;
-const APP_VERSION='2.0';
+let opensLeft=0;
 
-const cards = [
+let rewardClaimed=false;
+
+const cards=[
 
 {
 name:"BOLON",
-chance:28,
+chance:13.5,
+market:false,
+image:"cards/bolon.png"
+},
+
+{
+name:"BOLON_MARKET",
+chance:14.5,
+market:true,
 image:"cards/bolon.png"
 },
 
 {
 name:"HUY",
-chance:28,
+chance:13.5,
+market:false,
+image:"cards/huy.png"
+},
+
+{
+name:"HUY_MARKET",
+chance:14.5,
+market:true,
 image:"cards/huy.png"
 },
 
 {
 name:"BONHO",
-chance:20,
+chance:9.5,
+market:false,
+image:"cards/bonho.png"
+},
+
+{
+name:"BONHO_MARKET",
+chance:10.5,
+market:true,
 image:"cards/bonho.png"
 },
 
 {
 name:"BU",
-chance:10,
+chance:4.5,
+market:false,
+image:"cards/bu.png"
+},
+
+{
+name:"BU_MARKET",
+chance:5.5,
+market:true,
 image:"cards/bu.png"
 },
 
 {
 name:"GAO",
-chance:6,
+chance:2.5,
+market:false,
+image:"cards/gao.png"
+},
+
+{
+name:"GAO_MARKET",
+chance:3.5,
+market:true,
 image:"cards/gao.png"
 },
 
 {
 name:"PHI",
-chance:4,
+chance:1.5,
+market:false,
+image:"cards/phi.png"
+},
+
+{
+name:"PHI_MARKET",
+chance:2.5,
+market:true,
 image:"cards/phi.png"
 },
 
 {
 name:"TIN",
-chance:4,
+chance:1.5,
+market:false,
+image:"cards/tin.png"
+},
+
+{
+name:"TIN_MARKET",
+chance:2.5,
+market:true,
 image:"cards/tin.png"
 }
 
 ];
 
-const videoMap = {
+const videoMap={
 
 BOLON:"videos/bolon.mp4",
+BOLON_MARKET:"videos/bolon.mp4",
+
 HUY:"videos/huy.mp4",
+HUY_MARKET:"videos/huy.mp4",
+
 BONHO:"videos/bonho.mp4",
+BONHO_MARKET:"videos/bonho.mp4",
+
 BU:"videos/bu.mp4",
+BU_MARKET:"videos/bu.mp4",
+
 GAO:"videos/gao.mp4",
+GAO_MARKET:"videos/gao.mp4",
+
 PHI:"videos/phi.mp4",
-TIN:"videos/tin.mp4"
+PHI_MARKET:"videos/phi.mp4",
+
+TIN:"videos/tin.mp4",
+TIN_MARKET:"videos/tin.mp4"
 
 };
 
-async function initUser(){
+function getCard(cardName){
 
-deviceId =
-localStorage.getItem(
-"deviceId"
+return cards.find(
+c=>c.name===cardName
 );
-
-if(!deviceId){
-
-deviceId =
-crypto.randomUUID();
-
-localStorage.setItem(
-"deviceId",
-deviceId
-);
-
-}
-
-if(localStorage.getItem('app_version')!==APP_VERSION){
-localStorage.setItem('app_version',APP_VERSION);
-}
-
-username = localStorage.getItem("username");
-
-while(!username || username.trim()==="" || username==="Người chơi"){
-username = prompt("Nhập tên người chơi:");
-if(username===null) continue;
-username = username.trim();
-if(username.length<3) username="";
-}
-
-localStorage.setItem("username",username);
-
-const userRef =
-doc(
-db,
-"users",
-deviceId
-);
-
-const userSnap =
-await getDoc(
-userRef
-);
-
-if(!userSnap.exists()){
-
-await setDoc(
-userRef,
-{
-
-username:username,
-
-opensLeft:1,
-
-inventory:{
-BOLON:0,
-HUY:0,
-BONHO:0,
-BU:0,
-GAO:0,
-PHI:0,
-TIN:0
-},
-
-history:[]
-
-}
-);
-
-opensLeft = 1;
-
-}else{
-
-const data =
-userSnap.data();
-
-opensLeft =
-data.opensLeft || 0;
-
-}
-
-document.getElementById(
-"usernameBox"
-).innerText =
-"Tên: " + username;
-
-updateOpenText();
 
 }
 
@@ -449,32 +555,31 @@ function updateOpenText(){
 
 document.getElementById(
 "opensBox"
-).innerText =
-"Lượt mở: " +
-opensLeft;
+).innerText=
+"Lượt mở: "+opensLeft;
 
 }
 
 function randomCard(){
 
-let total = 0;
+let total=0;
 
 for(const card of cards){
 
-total += card.chance;
+total+=card.chance;
 
 }
 
-let rand =
-Math.random() * total;
+let rand=
+Math.random()*total;
 
-let current = 0;
+let current=0;
 
 for(const card of cards){
 
-current += card.chance;
+current+=card.chance;
 
-if(rand <= current){
+if(rand<=current){
 
 return card;
 
@@ -485,105 +590,299 @@ return card;
 return cards[0];
 
 }
-async function renderInventory(){
 
-const userRef =
-doc(db,"users",deviceId);
+window.showTab=function(tab){
 
-const userSnap =
-await getDoc(userRef);
+document.getElementById(
+"inventoryTab"
+).style.display=
+tab==="inventory"
+? "block"
+: "none";
 
-if(!userSnap.exists()) return;
+document.getElementById(
+"marketTab"
+).style.display=
+tab==="market"
+? "block"
+: "none";
 
-const data =
+};
+
+window.openCardImage=
+function(cardName){
+
+const card=
+getCard(cardName);
+
+if(!card) return;
+
+document.getElementById(
+"viewerImage"
+).src=
+card.image;
+
+document.getElementById(
+"imageViewer"
+).style.display=
+"flex";
+
+};
+
+window.closeViewer=
+function(){
+
+document.getElementById(
+"imageViewer"
+).style.display=
+"none";
+
+};
+async function initUser(){
+
+deviceId=
+localStorage.getItem(
+"deviceId"
+);
+
+if(!deviceId){
+
+deviceId=
+crypto.randomUUID();
+
+localStorage.setItem(
+"deviceId",
+deviceId
+);
+
+}
+
+if(
+localStorage.getItem("app_version")
+!==APP_VERSION
+){
+
+localStorage.setItem(
+"app_version",
+APP_VERSION
+);
+
+}
+
+username=
+localStorage.getItem(
+"username"
+);
+
+while(
+!username ||
+username.trim()===""
+){
+
+username=
+prompt(
+"Nhập tên người chơi:"
+);
+
+if(username===null)
+continue;
+
+username=
+username.trim();
+
+}
+
+localStorage.setItem(
+"username",
+username
+);
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const userSnap=
+await getDoc(
+userRef
+);
+
+if(!userSnap.exists()){
+
+await setDoc(
+userRef,
+{
+
+username,
+
+opensLeft:1,
+
+inventory:{
+
+BOLON:0,
+HUY:0,
+BONHO:0,
+BU:0,
+GAO:0,
+PHI:0,
+TIN:0
+
+},
+
+marketInventory:{
+
+BOLON_MARKET:0,
+HUY_MARKET:0,
+BONHO_MARKET:0,
+BU_MARKET:0,
+GAO_MARKET:0,
+PHI_MARKET:0,
+TIN_MARKET:0
+
+},
+
+history:[],
+
+marketHistory:[]
+
+}
+);
+
+opensLeft=1;
+
+}else{
+
+const data=
 userSnap.data();
 
-const inv =
-data.inventory;
+opensLeft=
+data.opensLeft || 0;
 
-let html = "";
+let updateNeeded=false;
 
-for(const card of cards){
+if(!data.inventory){
 
-html += `
-<div class="inventoryItem">
+data.inventory={
 
-<div>
+BOLON:0,
+HUY:0,
+BONHO:0,
+BU:0,
+GAO:0,
+PHI:0,
+TIN:0
 
-<b>${card.name}</b>
+};
 
-<br>
+updateNeeded=true;
 
-Sở hữu:
-${inv[card.name] || 0}
+}
 
+if(!data.marketInventory){
 
-</div>
+data.marketInventory={
 
-<button onclick="sendCardPrompt('${card.name}')">
-GỬI
-</button>
+BOLON_MARKET:0,
+HUY_MARKET:0,
+BONHO_MARKET:0,
+BU_MARKET:0,
+GAO_MARKET:0,
+PHI_MARKET:0,
+TIN_MARKET:0
 
-</div>
-`;
+};
+
+updateNeeded=true;
+
+}
+
+if(!data.history){
+
+data.history=[];
+
+updateNeeded=true;
+
+}
+
+if(!data.marketHistory){
+
+data.marketHistory=[];
+
+updateNeeded=true;
+
+}
+
+if(updateNeeded){
+
+await updateDoc(
+userRef,
+{
+
+inventory:
+data.inventory,
+
+marketInventory:
+data.marketInventory,
+
+history:
+data.history,
+
+marketHistory:
+data.marketHistory
+
+}
+);
+
+}
 
 }
 
 document.getElementById(
-"inventory"
-).innerHTML = html;
+"usernameBox"
+).innerText=
+"Tên: "+username;
+
+updateOpenText();
 
 }
 
-async function renderHistory(){
+async function getMyData(){
 
-const userRef =
-doc(db,"users",deviceId);
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
 
-const userSnap =
-await getDoc(userRef);
+const snap=
+await getDoc(
+userRef
+);
 
-if(!userSnap.exists()) return;
-
-const data =
-userSnap.data();
-
-let html = "";
-
-for(const item of data.history){
-
-html += `
-<div class="historyItem">
-
-${item.time}
-
-<br>
-
-🎴 ${item.card}
-
-</div>
-`;
+return snap.data();
 
 }
 
-document.getElementById(
-"history"
-).innerHTML = html;
+async function saveMyData(data){
+
+await updateDoc(
+doc(
+db,
+"users",
+deviceId
+),
+data
+);
 
 }
 
-async function addCard(cardName){
+async function addHistory(cardName){
 
-const userRef =
-doc(db,"users",deviceId);
-
-const userSnap =
-await getDoc(userRef);
-
-const data =
-userSnap.data();
-
-data.inventory[cardName]++;
+const data=
+await getMyData();
 
 data.history.unshift({
 
@@ -595,243 +894,428 @@ time:new Date()
 });
 
 if(
-data.history.length > 50
+data.history.length>100
 ){
+
 data.history.pop();
+
 }
 
-await updateDoc(
-userRef,
-{
-inventory:data.inventory,
+await saveMyData({
+
 history:data.history
-}
-);
 
-await renderInventory();
-
-await renderHistory();
+});
 
 }
 
-window.openPack =
-async function(){
+async function addMarketHistory(text){
 
-if(
-!isAdmin &&
-opensLeft <= 0
-){
+const data=
+await getMyData();
 
-alert(
-"Bạn đã hết lượt mở!"
-);
+data.marketHistory.unshift({
 
-return;
-
-}
-
-const reward =
-randomCard();
-
-rewardClaimed = false;
-
-if(!isAdmin){
-
-opensLeft--;
-
-updateOpenText();
-
-await updateDoc(
-doc(db,"users",deviceId),
-{
-opensLeft:opensLeft
-}
-);
-
-}
-
-const overlay =
-document.getElementById(
-"overlay"
-);
-
-overlay.style.display =
-"flex";
-
-document.getElementById(
-"cardHolder"
-).innerHTML = "";
-
-document.getElementById(
-"videoHolder"
-).innerHTML =
-
-`
-<video
-id="packVideo"
-autoplay
-playsinline
-preload="auto">
-
-<source
-src="${videoMap[reward.name]}"
-type="video/mp4">
-
-</video>
-`;
-
-const video =
-document.getElementById(
-"packVideo"
-);
-
-video.onended =
-function(){
-
-document.getElementById(
-"videoHolder"
-).innerHTML = "";
-
-document.getElementById(
-"cardHolder"
-).innerHTML =
-
-`
-<div class="cardResult">
-
-<img
-src="${reward.image}"
-alt="${reward.name}">
-
-<br><br>
-
-<h2>${reward.name}</h2>
-
-<br>
-
-<button
-id="claimBtn"
-onclick="closeReward('${reward.name}')">
-
-NHẬN THẺ
-
-</button>
-
-</div>
-`;
-
-};
-
-};
-
-window.closeReward =
-async function(cardName){
-
-if(rewardClaimed) return;
-
-rewardClaimed = true;
-
-const btn=document.getElementById("claimBtn");
-if(btn) btn.disabled=true;
-
-await addCard(cardName);
-
-document.getElementById(
-"overlay"
-).style.display =
-"none";
-
-};
-window.sendCardPrompt =
-async function(cardName){
-
-const receiver =
-prompt("Tên người nhận:");
-
-if(!receiver) return;
-
-const amount =
-parseInt(
-prompt("Số lượng:")
-);
-
-if(
-isNaN(amount) ||
-amount <= 0
-){
-return;
-}
-
-const userRef =
-doc(db,"users",deviceId);
-
-const userSnap =
-await getDoc(userRef);
-
-const user =
-userSnap.data();
-
-if(
-(user.inventory[cardName] || 0)
-< amount
-){
-
-alert("Không đủ thẻ");
-
-return;
-
-}
-
-await addDoc(
-collection(db,"transfers"),
-{
-
-from:username,
-
-fromId:deviceId,
-
-to:receiver,
-
-card:cardName,
-
-amount:amount,
-
-status:"pending",
+text:text,
 
 time:new Date()
 .toLocaleString()
 
 });
 
-alert(
-"Đã gửi yêu cầu"
+if(
+data.marketHistory.length>100
+){
+
+data.marketHistory.pop();
+
+}
+
+await saveMyData({
+
+marketHistory:
+data.marketHistory
+
+});
+
+}
+
+async function addCard(cardName){
+
+const data=
+await getMyData();
+
+if(
+cardName.endsWith(
+"_MARKET"
+)
+){
+
+if(
+!data.marketInventory[
+cardName
+]
+){
+
+data.marketInventory[
+cardName
+]=0;
+
+}
+
+data.marketInventory[
+cardName
+]++;
+
+await saveMyData({
+
+marketInventory:
+data.marketInventory
+
+});
+
+}else{
+
+if(
+!data.inventory[
+cardName
+]
+){
+
+data.inventory[
+cardName
+]=0;
+
+}
+
+data.inventory[
+cardName
+]++;
+
+await saveMyData({
+
+inventory:
+data.inventory
+
+});
+
+}
+
+await addHistory(
+cardName
 );
+
+}
+
+document
+.getElementById(
+"changeNameBtn"
+)
+.addEventListener(
+"click",
+async()=>{
+
+let newName=
+prompt(
+"Tên mới:"
+);
+
+if(!newName)
+return;
+
+newName=
+newName.trim();
+
+if(
+newName.length<3
+)
+return;
+
+username=
+newName;
+
+localStorage.setItem(
+"username",
+username
+);
+
+await updateDoc(
+doc(
+db,
+"users",
+deviceId
+),
+{
+username
+}
+);
+
+document.getElementById(
+"usernameBox"
+).innerText=
+"Tên: "+username;
+
+}
+);
+
+window.adminLogin=
+async function(){
+
+const pass=
+prompt(
+"Mật khẩu Admin:"
+);
+
+if(
+pass!==ADMIN_PASSWORD
+){
+
+alert(
+"Sai mật khẩu"
+);
+
+return;
+
+}
+
+isAdmin=true;
+
+document.getElementById(
+"adminPanel"
+).style.display=
+"block";
+
+await loadAdminPanel();
 
 };
 
+document
+.getElementById(
+"adminBtn"
+)
+.addEventListener(
+"click",
+adminLogin
+);
+async function renderInventory(){
+
+const data=
+await getMyData();
+
+let html="";
+
+for(const key of Object.keys(data.inventory)){
+
+const amount=
+data.inventory[key]||0;
+
+html+=`
+
+<div class="inventoryItem">
+
+<div>
+
+<b
+class="cardName"
+onclick="openCardImage('${key}')">
+
+${key}
+
+</b>
+
+<br>
+
+Sở hữu:
+${amount}
+
+</div>
+
+<br>
+
+<button
+onclick="sendCardPrompt('${key}')">
+
+GỬI
+
+</button>
+
+</div>
+
+`;
+
+}
+
+document.getElementById(
+"inventory"
+).innerHTML=
+html;
+
+}
+
+async function renderMarket(){
+
+const data=
+await getMyData();
+
+let html="";
+
+const marketCards=[
+
+"BOLON_MARKET",
+"HUY_MARKET",
+"BONHO_MARKET",
+"BU_MARKET",
+"GAO_MARKET",
+"PHI_MARKET",
+"TIN_MARKET"
+
+];
+
+for(const card of marketCards){
+
+const amount=
+data.marketInventory[
+card
+] || 0;
+
+html+=`
+
+<div class="marketItem">
+
+<div class="marketTitle">
+
+<span
+class="cardName"
+onclick="openCardImage('${card}')">
+
+${card}
+
+</span>
+
+</div>
+
+<br>
+
+Sở hữu:
+${amount}
+
+<br><br>
+
+<button
+onclick="marketExchange('${card}')">
+
+ĐỔI
+
+</button>
+
+</div>
+
+`;
+
+}
+
+document.getElementById(
+"marketPanel"
+).innerHTML=
+html;
+
+}
+
+async function renderHistory(){
+
+const data=
+await getMyData();
+
+let html="";
+
+for(const item of data.history){
+
+html+=`
+
+<div class="historyItem">
+
+${item.time}
+
+<br>
+
+🎴 ${item.card}
+
+</div>
+
+`;
+
+}
+
+document.getElementById(
+"history"
+).innerHTML=
+html;
+
+}
+
+async function renderMarketHistory(){
+
+const data=
+await getMyData();
+
+let html="";
+
+for(const item of data.marketHistory){
+
+html+=`
+
+<div class="historyItem">
+
+${item.time}
+
+<br>
+
+🛒 ${item.text}
+
+</div>
+
+`;
+
+}
+
+document.getElementById(
+"marketHistory"
+).innerHTML=
+html;
+
+}
+
 async function loadNotifications(){
 
-const snap =
+const snap=
 await getDocs(
-collection(db,"transfers")
+collection(
+db,
+"transfers"
+)
 );
 
-let html = "";
+let html="";
 
 snap.forEach(docSnap=>{
 
-const data =
+const data=
 docSnap.data();
 
 if(
-data.to === username &&
-data.status === "pending"
+data.to===username &&
+data.status==="pending"
 ){
 
-html += `
+html+=`
+
 <div class="notifyItem">
 
-<b>${data.from}</b>
+<b>
+
+${data.from}
+
+</b>
 
 <br>
 
@@ -855,6 +1339,7 @@ TỪ CHỐI
 </button>
 
 </div>
+
 `;
 
 }
@@ -863,52 +1348,137 @@ TỪ CHỐI
 
 if(html===""){
 
-html =
+html=
 "Chưa có thông báo";
 
 }
 
 document.getElementById(
 "notifications"
-).innerHTML =
+).innerHTML=
 html;
 
 }
 
-window.acceptTransfer =
+window.sendCardPrompt=
+async function(cardName){
+
+const receiver=
+prompt(
+"Tên người nhận:"
+);
+
+if(!receiver)
+return;
+
+const amount=
+parseInt(
+prompt(
+"Số lượng:"
+)
+);
+
+if(
+isNaN(amount)||
+amount<=0
+){
+
+return;
+
+}
+
+const data=
+await getMyData();
+
+if(
+(data.inventory[
+cardName
+]||0)
+<
+amount
+){
+
+alert(
+"Không đủ thẻ"
+);
+
+return;
+
+}
+
+await addDoc(
+collection(
+db,
+"transfers"
+),
+{
+
+from:username,
+
+fromId:deviceId,
+
+to:receiver,
+
+card:cardName,
+
+amount:amount,
+
+status:"pending",
+
+time:new Date()
+.toLocaleString()
+
+}
+);
+
+alert(
+"Đã gửi yêu cầu"
+);
+
+};
+
+window.acceptTransfer=
 async function(id){
 
-const transferRef =
-doc(db,"transfers",id);
+const transferRef=
+doc(
+db,
+"transfers",
+id
+);
 
-const transferSnap =
+const transferSnap=
 await getDoc(
 transferRef
 );
 
-if(!transferSnap.exists())
+if(
+!transferSnap.exists()
+)
 return;
 
-const transfer =
+const transfer=
 transferSnap.data();
 
-const senderRef =
+const senderRef=
 doc(
 db,
 "users",
 transfer.fromId
 );
 
-const senderSnap =
-await getDoc(senderRef);
+const senderSnap=
+await getDoc(
+senderRef
+);
 
-const sender =
+const sender=
 senderSnap.data();
 
 if(
 (sender.inventory[
 transfer.card
-] || 0)
+]||0)
 <
 transfer.amount
 ){
@@ -923,7 +1493,8 @@ return;
 
 sender.inventory[
 transfer.card
-] -= transfer.amount;
+]-=
+transfer.amount;
 
 await updateDoc(
 senderRef,
@@ -933,30 +1504,32 @@ sender.inventory
 }
 );
 
-const myRef =
-doc(
-db,
-"users",
-deviceId
-);
+const me=
+await getMyData();
 
-const mySnap =
-await getDoc(myRef);
-
-const me =
-mySnap.data();
+if(
+!me.inventory[
+transfer.card
+]
+){
 
 me.inventory[
 transfer.card
-] += transfer.amount;
+]=0;
 
-await updateDoc(
-myRef,
-{
+}
+
+me.inventory[
+transfer.card
+]+=
+transfer.amount;
+
+await saveMyData({
+
 inventory:
 me.inventory
-}
-);
+
+});
 
 await deleteDoc(
 transferRef
@@ -972,7 +1545,7 @@ alert(
 
 };
 
-window.rejectTransfer =
+window.rejectTransfer=
 async function(id){
 
 await deleteDoc(
@@ -986,59 +1559,519 @@ id
 await loadNotifications();
 
 };
-
-window.adminLogin =
+window.openPack=
 async function(){
 
-const pass =
-prompt(
-"Mật khẩu Admin:"
-);
-
 if(
-pass !==
-ADMIN_PASSWORD
+!isAdmin &&
+opensLeft<=0
 ){
 
 alert(
-"Sai mật khẩu"
+"Bạn đã hết lượt mở!"
 );
 
 return;
 
 }
 
-isAdmin = true;
+const reward=
+randomCard();
+
+rewardClaimed=false;
+
+if(!isAdmin){
+
+opensLeft--;
+
+updateOpenText();
+
+await updateDoc(
+doc(
+db,
+"users",
+deviceId
+),
+{
+opensLeft
+}
+);
+
+}
+
+const overlay=
+document.getElementById(
+"overlay"
+);
+
+overlay.style.display=
+"flex";
 
 document.getElementById(
-"adminPanel"
-).style.display =
-"block";
+"cardHolder"
+).innerHTML="";
 
-await loadAdminPanel();
+document.getElementById(
+"videoHolder"
+).innerHTML=
+
+`
+<video
+id="packVideo"
+autoplay
+playsinline>
+
+<source
+src="${videoMap[reward.name]}"
+type="video/mp4">
+
+</video>
+`;
+
+const video=
+document.getElementById(
+"packVideo"
+);
+
+video.onended=
+function(){
+
+document.getElementById(
+"videoHolder"
+).innerHTML="";
+
+document.getElementById(
+"cardHolder"
+).innerHTML=
+
+`
+<div class="cardResult">
+
+<img
+src="${reward.image}">
+
+<br><br>
+
+<h2>
+${reward.name}
+</h2>
+
+<br>
+
+<button
+id="claimBtn"
+onclick="closeReward('${reward.name}')">
+
+NHẬN THẺ
+
+</button>
+
+</div>
+`;
+
+};
+
+};
+
+window.closeReward=
+async function(cardName){
+
+if(rewardClaimed)
+return;
+
+rewardClaimed=true;
+
+await addCard(
+cardName
+);
+
+await renderInventory();
+await renderMarket();
+await renderHistory();
+
+document.getElementById(
+"overlay"
+).style.display=
+"none";
+
+};
+
+window.marketExchange=
+async function(cardName){
+
+const data=
+await getMyData();
+
+function hasAnyLow(){
+
+return
+
+(data.inventory.BOLON||0)+
+(data.inventory.HUY||0)+
+(data.marketInventory.BOLON_MARKET||0)+
+(data.marketInventory.HUY_MARKET||0);
+
+}
+
+async function consumeChoice(){
+
+if(
+(data.inventory.BOLON||0)>0
+){
+
+data.inventory.BOLON--;
+return true;
+
+}
+
+if(
+(data.inventory.HUY||0)>0
+){
+
+data.inventory.HUY--;
+return true;
+
+}
+
+if(
+(data.marketInventory.BOLON_MARKET||0)>0
+){
+
+data.marketInventory.BOLON_MARKET--;
+return true;
+
+}
+
+if(
+(data.marketInventory.HUY_MARKET||0)>0
+){
+
+data.marketInventory.HUY_MARKET--;
+return true;
+
+}
+
+return false;
+
+}
+
+if(
+cardName==="BOLON_MARKET"||
+cardName==="HUY_MARKET"
+){
+
+let found=false;
+
+for(const k in data.inventory){
+
+if(data.inventory[k]>0){
+
+data.inventory[k]--;
+found=true;
+break;
+
+}
+
+}
+
+if(!found){
+
+alert(
+"Không đủ nguyên liệu"
+);
+
+return;
+
+}
+
+data.marketInventory[
+cardName
+]++;
+
+}
+
+else if(
+cardName==="BONHO_MARKET"
+){
+
+if(
+await consumeChoice()
+){
+
+data.marketInventory[
+cardName
+]++;
+
+}else{
+
+alert(
+"Thiếu BOLON hoặc HUY"
+);
+
+return;
+
+}
+
+}
+
+else if(
+cardName==="BU_MARKET"
+){
+
+if(
+(data.inventory.BONHO||0)+
+(data.marketInventory.BONHO_MARKET||0)
+<=0
+){
+
+alert(
+"Thiếu BONHO"
+);
+
+return;
+
+}
+
+if(
+(data.inventory.BONHO||0)>0
+){
+
+data.inventory.BONHO--;
+
+}else{
+
+data.marketInventory.BONHO_MARKET--;
+
+}
+
+if(
+await consumeChoice()
+){
+
+data.marketInventory.BU_MARKET++;
+
+}else{
+
+alert(
+"Thiếu BOLON hoặc HUY"
+);
+
+return;
+
+}
+
+}
+
+else if(
+cardName==="GAO_MARKET"
+){
+
+if(
+(data.inventory.BU||0)+
+(data.marketInventory.BU_MARKET||0)
+<=0
+){
+
+alert("Thiếu BU");
+return;
+
+}
+
+if(
+(data.inventory.BONHO||0)+
+(data.marketInventory.BONHO_MARKET||0)
+<=0
+){
+
+alert("Thiếu BONHO");
+return;
+
+}
+
+if(
+(data.inventory.BU||0)>0
+){
+
+data.inventory.BU--;
+
+}else{
+
+data.marketInventory.BU_MARKET--;
+
+}
+
+if(
+(data.inventory.BONHO||0)>0
+){
+
+data.inventory.BONHO--;
+
+}else{
+
+data.marketInventory.BONHO_MARKET--;
+
+}
+
+if(
+await consumeChoice()
+){
+
+data.marketInventory.GAO_MARKET++;
+
+}else{
+
+alert(
+"Thiếu BOLON hoặc HUY"
+);
+
+return;
+
+}
+
+}
+
+else if(
+cardName==="PHI_MARKET"||
+cardName==="TIN_MARKET"
+){
+
+if(
+(data.inventory.GAO||0)+
+(data.marketInventory.GAO_MARKET||0)
+<=0
+){
+
+alert("Thiếu GAO");
+return;
+
+}
+
+if(
+(data.inventory.BU||0)+
+(data.marketInventory.BU_MARKET||0)
+<=0
+){
+
+alert("Thiếu BU");
+return;
+
+}
+
+if(
+(data.inventory.BONHO||0)+
+(data.marketInventory.BONHO_MARKET||0)
+<=0
+){
+
+alert("Thiếu BONHO");
+return;
+
+}
+
+if(
+(data.inventory.GAO||0)>0
+){
+
+data.inventory.GAO--;
+
+}else{
+
+data.marketInventory.GAO_MARKET--;
+
+}
+
+if(
+(data.inventory.BU||0)>0
+){
+
+data.inventory.BU--;
+
+}else{
+
+data.marketInventory.BU_MARKET--;
+
+}
+
+if(
+(data.inventory.BONHO||0)>0
+){
+
+data.inventory.BONHO--;
+
+}else{
+
+data.marketInventory.BONHO_MARKET--;
+
+}
+
+if(
+await consumeChoice()
+){
+
+data.marketInventory[
+cardName
+]++;
+
+}else{
+
+alert(
+"Thiếu BOLON hoặc HUY"
+);
+
+return;
+
+}
+
+}
+
+await saveMyData({
+
+inventory:
+data.inventory,
+
+marketInventory:
+data.marketInventory
+
+});
+
+await addMarketHistory(
+"Đổi thành công "+cardName
+);
+
+await renderInventory();
+await renderMarket();
+await renderMarketHistory();
+
+alert(
+"Đổi thành công"
+);
 
 };
 
 async function loadAdminPanel(){
 
-if(!isAdmin) return;
+if(!isAdmin)
+return;
 
-const snap =
+const snap=
 await getDocs(
-collection(db,"users")
+collection(
+db,
+"users"
+)
 );
 
-let html =
+let html=
 "<h3>Quản trị</h3>";
 
 snap.forEach(userDoc=>{
 
-const data =
+const data=
 userDoc.data();
 
-html += `
+html+=`
 
-<div class="historyItem">
+<div class="adminUser">
 
 <b>
 ${data.username}
@@ -1047,7 +2080,7 @@ ${data.username}
 <br>
 
 Lượt:
-${data.opensLeft || 0}
+${data.opensLeft||0}
 
 <br><br>
 
@@ -1067,8 +2100,8 @@ onclick="giveOpen('${userDoc.id}',10)">
 </button>
 
 <button
-onclick="kickUser('${userDoc.id}')">
-KICK
+onclick="randomRemove('${userDoc.id}')">
+Thu hồi
 </button>
 
 </div>
@@ -1079,51 +2112,115 @@ KICK
 
 document.getElementById(
 "adminPanel"
-).innerHTML =
+).innerHTML=
 html;
 
 }
 
-window.giveOpen =
+window.giveOpen=
 async function(
 userId,
 amount
 ){
 
-const userRef =
+const userRef=
 doc(
 db,
 "users",
 userId
 );
 
-const snap =
+const snap=
 await getDoc(
 userRef
 );
 
-const data =
+const data=
 snap.data();
 
 await updateDoc(
 userRef,
 {
 opensLeft:
-(data.opensLeft || 0)
-+
-amount
+(data.opensLeft||0)+amount
 }
 );
 
 await loadAdminPanel();
 
-alert(
-"Đã cộng "
-+
-amount
-+
-" lượt"
+};
+
+window.randomRemove=
+async function(userId){
+
+const userRef=
+doc(
+db,
+"users",
+userId
 );
+
+const snap=
+await getDoc(
+userRef
+);
+
+const data=
+snap.data();
+
+const normal=[];
+
+for(const k in data.inventory){
+
+for(
+let i=0;
+i<(data.inventory[k]||0);
+i++
+){
+
+normal.push(k);
+
+}
+
+}
+
+if(
+normal.length===0
+){
+
+alert(
+"Không có thẻ thường"
+);
+
+return;
+
+}
+
+const chosen=
+normal[
+Math.floor(
+Math.random()*
+normal.length
+)
+];
+
+data.inventory[
+chosen
+]--;
+
+await updateDoc(
+userRef,
+{
+inventory:
+data.inventory
+}
+);
+
+alert(
+"Đã thu hồi "+chosen
+);
+
+await loadAdminPanel();
 
 };
 
@@ -1135,41 +2232,46 @@ document
 "click",
 openPack
 );
+window.kickUser=
+async function(userId){
 
-document
-.getElementById(
-"adminBtn"
+if(
+!confirm(
+"Xóa tài khoản này?"
 )
-.addEventListener(
-"click",
-adminLogin
+){
+return;
+}
+
+await deleteDoc(
+doc(
+db,
+"users",
+userId
+)
 );
 
-
-document.getElementById("changeNameBtn").addEventListener("click",async()=>{
-let newName=prompt("Tên mới:");
-if(!newName) return;
-newName=newName.trim();
-if(newName.length<3) return;
-username=newName;
-localStorage.setItem("username",username);
-await updateDoc(doc(db,"users",deviceId),{username});
-document.getElementById("usernameBox").innerText="Tên: "+username;
-});
-
-window.kickUser=async function(userId){
-if(!confirm("Kick tài khoản này?")) return;
-await deleteDoc(doc(db,"users",userId));
 await loadAdminPanel();
+
 };
 
 await initUser();
 
 await renderInventory();
 
+await renderMarket();
+
 await renderHistory();
 
+await renderMarketHistory();
+
 await loadNotifications();
+
+setInterval(
+loadNotifications,
+5000
+);
+
 </script>
 
 </body>
