@@ -371,27 +371,21 @@ deviceId
 }
 
 username =
-localStorage.getItem("username");
+localStorage.getItem(
+"username"
+);
 
-while(
-!username ||
-username.trim() === "" ||
-username === "Người chơi"
-){
+if(!username){
 
 username =
-prompt("Nhập tên người chơi:");
+prompt(
+"Nhập tên người chơi"
+);
 
-if(username === null){
-continue;
-}
+if(!username){
 
 username =
-username.trim();
-
-if(username.length < 3){
-username = "";
-}
+"Người chơi";
 
 }
 
@@ -399,6 +393,8 @@ localStorage.setItem(
 "username",
 username
 );
+
+}
 
 const userRef =
 doc(
@@ -1067,6 +1063,11 @@ onclick="giveOpen('${userDoc.id}',10)">
 +10
 </button>
 
+<button
+onclick="kickUser('${userDoc.id}')">
+KICK
+</button>
+
 </div>
 
 `;
@@ -1146,38 +1147,45 @@ document
 .getElementById("changeNameBtn")
 .addEventListener("click", async ()=>{
 
-let newName =
-prompt("Tên mới:");
+let newName = prompt("Tên mới:");
 
 if(!newName) return;
 
-newName =
-newName.trim();
+newName = newName.trim();
 
-if(newName.length < 3){
-return;
-}
+if(newName.length < 3) return;
 
 username = newName;
 
-localStorage.setItem(
-"username",
-username
-);
+localStorage.setItem("username",username);
 
 await updateDoc(
 doc(db,"users",deviceId),
-{
-username:username
-}
+{username:username}
 );
 
-document.getElementById(
-"usernameBox"
-).innerText =
+document.getElementById("usernameBox").innerText =
 "Tên: " + username;
 
 });
+
+
+window.kickUser =
+async function(userId){
+
+if(!confirm("Kick tài khoản này?")){
+return;
+}
+
+await deleteDoc(
+doc(db,"users",userId)
+);
+
+await loadAdminPanel();
+
+alert("Đã kick tài khoản");
+
+};
 
 
 await initUser();
