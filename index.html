@@ -3,267 +3,1182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Túi Mù FC Premium</title>
+
 <style>
-*{box-sizing:border-box}
-body{
+
+*{
 margin:0;
-font-family:Arial,sans-serif;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
 color:white;
 background:
-radial-gradient(circle at top,#1b4f8c 0%,#081420 45%,#03070c 100%);
+radial-gradient(circle at top,
+#1d5ea8 0%,
+#0d233b 35%,
+#050b13 100%);
 min-height:100vh;
 overflow-x:hidden;
 }
+
 body::before{
 content:'';
-position:fixed;inset:0;
-background:radial-gradient(circle,#ffffff22 1px,transparent 1px);
+position:fixed;
+inset:0;
+background:
+radial-gradient(
+circle,
+rgba(255,255,255,.2) 1px,
+transparent 1px
+);
 background-size:40px 40px;
-opacity:.25;
+opacity:.2;
 pointer-events:none;
 }
+
 .header{
 text-align:center;
-font-size:40px;
+padding:25px;
+font-size:42px;
 font-weight:bold;
-padding:20px;
 text-shadow:0 0 20px gold;
 }
+
 .layout{
 display:grid;
-grid-template-columns:260px 1fr 280px;
+grid-template-columns:280px 1fr 300px;
 gap:20px;
 padding:20px;
 }
+
 .panel{
 background:rgba(255,255,255,.08);
 backdrop-filter:blur(10px);
 border-radius:18px;
-padding:16px;
-border:1px solid rgba(255,255,255,.15);
+padding:18px;
+border:1px solid rgba(255,255,255,.12);
 }
-.center{text-align:center}
+
+.panel h2{
+margin-bottom:12px;
+}
+
+.panel h3{
+margin-bottom:10px;
+}
+
+.panel ul{
+padding-left:20px;
+}
+
+.panel li{
+margin-bottom:8px;
+}
+
+.center{
+text-align:center;
+}
+
 .pack{
-width:280px;height:380px;margin:auto;
+width:280px;
+height:380px;
+
+margin:auto;
+
 border-radius:24px;
-display:flex;align-items:center;justify-content:center;
-font-size:30px;font-weight:bold;
-background:linear-gradient(135deg,#123b67,#08131f);
-box-shadow:0 0 40px gold;
-animation:pulse 2s infinite;
-}
-@keyframes pulse{
-50%{transform:scale(1.03);box-shadow:0 0 70px gold}
-}
-button{
-padding:14px 28px;
-border:none;
-border-radius:14px;
-font-size:18px;
-cursor:pointer;
-font-weight:bold;
-}
-.openBtn{
-background:linear-gradient(90deg,gold,#ffcf33);
-}
-.history{max-height:350px;overflow:auto}
-.overlay{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.88);
-z-index:1000;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-}
-.overlay video{
-max-width:90vw;
-max-height:80vh;
-border-radius:18px;
-}
-.card{
-width:260px;
-height:360px;
-margin:20px auto;
-perspective:1000px;
-}
-.card-inner{
-position:relative;
-width:100%;
-height:100%;
-transform-style:preserve-3d;
-animation:flip 1s forwards;
-}
-@keyframes flip{
-from{transform:rotateY(0)}
-to{transform:rotateY(180deg)}
-}
-.face{
-position:absolute;
-width:100%;
-height:100%;
-backface-visibility:hidden;
-border-radius:20px;
+
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:32px;
+
+font-size:34px;
+font-weight:bold;
+
+background:
+linear-gradient(
+135deg,
+#143b67,
+#08131f
+);
+
+box-shadow:
+0 0 25px gold,
+0 0 60px rgba(255,215,0,.3);
+
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.03);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+button{
+
+padding:14px 28px;
+
+border:none;
+
+border-radius:14px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
+
+.openBtn{
+
+background:
+linear-gradient(
+90deg,
+gold,
+#ffcf33
+);
+
+color:black;
+}
+
+.adminBtn{
+
+background:
+linear-gradient(
+90deg,
+#2c3e50,
+#4b6584
+);
+
+color:white;
+}
+
+.infoBox{
+
+margin-top:15px;
+
+padding:12px;
+
+border-radius:12px;
+
+background:
+rgba(255,255,255,.08);
+}
+
+.history{
+
+max-height:350px;
+
+overflow-y:auto;
+
+padding-right:8px;
+}
+
+.historyItem{
+
+padding:8px;
+
+margin-bottom:8px;
+
+border-radius:10px;
+
+background:
+rgba(255,255,255,.05);
+}
+
+.inventoryItem{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:8px;
+
+margin-bottom:8px;
+
+border-radius:10px;
+
+background:
+rgba(255,255,255,.05);
+}
+
+.overlay{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:
+rgba(0,0,0,.92);
+
+z-index:9999;
+
+align-items:center;
+
+justify-content:center;
+
+flex-direction:column;
+}
+
+.overlay video{
+
+max-width:90vw;
+
+max-height:80vh;
+
+border-radius:18px;
+}
+
+.card{
+
+width:260px;
+
+height:360px;
+
+perspective:1000px;
+
+margin-bottom:20px;
+}
+
+.card-inner{
+
+position:relative;
+
+width:100%;
+
+height:100%;
+
+transform-style:preserve-3d;
+
+animation:flipCard 1s forwards;
+}
+
+@keyframes flipCard{
+
+from{
+transform:rotateY(0deg);
+}
+
+to{
+transform:rotateY(180deg);
+}
+
+}
+
+.face{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+backface-visibility:hidden;
+
+border-radius:20px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:34px;
+
 font-weight:bold;
 }
+
 .front{
-background:linear-gradient(135deg,#0d1f31,#224e7c);
+
+background:
+linear-gradient(
+135deg,
+#102a44,
+#234e7b
+);
 }
+
 .back{
+
 transform:rotateY(180deg);
-background:linear-gradient(135deg,#ffd700,#b8860b);
+
+background:
+linear-gradient(
+135deg,
+gold,
+#c89c00
+);
+
 color:black;
-box-shadow:0 0 40px gold;
+
+box-shadow:
+0 0 30px gold;
 }
+
+.closeBtn{
+
+background:
+linear-gradient(
+90deg,
+#27ae60,
+#2ecc71
+);
+
+color:white;
+}
+
+.username{
+
+font-size:18px;
+margin-bottom:10px;
+}
+
+.opensLeft{
+
+font-size:18px;
+margin-top:10px;
+color:#ffd700;
+font-weight:bold;
+}
+
+@media(max-width:1000px){
+
+.layout{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="header">⚽ TÚI MÙ FC PREMIUM ⚽</div>
+<div class="header">
+⚽ TÚI MÙ FC PREMIUM ⚽
+</div>
 
 <div class="layout">
+
 <div class="panel">
-<h3>Tỉ lệ</h3>
+
+<h2>Thông tin</h2>
+
+<div id="usernameBox" class="username">
+Chưa đăng nhập
+</div>
+
+<div id="opensLeftBox" class="opensLeft">
+Lượt mở: ?
+</div>
+
+<br>
+
+<button
+class="adminBtn"
+onclick="adminLogin()">
+Admin
+</button>
+
+<br><br>
+
+<h3>Tỉ lệ thẻ</h3>
+
 <ul>
-<li>BOLON 30%</li>
-<li>HUY 30%</li>
-<li>BONHO 20%</li>
-<li>BU 10%</li>
-<li>PHI 5%</li>
-<li>tin 5%</li>
+<li>BOLON — 28%</li>
+<li>HUY — 28%</li>
+<li>BONHO — 20%</li>
+<li>BU — 10%</li>
+<li>GAO — 6%</li>
+<li>PHI — 4%</li>
+<li>TIN — 4%</li>
 </ul>
-<button onclick="adminLogin()">Admin</button>
+
 </div>
 
 <div class="center">
-<div class="pack">MYSTERY PACK</div><br>
-<button class="openBtn" onclick="openPack()">MỞ TÚI</button>
+
+<div class="pack">
+MYSTERY PACK
+</div>
+
+<br>
+
+<button
+class="openBtn"
+onclick="openPack()">
+MỞ TÚI
+</button>
+
 </div>
 
 <div class="panel">
-<h3>Lịch sử</h3>
-<div id="history" class="history"></div>
-</div>
+
+<h2>Kho thẻ</h2>
+
+<div id="inventory">
+Đang tải...
 </div>
 
-<div id="overlay" class="overlay">
+<hr style="margin:15px 0">
+
+<h2>Lịch sử</h2>
+
+<div
+id="history"
+class="history">
+</div>
+
+</div>
+
+</div>
+
+<div
+id="overlay"
+class="overlay">
+
 <div id="videoHolder"></div>
-<div id="cardHolder"></div>
-</div>
 
-<script>
+<div id="cardHolder"></div>
+
+</div>
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+setDoc,
+updateDoc,
+collection,
+addDoc,
+getDocs,
+deleteDoc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey:"AIzaSyC7zCqjOfpyj3bR37xHj4CA5XIxyc_x_Yk",
+authDomain:"fc-mystery-pack.firebaseapp.com",
+projectId:"fc-mystery-pack",
+storageBucket:"fc-mystery-pack.firebasestorage.app",
+messagingSenderId:"64482739800",
+appId:"1:64482739800:web:f2fc37048fa577f19cec2d"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 const ADMIN_PASSWORD="nhatisreal";
+
 let isAdmin=false;
+let username="";
+let deviceId="";
+let opensLeft=0;
 
 const cards=[
-{name:"BOLON",chance:30},
-{name:"HUY",chance:30},
+
+{name:"BOLON",chance:28},
+
+{name:"HUY",chance:28},
+
 {name:"BONHO",chance:20},
+
 {name:"BU",chance:10},
-{name:"PHI",chance:5},
-{name:"tin",chance:5}
+
+{name:"GAO",chance:6},
+
+{name:"PHI",chance:4},
+
+{name:"TIN",chance:4}
+
 ];
 
-function adminLogin(){
-const p=prompt("Mật khẩu Admin:");
-if(p===ADMIN_PASSWORD){isAdmin=true;alert("Đăng nhập thành công");}
+const videoMap={
+
+BOLON:"videos/bolon.mp4",
+
+HUY:"videos/huy.mp4",
+
+BONHO:"videos/bonho.mp4",
+
+BU:"videos/bu.mp4",
+
+GAO:"videos/gao.mp4",
+
+PHI:"videos/phi.mp4",
+
+TIN:"videos/tin.mp4"
+
+};
+
+window.adminLogin=function(){
+
+const p=prompt("Nhập mật khẩu Admin");
+
+if(p===ADMIN_PASSWORD){
+
+isAdmin=true;
+
+alert("Đăng nhập Admin thành công");
+
+loadTradeRequests();
+
+}else{
+
+alert("Sai mật khẩu");
+
 }
 
-function canOpen(){
-if(isAdmin) return true;
-const today=new Date().toDateString();
-return localStorage.getItem("lastOpen")!==today;
+};
+
+async function initUser(){
+
+deviceId=
+localStorage.getItem("deviceId");
+
+if(!deviceId){
+
+deviceId=crypto.randomUUID();
+
+localStorage.setItem(
+"deviceId",
+deviceId
+);
+
 }
 
-function saveOpen(){
-if(!isAdmin){
-localStorage.setItem("lastOpen",new Date().toDateString());
+username=
+localStorage.getItem("username");
+
+if(!username){
+
+username=
+prompt("Nhập tên của bạn");
+
+if(!username){
+
+username="Người chơi";
+
 }
+
+localStorage.setItem(
+"username",
+username
+);
+
+}
+
+const ref=
+doc(db,"users",deviceId);
+
+const snap=
+await getDoc(ref);
+
+if(!snap.exists()){
+
+await setDoc(ref,{
+
+username:username,
+
+opensLeft:1,
+
+inventory:{
+
+BOLON:0,
+HUY:0,
+BONHO:0,
+BU:0,
+GAO:0,
+PHI:0,
+TIN:0
+
+},
+
+history:[]
+
+});
+
+opensLeft=1;
+
+}else{
+
+const data=snap.data();
+
+opensLeft=
+data.opensLeft || 0;
+
+}
+
+document.getElementById(
+"usernameBox"
+).innerText=
+"Tên: " + username;
+
+updateOpenText();
+
+renderInventory();
+
+renderHistory();
+
+}
+
+function updateOpenText(){
+
+document.getElementById(
+"opensLeftBox"
+).innerText=
+"Lượt mở: " + opensLeft;
+
 }
 
 function randomCard(){
-let total=cards.reduce((a,b)=>a+b.chance,0);
-let r=Math.random()*total;
-let cur=0;
-for(const c of cards){
-cur+=c.chance;
-if(r<=cur) return c;
-}
-}
 
-function addHistory(name){
-let h=JSON.parse(localStorage.getItem("history")||"[]");
-h.unshift(new Date().toLocaleString()+" - "+name);
-h=h.slice(0,10);
-localStorage.setItem("history",JSON.stringify(h));
-renderHistory();
+let total=0;
+
+for(const card of cards){
+
+total+=card.chance;
+
 }
 
-function renderHistory(){
-let h=JSON.parse(localStorage.getItem("history")||"[]");
-document.getElementById("history").innerHTML=h.join("<br>");
+let rand=
+Math.random()*total;
+
+let current=0;
+
+for(const card of cards){
+
+current+=card.chance;
+
+if(rand<=current){
+
+return card;
+
 }
 
-function openPack(){
+}
 
-if(!canOpen()){
-alert("Bạn đã mở hôm nay rồi!");
+return cards[0];
+
+}
+async function renderInventory(){
+
+const snap=
+await getDoc(
+doc(db,"users",deviceId)
+);
+
+if(!snap.exists()) return;
+
+const data=snap.data();
+
+const inv=data.inventory;
+
+document.getElementById("inventory").innerHTML=
+`
+<div class="inventoryItem">
+<span>BOLON</span>
+<span>x${inv.BOLON}</span>
+</div>
+
+<div class="inventoryItem">
+<span>HUY</span>
+<span>x${inv.HUY}</span>
+</div>
+
+<div class="inventoryItem">
+<span>BONHO</span>
+<span>x${inv.BONHO}</span>
+</div>
+
+<div class="inventoryItem">
+<span>BU</span>
+<span>x${inv.BU}</span>
+</div>
+
+<div class="inventoryItem">
+<span>GAO</span>
+<span>x${inv.GAO}</span>
+</div>
+
+<div class="inventoryItem">
+<span>PHI</span>
+<span>x${inv.PHI}</span>
+</div>
+
+<div class="inventoryItem">
+<span>TIN</span>
+<span>x${inv.TIN}</span>
+</div>
+`;
+
+}
+
+async function renderHistory(){
+
+const snap=
+await getDoc(
+doc(db,"users",deviceId)
+);
+
+if(!snap.exists()) return;
+
+const data=snap.data();
+
+let html="";
+
+for(const item of data.history){
+
+html+=`
+<div class="historyItem">
+${item.time}<br>
+🎴 ${item.card}
+</div>
+`;
+
+}
+
+document.getElementById("history").innerHTML=html;
+
+}
+
+async function addCard(cardName){
+
+const ref=
+doc(db,"users",deviceId);
+
+const snap=
+await getDoc(ref);
+
+const data=snap.data();
+
+data.inventory[cardName]++;
+
+data.history.unshift({
+
+card:cardName,
+
+time:new Date().toLocaleString()
+
+});
+
+if(data.history.length>30){
+
+data.history.pop();
+
+}
+
+await updateDoc(ref,{
+
+inventory:data.inventory,
+
+history:data.history
+
+});
+
+await renderInventory();
+
+await renderHistory();
+
+}
+
+window.openPack=async function(){
+
+if(opensLeft<=0){
+
+alert("Bạn đã hết lượt mở!");
+
 return;
-}
 
-saveOpen();
+}
 
 const reward=randomCard();
 
-const videoMap={
-BOLON:"videos/bolon.mp4",
-HUY:"videos/huy.mp4",
-BONHO:"videos/bonho.mp4",
-BU:"videos/bu.mp4",
-PHI:"videos/phi.mp4",
-tin:"videos/tin.mp4"
-};
+opensLeft--;
 
-const overlay=document.getElementById("overlay");
+updateOpenText();
+
+await updateDoc(
+doc(db,"users",deviceId),
+{
+opensLeft:opensLeft
+}
+);
+
+const overlay=
+document.getElementById("overlay");
+
 overlay.style.display="flex";
 
-document.getElementById("cardHolder").innerHTML="";
+document.getElementById(
+"cardHolder"
+).innerHTML="";
 
-document.getElementById("videoHolder").innerHTML=`
-<video id="packVideo" autoplay>
-<source src="${videoMap[reward.name]}" type="video/mp4">
-</video>`;
+document.getElementById(
+"videoHolder"
+).innerHTML=
+`
+<video
+id="packVideo"
+autoplay>
 
-const video=document.getElementById("packVideo");
+<source
+src="${videoMap[reward.name]}"
+type="video/mp4">
 
-video.onended=function(){
-
-document.getElementById("videoHolder").innerHTML="";
-
-document.getElementById("cardHolder").innerHTML=`
-<div class="card">
-<div class="card-inner">
-<div class="face front">FC</div>
-<div class="face back">${reward.name}</div>
-</div>
-</div>
-<button onclick="closeReward('${reward.name}')">ĐÓNG</button>
+</video>
 `;
+
+const video=
+document.getElementById(
+"packVideo"
+);
+
+video.onended=
+async function(){
+
+document.getElementById(
+"videoHolder"
+).innerHTML="";
+
+document.getElementById(
+"cardHolder"
+).innerHTML=
+`
+<div class="card">
+
+<div class="card-inner">
+
+<div class="face front">
+FC
+</div>
+
+<div class="face back">
+${reward.name}
+</div>
+
+</div>
+
+</div>
+
+<button
+class="closeBtn"
+onclick="closeReward('${reward.name}')">
+NHẬN THẺ
+</button>
+`;
+
 };
+
+};
+
+window.closeReward=
+async function(cardName){
+
+await addCard(cardName);
+
+document.getElementById(
+"overlay"
+).style.display="none";
+
+};
+async function requestTrade(){
+
+const card=
+prompt(
+"Nhập tên thẻ muốn đổi (BOLON, HUY, BONHO, BU, GAO, PHI, TIN)"
+);
+
+if(!card) return;
+
+const cardName=
+card.toUpperCase();
+
+const userRef=
+doc(db,"users",deviceId);
+
+const userSnap=
+await getDoc(userRef);
+
+const userData=
+userSnap.data();
+
+if(
+!userData.inventory[cardName] ||
+userData.inventory[cardName] <= 0
+){
+alert("Bạn không sở hữu thẻ này!");
+return;
 }
 
-function closeReward(name){
-addHistory(name);
-document.getElementById("overlay").style.display="none";
+await addDoc(
+collection(db,"tradeRequests"),
+{
+username,
+deviceId,
+card:cardName,
+status:"pending",
+time:new Date().toLocaleString()
+}
+);
+
+alert("Đã gửi yêu cầu đổi thẻ!");
 }
 
-renderHistory();
+window.requestTrade=requestTrade;
+
+async function loadTradeRequests(){
+
+if(!isAdmin) return;
+
+const snap=
+await getDocs(
+collection(db,"tradeRequests")
+);
+
+let html=`
+<h3>Yêu cầu đổi thẻ</h3>
+`;
+
+snap.forEach(docSnap=>{
+
+const data=
+docSnap.data();
+
+html +=
+`
+<div class="historyItem">
+
+<b>${data.username}</b>
+
+<br>
+
+Thẻ:
+${data.card}
+
+<br>
+
+${data.time}
+
+<br><br>
+
+<button
+onclick="approveTrade('${docSnap.id}')">
+DUYỆT
+</button>
+
+<button
+onclick="rejectTrade('${docSnap.id}')">
+TỪ CHỐI
+</button>
+
+</div>
+`;
+
+});
+
+html += `
+<hr>
+<h3>Người chơi</h3>
+<div id="adminUsers">
+Đang tải...
+</div>
+`;
+
+document.getElementById(
+"history"
+).innerHTML = html;
+
+loadUsers();
+}
+
+window.approveTrade =
+async function(id){
+
+const tradeRef=
+doc(db,"tradeRequests",id);
+
+const tradeSnap=
+await getDoc(tradeRef);
+
+if(!tradeSnap.exists()) return;
+
+const trade=
+tradeSnap.data();
+
+const userRef=
+doc(
+db,
+"users",
+trade.deviceId
+);
+
+const userSnap=
+await getDoc(userRef);
+
+const user=
+userSnap.data();
+
+if(
+user.inventory[trade.card] > 0
+){
+
+user.inventory[trade.card]--;
+
+await updateDoc(
+userRef,
+{
+inventory:user.inventory
+}
+);
+
+}
+
+await deleteDoc(tradeRef);
+
+alert("Đã duyệt đổi thẻ");
+
+loadTradeRequests();
+};
+
+window.rejectTrade =
+async function(id){
+
+await deleteDoc(
+doc(db,"tradeRequests",id)
+);
+
+alert("Đã từ chối");
+
+loadTradeRequests();
+};
+
+async function loadUsers(){
+
+if(!isAdmin) return;
+
+const snap=
+await getDocs(
+collection(db,"users")
+);
+
+let html="";
+
+snap.forEach(userDoc=>{
+
+const data=
+userDoc.data();
+
+html +=
+`
+<div class="historyItem">
+
+<b>
+${data.username}
+</b>
+
+<br>
+
+Lượt:
+${data.opensLeft}
+
+<br><br>
+
+<button
+onclick="giveOpen('${userDoc.id}',1)">
++1
+</button>
+
+<button
+onclick="giveOpen('${userDoc.id}',5)">
++5
+</button>
+
+<button
+onclick="giveOpen('${userDoc.id}',10)">
++10
+</button>
+
+</div>
+`;
+
+});
+
+const target=
+document.getElementById(
+"adminUsers"
+);
+
+if(target){
+target.innerHTML=html;
+}
+}
+
+window.giveOpen=
+async function(userId,amount){
+
+const ref=
+doc(
+db,
+"users",
+userId
+);
+
+const snap=
+await getDoc(ref);
+
+if(!snap.exists()) return;
+
+const data=
+snap.data();
+
+await updateDoc(
+ref,
+{
+opensLeft:
+(data.opensLeft||0)+amount
+}
+);
+
+loadUsers();
+
+alert(
+"Đã cộng "
++ amount +
+" lượt"
+);
+
+};
+
+initUser();
 </script>
 
 </body>
