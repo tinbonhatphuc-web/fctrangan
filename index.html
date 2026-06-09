@@ -520,6 +520,9 @@ html += `
 Sở hữu:
 ${inv[card.name] || 0}
 
+<button onclick="sendToAdmin('${card.name}')">
+ĐỔI ADMIN
+</button>
 </div>
 
 <button onclick="sendCardPrompt('${card.name}')">
