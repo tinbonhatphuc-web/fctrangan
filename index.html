@@ -7,32 +7,17 @@
 
 <meta
 name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 <title>
-FC PREMIUM V4
+FC Premium V4 Fixed Edition
 </title>
 
 <style>
 
-:root{
-
---bg1:#06111c;
---bg2:#0e2640;
-
---panel:
-rgba(255,255,255,.08);
-
---border:
-rgba(255,255,255,.12);
-
---gold:#ffd700;
-
---red:#ff3b3b;
-
---radius:18px;
-
-}
+/* =========================
+RESET
+========================= */
 
 *{
 margin:0;
@@ -40,175 +25,218 @@ padding:0;
 box-sizing:border-box;
 }
 
+html,
+body{
+height:100%;
+}
+
 body{
 
 font-family:
 Arial,
-Helvetica,
 sans-serif;
 
 background:
-radial-gradient(
-circle at top,
-#1f5fa3 0%,
-#0c2138 40%,
-#03070c 100%
+linear-gradient(
+180deg,
+#0f172a,
+#111827
 );
 
 color:white;
 
-min-height:100vh;
-
-overflow-x:hidden;
+overflow:hidden;
 
 }
 
-button{
+/* =========================
+APP
+========================= */
 
-border:none;
+.app{
 
-cursor:pointer;
+height:100vh;
 
-font-weight:bold;
-
-border-radius:12px;
-
-}
-
-img{
-
-max-width:100%;
-
-display:block;
+display:flex;
+flex-direction:column;
 
 }
 
-/* ==========================
+/* =========================
 HEADER
-========================== */
+========================= */
 
 .header{
 
 height:70px;
 
-display:flex;
+flex-shrink:0;
 
+display:flex;
+align-items:center;
 justify-content:center;
 
-align-items:center;
-
-font-size:34px;
-
+font-size:28px;
 font-weight:bold;
 
-color:white;
+background:
 
-text-shadow:
-0 0 10px gold,
-0 0 25px gold;
+rgba(
+255,
+255,
+255,
+0.08
+);
+
+backdrop-filter:
+blur(12px);
+
+border-bottom:
+
+1px solid rgba(
+255,
+255,
+255,
+0.12
+);
 
 }
 
-/* ==========================
-MAIN GRID
-========================== */
+/* =========================
+MAIN
+========================= */
 
-.app{
+.main{
 
-padding:20px;
+flex:1;
 
 display:grid;
 
 grid-template-columns:
+
 300px
 1fr
-350px;
+380px;
 
-gap:20px;
+gap:12px;
 
-align-items:start;
+padding:12px;
+
+overflow:hidden;
 
 }
 
-/* ==========================
-PANEL
-========================== */
+/* =========================
+PANELS
+========================= */
 
 .panel{
 
-background:var(--panel);
+background:
 
-backdrop-filter:blur(12px);
+rgba(
+255,
+255,
+255,
+0.06
+);
 
 border:
-1px solid var(--border);
 
-border-radius:var(--radius);
+1px solid rgba(
+255,
+255,
+255,
+0.1
+);
 
-padding:18px;
+border-radius:18px;
+
+backdrop-filter:
+blur(10px);
+
+overflow:hidden;
 
 }
 
-/* ==========================
-LEFT SIDEBAR
-========================== */
+/* =========================
+LEFT
+========================= */
 
 .leftPanel{
 
 display:flex;
-
 flex-direction:column;
 
-gap:14px;
+padding:15px;
+gap:12px;
+
+overflow-y:auto;
 
 }
 
 .playerBox{
 
-padding:12px;
-
 background:
-rgba(255,255,255,.05);
 
-border-radius:12px;
+rgba(
+255,
+255,
+255,
+0.08
+);
+
+border-radius:14px;
+
+padding:12px;
 
 }
 
-.statRow{
+.playerTitle{
 
-margin-top:8px;
+font-size:18px;
+font-weight:bold;
 
+margin-bottom:8px;
+
+}
+
+.stat{
+
+margin-top:6px;
 font-size:14px;
 
 }
 
-.version{
-
-color:gold;
-
-font-weight:bold;
-
-}
-
-/* ==========================
+/* =========================
 PITY
-========================== */
+========================= */
 
 .pityWrap{
 
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
+margin-top:8px;
 
 }
 
-.bar{
+.pityLabel{
 
-height:14px;
+font-size:13px;
 
-background:#222;
+margin-bottom:5px;
+
+}
+
+.pityBar{
+
+height:12px;
+
+background:
+rgba(
+255,
+255,
+255,
+0.1
+);
 
 border-radius:999px;
 
@@ -216,39 +244,59 @@ overflow:hidden;
 
 }
 
-.fill{
+.pityFill{
 
 height:100%;
 
 width:0%;
 
-transition:.3s;
+background:
+
+linear-gradient(
+90deg,
+#22c55e,
+#3b82f6
+);
+
+transition:
+0.3s;
 
 }
 
-.normalFill{
+/* =========================
+BUTTON
+========================= */
 
-background:#4caf50;
+.btn{
+
+border:none;
+
+padding:10px 14px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+background:
+#2563eb;
+
+color:white;
 
 }
 
-.highFill{
+.btn:hover{
 
-background:gold;
+opacity:0.9;
 
 }
 
-/* ==========================
+/* =========================
 CENTER
-========================== */
+========================= */
 
 .centerPanel{
-
-text-align:center;
-
-}
-
-.packArea{
 
 display:flex;
 
@@ -256,65 +304,73 @@ flex-direction:column;
 
 align-items:center;
 
+justify-content:center;
+
 gap:20px;
+
+padding:20px;
+
+position:relative;
 
 }
 
+/* =========================
+PACK
+========================= */
+
 .packImage{
 
-width:300px;
+width:320px;
 
-height:420px;
+max-width:90%;
 
-border-radius:25px;
+cursor:pointer;
 
-background:
-linear-gradient(
-135deg,
-#163c69,
-#081421
-);
+transition:0.3s;
 
-display:flex;
+}
 
-justify-content:center;
+.packImage:hover{
 
-align-items:center;
-
-font-size:30px;
-
-font-weight:bold;
-
-box-shadow:
-0 0 35px gold;
+transform:scale(1.05);
 
 }
 
 .openBtn{
 
-padding:14px 28px;
+font-size:20px;
 
-font-size:18px;
-
-background:gold;
-
-color:black;
+padding:14px 26px;
 
 }
 
-.claimBtn{
+/* =========================
+REWARD
+========================= */
 
-padding:14px 24px;
+.rewardCard{
 
-background:#00c853;
+display:none;
 
-color:white;
+flex-direction:column;
+
+align-items:center;
+
+gap:12px;
 
 }
 
-/* ==========================
+.rewardCard img{
+
+width:260px;
+
+border-radius:18px;
+
+}
+
+/* =========================
 RIGHT
-========================== */
+========================= */
 
 .rightPanel{
 
@@ -322,123 +378,85 @@ display:flex;
 
 flex-direction:column;
 
-gap:10px;
-
-}
-
-/* ==========================
-ACCORDION
-========================== */
-
-.accordion{
-
-border-radius:14px;
-
 overflow:hidden;
 
-background:
-rgba(255,255,255,.05);
+}
+
+/* =========================
+ACCORDION
+========================= */
+
+.accordionItem{
+
+border-bottom:
+
+1px solid rgba(
+255,
+255,
+255,
+0.08
+);
 
 }
 
-.accHeader{
+.accordionHeader{
 
-padding:14px;
+padding:15px;
 
 cursor:pointer;
 
-font-size:18px;
-
 font-weight:bold;
 
-display:flex;
+background:
 
-justify-content:space-between;
-
-align-items:center;
+rgba(
+255,
+255,
+255,
+0.05
+);
 
 }
 
-.accBody{
+.accordionBody{
 
 display:none;
 
-padding:12px;
+height:400px;
 
-border-top:
-1px solid rgba(255,255,255,.08);
+overflow-y:auto;
+
+padding:12px;
 
 }
 
-.accordion.active .accBody{
+.accordionItem.active
+.accordionBody{
 
 display:block;
 
 }
 
-/* ==========================
-NOTIFICATION DOT
-========================== */
-
-.redDot{
-
-width:12px;
-
-height:12px;
-
-border-radius:50%;
-
-background:red;
-
-box-shadow:
-0 0 12px red;
-
-display:none;
-
-}
-
-/* ==========================
-SCROLL
-========================== */
-
-.scrollBox{
-
-max-height:450px;
-
-overflow-y:auto;
-
-padding-right:5px;
-
-}
-
-.scrollBox::-webkit-scrollbar{
-
-width:6px;
-
-}
-
-.scrollBox::-webkit-scrollbar-thumb{
-
-background:gold;
-
-border-radius:999px;
-
-}
-
-/* ==========================
-CARD
-========================== */
+/* =========================
+CARD ITEM
+========================= */
 
 .cardItem{
 
-padding:10px;
+padding:12px;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
-border-radius:10px;
+border-radius:12px;
 
 background:
-rgba(255,255,255,.05);
+
+rgba(
+255,
+255,
+255,
+0.06
+);
 
 cursor:pointer;
 
@@ -447,144 +465,134 @@ cursor:pointer;
 .marketCard{
 
 border:
+
 1px solid gold;
+
 }
 
-/* ==========================
-RESULT MODAL
-========================== */
+/* =========================
+MODAL
+========================= */
 
-#rewardModal{
+.modal{
+
+display:none;
 
 position:fixed;
 
 inset:0;
 
-display:none;
+background:
 
-justify-content:center;
+rgba(
+0,
+0,
+0,
+0.85
+);
 
 align-items:center;
 
-background:
-rgba(0,0,0,.92);
-
-z-index:9999;
-
-}
-
-.rewardBox{
-
-text-align:center;
-
-}
-
-.rewardBox img{
-
-width:280px;
-
-border-radius:20px;
-
-box-shadow:
-0 0 30px gold;
-
-}
-
-/* ==========================
-CARD PREVIEW
-========================== */
-
-#previewModal{
-
-position:fixed;
-
-inset:0;
-
-display:none;
-
 justify-content:center;
 
-align-items:center;
+z-index:999;
+
+}
+
+.modalContent{
 
 background:
-rgba(0,0,0,.95);
+#111827;
 
-z-index:10000;
+padding:20px;
 
-}
+border-radius:18px;
 
-.previewContent img{
+max-width:90%;
 
-max-width:90vw;
+max-height:90%;
 
-max-height:80vh;
-
-border-radius:20px;
+overflow:auto;
 
 }
 
-/* ==========================
-ADMIN
-========================== */
+.modalContent img{
 
-#adminPanel{
+max-width:100%;
+
+}
+
+/* =========================
+NOTIFICATION DOT
+========================= */
+
+.redDot{
+
+width:12px;
+height:12px;
+
+border-radius:50%;
+
+background:red;
 
 display:none;
 
-margin-top:10px;
-
 }
 
-.adminUser{
-
-padding:10px;
-
-margin-bottom:8px;
-
-background:
-rgba(255,255,255,.05);
-
-border-radius:10px;
-
-}
-
-/* ==========================
+/* =========================
 TABLET
-========================== */
+========================= */
 
-@media(max-width:1100px){
+@media
+(max-width:1200px){
 
-.app{
+.main{
 
 grid-template-columns:
 1fr;
 
-}
+overflow-y:auto;
 
 }
 
-/* ==========================
+.leftPanel,
+.centerPanel,
+.rightPanel{
+
+min-height:500px;
+
+}
+
+body{
+
+overflow:auto;
+
+}
+
+}
+
+/* =========================
 MOBILE
-========================== */
+========================= */
 
-@media(max-width:700px){
+@media
+(max-width:700px){
 
 .header{
 
-font-size:24px;
+font-size:20px;
 
 }
 
 .packImage{
 
-width:230px;
-height:320px;
+width:220px;
 
 }
 
 .openBtn{
 
-width:100%;
+font-size:16px;
 
 }
 
@@ -596,59 +604,68 @@ width:100%;
 
 <body>
 
+<div class="app">
+
+<!-- HEADER -->
+
 <div class="header">
 
-⚽ FC PREMIUM V4 ⚽
+⚽ FC PREMIUM V4 FIXED ⚽
 
 </div>
 
-<div class="app">
+<!-- MAIN -->
+
+<div class="main">
 
 <!-- LEFT -->
 
-<div
-class="panel leftPanel">
+<div class="panel leftPanel">
 
 <div class="playerBox">
 
-<h2>
+<div class="playerTitle">
+
 Người Chơi
-</h2>
+
+</div>
 
 <div id="playerName">
+
 Đang tải...
-</div>
 
 </div>
 
-<button id="changeNameBtn">
+<button
+class="btn"
+id="changeNameBtn">
+
 Đổi Tên
+
 </button>
 
-<div class="statRow">
+<div class="stat">
+
 Lượt mở:
 <span id="openCount">
 0
 </span>
+
 </div>
 
 <div class="pityWrap">
 
-<div>
+<div class="pityLabel">
 
-Pity Thường
+Pity 10
 
-<span id="normalPityText">
+</div>
 
-0/10
-
-</span>
-
-<div class="bar">
+<div class="pityBar">
 
 <div
-id="normalPityBar"
-class="fill normalFill">
+id="pity10Bar"
+class="pityFill">
 
 </div>
 
@@ -656,21 +673,19 @@ class="fill normalFill">
 
 </div>
 
-<div>
+<div class="pityWrap">
 
-Pity BU+
+<div class="pityLabel">
 
-<span id="highPityText">
+Pity 30 (BU+)
 
-0/30
+</div>
 
-</span>
-
-<div class="bar">
+<div class="pityBar">
 
 <div
-id="highPityBar"
-class="fill highFill">
+id="pity30Bar"
+class="pityFill">
 
 </div>
 
@@ -678,31 +693,20 @@ class="fill highFill">
 
 </div>
 
-</div>
+<div class="stat">
 
-<div id="rateBox">
-
-<h3>Tỷ Lệ Rơi</h3>
-
-</div>
-
-<div class="version">
-
-FC PREMIUM V4
+Version:
+V4 Fixed
 
 </div>
 
-<button id="adminBtn">
+<button
+id="adminBtn"
+class="btn">
 
-ADMIN
+Admin
 
 </button>
-
-<div id="adminPanel">
-
-<div id="adminUsers">
-
-</div>
 
 </div>
 
@@ -710,22 +714,45 @@ ADMIN
 
 <!-- CENTER -->
 
+<div class="panel centerPanel">
+
+<img
+
+id="packImage"
+
+class="packImage"
+
+src="fc-mystery-pack.png"
+
+alt="Pack">
+
+<button
+
+id="openPackBtn"
+
+class="btn openBtn">
+
+MỞ PACK
+
+</button>
+
 <div
-class="panel centerPanel">
+id="rewardCard"
+class="rewardCard">
 
-<div class="packArea">
+<img
+id="rewardImage">
 
-<div class="packImage">
-
-MYSTERY PACK
+<div
+id="rewardName">
 
 </div>
 
 <button
-id="openBtn"
-class="openBtn">
+id="claimBtn"
+class="btn">
 
-MỞ PACK
+NHẬN
 
 </button>
 
@@ -735,56 +762,49 @@ MỞ PACK
 
 <!-- RIGHT -->
 
-<div
-class="panel rightPanel">
+<div class="panel rightPanel">
 
 <div
-class="accordion active">
+class="accordionItem">
 
 <div
-class="accHeader">
+class="accordionHeader">
 
 📦 Kho Thẻ
 
 </div>
 
-<div class="accBody">
-
 <div
 id="inventoryList"
-class="scrollBox">
+class="accordionBody">
 
 </div>
 
 </div>
-
-</div>
-
-<div class="accordion">
 
 <div
-class="accHeader">
+class="accordionItem">
+
+<div
+class="accordionHeader">
 
 🏪 Chợ Market
 
 </div>
 
-<div class="accBody">
-
 <div
 id="marketList"
-class="scrollBox">
+class="accordionBody">
 
 </div>
 
 </div>
-
-</div>
-
-<div class="accordion">
 
 <div
-class="accHeader">
+class="accordionItem">
+
+<div
+class="accordionHeader">
 
 🔔 Thông Báo
 
@@ -796,74 +816,63 @@ class="redDot">
 
 </div>
 
-<div class="accBody">
-
 <div
 id="notificationList"
-class="scrollBox">
+class="accordionBody">
 
 </div>
 
 </div>
-
-</div>
-
-<div class="accordion">
 
 <div
-class="accHeader">
+class="accordionItem">
+
+<div
+class="accordionHeader">
 
 📜 Lịch Sử Mở
 
 </div>
 
-<div class="accBody">
-
 <div
 id="openHistory"
-class="scrollBox">
+class="accordionBody">
 
 </div>
 
 </div>
-
-</div>
-
-<div class="accordion">
 
 <div
-class="accHeader">
+class="accordionItem">
+
+<div
+class="accordionHeader">
 
 💱 Lịch Sử Giao Dịch
 
 </div>
 
-<div class="accBody">
-
 <div
 id="tradeHistory"
-class="scrollBox">
+class="accordionBody">
 
 </div>
 
 </div>
-
-</div>
-
-<div class="accordion">
 
 <div
-class="accHeader">
+class="accordionItem">
+
+<div
+class="accordionHeader">
 
 🎁 Lịch Sử Chuyển
 
 </div>
 
-<div class="accBody">
-
 <div
 id="transferHistory"
-class="scrollBox">
+class="accordionBody">
 
 </div>
 
@@ -875,103 +884,78 @@ class="scrollBox">
 
 </div>
 
-<!-- REWARD -->
+<!-- MODAL -->
 
-<div id="rewardModal">
+<div
+id="previewModal"
+class="modal">
 
-<div class="rewardBox">
-
-<div id="videoContainer">
-
-</div>
-
-<div id="rewardContainer">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- PREVIEW -->
-
-<div id="previewModal">
-
-<div class="previewContent">
+<div
+class="modalContent">
 
 <img
-id="previewImage"
-src="">
-
-<br><br>
-
-<button
-id="closePreview">
-
-ĐÓNG
-
-</button>
+id="previewImage">
 
 </div>
 
 </div>
 <script type="module">
 
-/* =========================================
-FC PREMIUM V4
-CORE ENGINE
-========================================= */
+/* =========================
+FIREBASE IMPORT
+========================= */
 
 import {
+
 initializeApp
+
 }
+
 from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-getFirestore,
 
+getFirestore,
 doc,
 getDoc,
 setDoc,
 updateDoc,
-deleteDoc,
-
-collection,
-getDocs,
 addDoc,
+deleteDoc,
+collection,
 query,
+where,
 orderBy,
 limit,
-
+getDocs,
 serverTimestamp
 
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-/* =========================================
-FIREBASE
-========================================= */
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================
+FIREBASE CONFIG
+THAY BẰNG CONFIG CỦA BẠN
+========================= */
 
 const firebaseConfig={
 
-apiKey:"AIzaSyC7zCqjOfpyj3bR37xHj4CA5XIxyc_x_Yk",
+apiKey:"YOUR_API_KEY",
 
-authDomain:
-"fc-mystery-pack.firebaseapp.com",
+authDomain:"YOUR_PROJECT.firebaseapp.com",
 
-projectId:
-"fc-mystery-pack",
+projectId:"YOUR_PROJECT_ID",
 
-storageBucket:
-"fc-mystery-pack.firebasestorage.app",
+storageBucket:"YOUR_PROJECT.appspot.com",
 
-messagingSenderId:
-"64482739800",
+messagingSenderId:"123456",
 
-appId:
-"1:64482739800:web:f2fc37048fa577f19cec2d"
+appId:"YOUR_APP_ID"
 
 };
 
@@ -985,11 +969,18 @@ getFirestore(
 app
 );
 
-/* =========================================
-COLLECTIONS V4
-========================================= */
+/* =========================
+COLLECTIONS
+========================= */
 
-const USERS="users";
+const USERS=
+"users";
+
+const OPEN_LOGS=
+"openLogs";
+
+const NOTIFICATIONS=
+"notifications";
 
 const MARKET_TRADES=
 "marketTrades";
@@ -997,159 +988,73 @@ const MARKET_TRADES=
 const TRANSFER_LOGS=
 "transferLogs";
 
-const NOTIFICATIONS=
-"notifications";
+const TRANSFERS=
+"transfers";
 
-const OPEN_LOGS=
-"openLogs";
-
-/* =========================================
-GLOBAL STATE
-========================================= */
+/* =========================
+VERSION
+========================= */
 
 const VERSION=
-"FC PREMIUM V4";
+"FC Premium V4 Fixed";
+
+/* =========================
+ADMIN PASSWORD
+========================= */
 
 const ADMIN_PASSWORD=
 "nhatisreal";
 
-let isAdmin=false;
+/* =========================
+APP STATE
+========================= */
 
-let rewardClaimed=false;
+const APP={
 
-let currentReward=null;
+version:VERSION,
 
-let deviceId=null;
+admin:false,
 
-let username="";
+opening:false,
 
-let userData=null;
+rewardClaimed:false,
 
-/* =========================================
-CARDS
-========================================= */
+currentReward:null,
 
-const NORMAL_CARDS=[
+deviceId:null,
 
-"BOLON",
-"HUY",
-"BONHO",
-"BU",
-"GAO",
-"PHI",
-"TIN"
-
-];
-
-const MARKET_CARDS=[
-
-"BOLON_MARKET",
-"HUY_MARKET",
-"BONHO_MARKET",
-"BU_MARKET",
-"GAO_MARKET",
-"PHI_MARKET",
-"TIN_MARKET"
-
-];
-
-/* =========================================
-CARD DATA
-========================================= */
-
-const CARD_DATA={
-
-BOLON:{
-image:"cards/bolon.png",
-video:"videos/bolon.mp4"
-},
-
-HUY:{
-image:"cards/huy.png",
-video:"videos/huy.mp4"
-},
-
-BONHO:{
-image:"cards/bonho.png",
-video:"videos/bonho.mp4"
-},
-
-BU:{
-image:"cards/bu.png",
-video:"videos/bu.mp4"
-},
-
-GAO:{
-image:"cards/gao.png",
-video:"videos/gao.mp4"
-},
-
-PHI:{
-image:"cards/phi.png",
-video:"videos/phi.mp4"
-},
-
-TIN:{
-image:"cards/tin.png",
-video:"videos/tin.mp4"
-}
+user:null
 
 };
 
-/* =========================================
-CREATE INVENTORY
-========================================= */
+/* =========================
+DEVICE ID
+========================= */
 
-function createInventory(){
-
-return{
-
-BOLON:0,
-HUY:0,
-BONHO:0,
-BU:0,
-GAO:0,
-PHI:0,
-TIN:0
-
-};
-
-}
-
-function createMarketInventory(){
-
-return{
-
-BOLON_MARKET:0,
-HUY_MARKET:0,
-BONHO_MARKET:0,
-BU_MARKET:0,
-GAO_MARKET:0,
-PHI_MARKET:0,
-TIN_MARKET:0
-
-};
-
-}
-
-/* =========================================
-DEVICE
-========================================= */
-
-function createDevice(){
+function getDeviceId(){
 
 let id=
+
 localStorage.getItem(
-"fc_device"
+"fc_device_id"
 );
 
 if(!id){
 
 id=
-crypto.randomUUID();
+
+"FC_"+
+
+Date.now()+
+
+"_"+
+
+Math.random()
+.toString(36)
+.substring(2,8);
 
 localStorage.setItem(
-"fc_device",
+"fc_device_id",
 id
 );
 
@@ -1159,62 +1064,55 @@ return id;
 
 }
 
-/* =========================================
-TIME
-========================================= */
+APP.deviceId=
+getDeviceId();
 
-function nowText(){
+/* =========================
+DEFAULT USER
+========================= */
 
-return new Date()
-.toLocaleString(
-"vi-VN"
-);
+function createDefaultUser(){
+
+return{
+
+deviceId:
+APP.deviceId,
+
+username:
+"Người Chơi",
+
+opensLeft:
+10,
+
+normalPity:
+0,
+
+buPity:
+0,
+
+inventory:{},
+
+marketInventory:{},
+
+createdAt:
+Date.now()
+
+};
 
 }
 
-/* =========================================
-USER DOC
-========================================= */
+/* =========================
+LOAD USER
+========================= */
 
 async function loadUser(){
 
-deviceId=
-createDevice();
-
-username=
-localStorage.getItem(
-"fc_name"
-);
-
-while(
-!username ||
-username.trim().length<3
-){
-
-username=
-prompt(
-"Nhập tên người chơi"
-);
-
-if(
-username===null
-) continue;
-
-username=
-username.trim();
-
-}
-
-localStorage.setItem(
-"fc_name",
-username
-);
-
 const ref=
+
 doc(
 db,
 USERS,
-deviceId
+APP.deviceId
 );
 
 const snap=
@@ -1222,208 +1120,227 @@ await getDoc(
 ref
 );
 
-if(!snap.exists()){
+if(
+snap.exists()
+){
 
-const newUser={
-
-username,
-
-opensLeft:1,
-
-inventory:
-createInventory(),
-
-marketInventory:
-createMarketInventory(),
-
-normalPity:0,
-
-highPity:0,
-
-createdAt:
-Date.now()
-
-};
-
-await setDoc(
-ref,
-newUser
-);
-
-userData=
-newUser;
-
-}else{
-
-userData=
+APP.user=
 snap.data();
 
 }
+else{
 
-/* repair */
+APP.user=
+createDefaultUser();
 
-if(
-!userData.inventory
-){
-
-userData.inventory=
-createInventory();
-
-}
-
-if(
-!userData.marketInventory
-){
-
-userData.marketInventory=
-createMarketInventory();
-
-}
-
-if(
-userData.normalPity==
-undefined
-){
-
-userData.normalPity=0;
-
-}
-
-if(
-userData.highPity==
-undefined
-){
-
-userData.highPity=0;
-
-}
-
-await updateDoc(
+await setDoc(
 ref,
-userData
+APP.user
 );
 
 }
 
-/* =========================================
+}
+
+/* =========================
 SAVE USER
-========================================= */
+========================= */
 
 async function saveUser(){
 
-await updateDoc(
+await setDoc(
 
 doc(
 db,
 USERS,
-deviceId
+APP.deviceId
 ),
 
-userData
+APP.user,
+
+{
+merge:true
+}
 
 );
 
 }
 
-/* =========================================
-REFRESH PLAYER
-========================================= */
+/* =========================
+RENDER PLAYER
+========================= */
 
-function refreshPlayerPanel(){
+function renderPlayer(){
 
 document
 .getElementById(
 "playerName"
 )
 .innerText=
-username;
+
+APP.user.username;
 
 document
 .getElementById(
 "openCount"
 )
 .innerText=
-userData.opensLeft;
 
-/* pity 10 */
+APP.user.opensLeft||0;
 
-document
-.getElementById(
-"normalPityText"
+/* pity10 */
+
+const pity10=
+
+Math.min(
+
+100,
+
+(
+(APP.user.normalPity||0)
+/
+10
 )
-.innerText=
-userData.normalPity+
-"/10";
+*100
+
+);
 
 document
 .getElementById(
-"normalPityBar"
+"pity10Bar"
 )
 .style.width=
+
+pity10+"%";
+
+/* pity30 */
+
+const pity30=
+
 Math.min(
+
 100,
-(userData.normalPity/10)
+
+(
+(APP.user.buPity||0)
+/
+30
+)
 *100
-)
-+"%";
 
-/* pity 30 */
+);
 
 document
 .getElementById(
-"highPityText"
-)
-.innerText=
-userData.highPity+
-"/30";
-
-document
-.getElementById(
-"highPityBar"
+"pity30Bar"
 )
 .style.width=
-Math.min(
-100,
-(userData.highPity/30)
-*100
-)
-+"%";
+
+pity30+"%";
 
 }
 
-/* =========================================
+/* =========================
+ĐỔI TÊN
+========================= */
+
+document
+.getElementById(
+"changeNameBtn"
+)
+.onclick=
+async()=>{
+
+const name=
+
+prompt(
+"Tên mới"
+);
+
+if(!name)
+return;
+
+APP.user.username=
+name.trim();
+
+await saveUser();
+
+renderPlayer();
+
+};
+
+/* =========================
+ADMIN LOGIN
+========================= */
+
+document
+.getElementById(
+"adminBtn"
+)
+.onclick=
+()=>{
+
+const pass=
+prompt(
+"Mật khẩu Admin"
+);
+
+if(
+pass!==ADMIN_PASSWORD
+){
+
+alert(
+"Sai mật khẩu"
+);
+
+return;
+
+}
+
+APP.admin=true;
+
+alert(
+"Admin Mode"
+);
+
+};
+
+/* =========================
 ACCORDION
-ONLY ONE OPEN
-========================================= */
+========================= */
 
 function setupAccordion(){
 
-const all=
+const items=
 
 document.querySelectorAll(
-".accordion"
+".accordionItem"
 );
 
-all.forEach(acc=>{
+items.forEach(item=>{
 
 const header=
-acc.querySelector(
-".accHeader"
+
+item.querySelector(
+".accordionHeader"
 );
 
 header.onclick=
 ()=>{
 
-all.forEach(
-x=>{
-if(x!==acc)
-x.classList.remove(
+items.forEach(i=>{
+
+if(i!==item){
+
+i.classList.remove(
 "active"
 );
-}
-);
 
-acc.classList.toggle(
+}
+
+});
+
+item.classList.toggle(
 "active"
 );
 
@@ -1433,9 +1350,44 @@ acc.classList.toggle(
 
 }
 
-/* =========================================
+/* =========================
+PREVIEW MODAL
+========================= */
+
+const previewModal=
+
+document.getElementById(
+"previewModal"
+);
+
+const previewImage=
+
+document.getElementById(
+"previewImage"
+);
+
+window.showPreview=
+function(src){
+
+previewImage.src=
+src;
+
+previewModal.style.display=
+"flex";
+
+};
+
+previewModal.onclick=
+()=>{
+
+previewModal.style.display=
+"none";
+
+};
+
+/* =========================
 NOTIFICATION
-========================================= */
+========================= */
 
 async function addNotification(
 
@@ -1453,7 +1405,8 @@ NOTIFICATIONS
 
 {
 
-deviceId,
+deviceId:
+APP.deviceId,
 
 title,
 
@@ -1468,9 +1421,9 @@ serverTimestamp()
 
 }
 
-/* =========================================
+/* =========================
 OPEN LOG
-========================================= */
+========================= */
 
 async function addOpenLog(
 
@@ -1487,15 +1440,11 @@ OPEN_LOGS
 
 {
 
-deviceId,
-
-username,
+deviceId:
+APP.deviceId,
 
 card,
 
-time:
-nowText(),
-
 createdAt:
 serverTimestamp()
 
@@ -1505,46 +1454,9 @@ serverTimestamp()
 
 }
 
-/* =========================================
-TRANSFER LOG
-========================================= */
-
-async function addTransferLog(
-
-text
-
-){
-
-await addDoc(
-
-collection(
-db,
-TRANSFER_LOGS
-),
-
-{
-
-deviceId,
-
-username,
-
-text,
-
-time:
-nowText(),
-
-createdAt:
-serverTimestamp()
-
-}
-
-);
-
-}
-
-/* =========================================
+/* =========================
 MARKET LOG
-========================================= */
+========================= */
 
 async function addMarketLog(
 
@@ -1561,14 +1473,10 @@ MARKET_TRADES
 
 {
 
-deviceId,
-
-username,
+deviceId:
+APP.deviceId,
 
 text,
-
-time:
-nowText(),
 
 createdAt:
 serverTimestamp()
@@ -1579,143 +1487,115 @@ serverTimestamp()
 
 }
 
-/* =========================================
-PREVIEW
-========================================= */
+/* =========================
+TRANSFER LOG
+========================= */
 
-window.showPreview=
-function(src){
+async function addTransferLog(
 
-document
-.getElementById(
-"previewImage"
-)
-.src=src;
+text
 
-document
-.getElementById(
-"previewModal"
-)
-.style.display=
-"flex";
+){
 
-};
+await addDoc(
 
-document
-.getElementById(
-"closePreview"
-)
-.onclick=
-()=>{
+collection(
+db,
+TRANSFER_LOGS
+),
 
-document
-.getElementById(
-"previewModal"
-)
-.style.display=
-"none";
+{
 
-};
+deviceId:
+APP.deviceId,
 
-/* =========================================
+text,
+
+createdAt:
+serverTimestamp()
+
+}
+
+);
+
+}
+
+/* =========================
 BOOT
-========================================= */
+========================= */
 
 await loadUser();
 
+renderPlayer();
+
 setupAccordion();
 
-refreshPlayerPanel();
-
 console.log(
-"FC PREMIUM V4 READY"
+"FC Premium V4 Fixed Ready"
 );
+  /* =========================
+CARD DATA
+========================= */
 
-</script>
-/* =========================================
-DROP RATE V4
-========================================= */
+const CARD_DATA={
 
-const CARD_POOL=[
-
-{
-name:"BOLON",
-chance:13.5
+BOLON:{
+image:"cards/bolon.png",
+video:"videos/bolon.mp4",
+weight:40
 },
 
-{
-name:"HUY",
-chance:13.5
+HUY:{
+image:"cards/huy.png",
+video:"videos/huy.mp4",
+weight:30
 },
 
-{
-name:"BONHO",
-chance:9.5
+BONHO:{
+image:"cards/bonho.png",
+video:"videos/bonho.mp4",
+weight:18
 },
 
-{
-name:"BU",
-chance:4.5
+BU:{
+image:"cards/bu.png",
+video:"videos/bu.mp4",
+weight:8
 },
 
-{
-name:"GAO",
-chance:2.5
+GAO:{
+image:"cards/gao.png",
+video:"videos/gao.mp4",
+weight:3
 },
 
-{
-name:"PHI",
-chance:1.5
+PHI:{
+image:"cards/phi.png",
+video:"videos/phi.mp4",
+weight:0.8
 },
 
-{
-name:"TIN",
-chance:1.5
-},
-
-{
-name:"BOLON_MARKET",
-chance:14.5
-},
-
-{
-name:"HUY_MARKET",
-chance:14.5
-},
-
-{
-name:"BONHO_MARKET",
-chance:10.5
-},
-
-{
-name:"BU_MARKET",
-chance:5.5
-},
-
-{
-name:"GAO_MARKET",
-chance:3.5
-},
-
-{
-name:"PHI_MARKET",
-chance:2.5
-},
-
-{
-name:"TIN_MARKET",
-chance:2.5
+TIN:{
+image:"cards/tin.png",
+video:"videos/tin.mp4",
+weight:0.2
 }
+
+};
+
+const NORMAL_CARDS=[
+
+"BOLON",
+"HUY",
+"BONHO",
+"BU",
+"GAO",
+"PHI",
+"TIN"
 
 ];
 
-/* =========================================
-BU+ POOL
-PITY 30
-========================================= */
-
-const HIGH_PITY_POOL=[
+const BU_PLUS=[
 
 "BU",
 "GAO",
@@ -1724,67 +1604,79 @@ const HIGH_PITY_POOL=[
 
 ];
 
-/* =========================================
-RESET PITY 30
-========================================= */
+/* =========================
+PACK UI
+========================= */
 
-const HIGH_RESET=[
-
-"BU",
-"GAO",
-"PHI",
-"TIN"
-
-];
-
-/* =========================================
-CARD HELPER
-========================================= */
-
-function getBaseCard(name){
-
-return name.replace(
-"_MARKET",
-""
+const openPackBtn=
+document.getElementById(
+"openPackBtn"
 );
 
-}
-
-function isMarketCard(name){
-
-return name.endsWith(
-"_MARKET"
+const rewardCard=
+document.getElementById(
+"rewardCard"
 );
 
-}
-
-/* =========================================
-RANDOM CARD
-========================================= */
-
-function randomCard(){
-
-let total=0;
-
-CARD_POOL.forEach(
-c=>total+=c.chance
+const rewardImage=
+document.getElementById(
+"rewardImage"
 );
 
-let rand=
+const rewardName=
+document.getElementById(
+"rewardName"
+);
+
+const claimBtn=
+document.getElementById(
+"claimBtn"
+);
+
+/* =========================
+ANTI SPAM
+========================= */
+
+let packLocked=false;
+
+/* =========================
+ROLL NORMAL
+========================= */
+
+function rollCard(){
+
+const total=
+
+NORMAL_CARDS.reduce(
+
+(sum,name)=>
+
+sum+
+CARD_DATA[name].weight,
+
+0
+
+);
+
+let random=
 Math.random()*total;
-
-let current=0;
 
 for(
 const card
-of CARD_POOL
+of NORMAL_CARDS
 ){
 
-current+=card.chance;
+random-=
 
-if(rand<=current){
+CARD_DATA[
+card
+].weight;
 
-return card.name;
+if(
+random<=0
+){
+
+return card;
 
 }
 
@@ -1794,419 +1686,348 @@ return "BOLON";
 
 }
 
-/* =========================================
-PITY ENGINE
-========================================= */
+/* =========================
+ROLL BU+
+========================= */
 
-function getRewardCard(){
+function rollBUPlus(){
 
-/*
-PITY 10:
-không reset
-chỉ đếm
+const pool=[
 
-PITY 30:
-đảm bảo BU+
-*/
+"BU",
+"GAO",
+"PHI",
+"TIN"
 
-userData.normalPity++;
+];
 
-userData.highPity++;
-
-let reward;
-
-/* =====================
-PITY 30
-===================== */
-
-if(
-userData.highPity>=30
-){
-
-reward=
-
-HIGH_PITY_POOL[
+return pool[
 Math.floor(
-Math.random()*
-HIGH_PITY_POOL.length
+Math.random()*pool.length
 )
 ];
 
-/* reset pity 30 */
+}
 
-userData.highPity=0;
+/* =========================
+VIDEO POPUP
+========================= */
+
+function playRewardVideo(card){
+
+const old=
+document.getElementById(
+"rewardVideoModal"
+);
+
+if(old)
+old.remove();
+
+const modal=
+document.createElement(
+"div"
+);
+
+modal.id=
+"rewardVideoModal";
+
+modal.className=
+"modal";
+
+modal.style.display=
+"flex";
+
+modal.innerHTML=`
+
+<div class="modalContent">
+
+<video
+
+autoplay
+
+controls
+
+style="
+max-width:700px;
+width:100%;
+border-radius:15px;
+">
+
+<source
+
+src="${
+CARD_DATA[
+card
+].video
+}"
+
+type="video/mp4">
+
+</video>
+
+</div>
+
+`;
+
+document.body.appendChild(
+modal
+);
+
+setTimeout(()=>{
+
+modal.onclick=
+()=>modal.remove();
+
+},500);
+
+}
+
+/* =========================
+OPEN PACK
+========================= */
+
+async function openPack(){
+
+if(packLocked)
+return;
+
+if(APP.opening)
+return;
+
+if(
+(APP.user.opensLeft||0)<=0
+){
+
+alert(
+"Hết lượt mở"
+);
+
+return;
+
+}
+
+APP.opening=true;
+packLocked=true;
+
+try{
+
+APP.user.opensLeft--;
+
+APP.user.normalPity++;
+
+APP.user.buPity++;
+
+let reward;
+
+/* =========================
+PITY 30
+========================= */
+
+if(
+(APP.user.buPity||0)>=30
+){
+
+reward=
+rollBUPlus();
+
+APP.user.buPity=0;
 
 }
 else{
 
 reward=
-randomCard();
-
-/* reset pity 30
-nếu ra BU trở lên */
+rollCard();
 
 if(
-HIGH_RESET.includes(
+BU_PLUS.includes(
 reward
 )
 ){
 
-userData.highPity=0;
+APP.user.buPity=0;
 
 }
 
 }
 
-/* pity 10
-KHÔNG RESET */
+/* =========================
+SHOW REWARD
+========================= */
 
-return reward;
+APP.currentReward=
+reward;
 
-}
+APP.rewardClaimed=false;
 
-/* =========================================
-ADD CARD
-========================================= */
+rewardImage.src=
 
-async function addCardToInventory(
+CARD_DATA[
+reward
+].image;
 
-cardName
+rewardName.innerText=
+reward;
 
-){
+rewardCard.style.display=
+"flex";
 
-if(
-isMarketCard(
-cardName
-)
-){
-
-if(
-!userData.marketInventory[
-cardName
-]
-){
-
-userData.marketInventory[
-cardName
-]=0;
-
-}
-
-userData.marketInventory[
-cardName
-]++;
-
-}
-else{
-
-if(
-!userData.inventory[
-cardName
-]
-){
-
-userData.inventory[
-cardName
-]=0;
-
-}
-
-userData.inventory[
-cardName
-]++;
-
-}
+playRewardVideo(
+reward
+);
 
 await saveUser();
 
+renderPlayer();
+
 }
+catch(err){
 
-/* =========================================
-SHOW VIDEO
-========================================= */
-
-function showVideo(
-
-cardName
-
-){
-
-const base=
-getBaseCard(
-cardName
+console.error(
+err
 );
 
-const video=
-CARD_DATA[
-base
-].video;
-
-document
-.getElementById(
-"videoContainer"
-)
-.innerHTML=
-
-`
-<video
-id="rewardVideo"
-autoplay
-playsinline>
-
-<source
-src="${video}"
-type="video/mp4">
-
-</video>
-`;
-
-const player=
-document.getElementById(
-"rewardVideo"
+alert(
+"Lỗi mở pack"
 );
 
-player.onended=
-()=>{
+}
+finally{
 
-showRewardCard(
-cardName
-);
+APP.opening=false;
 
-};
+setTimeout(()=>{
+
+packLocked=false;
+
+},1500);
 
 }
 
-/* =========================================
-SHOW CARD
-========================================= */
-
-function showRewardCard(
-
-cardName
-
-){
-
-const base=
-getBaseCard(
-cardName
-);
-
-document
-.getElementById(
-"videoContainer"
-)
-.innerHTML="";
-
-document
-.getElementById(
-"rewardContainer"
-)
-.innerHTML=
-
-`
-<img
-src="${CARD_DATA[base].image}">
-
-<br><br>
-
-<h2>
-
-${cardName}
-
-</h2>
-
-<br>
-
-<button
-class="claimBtn"
-id="claimRewardBtn">
-
-NHẬN THẺ
-
-</button>
-`;
-
-document
-.getElementById(
-"claimRewardBtn"
-)
-.onclick=
-()=>claimReward();
-
 }
 
-/* =========================================
-CLAIM
-========================================= */
+/* =========================
+CLAIM REWARD
+========================= */
 
 async function claimReward(){
 
 if(
-rewardClaimed
+APP.rewardClaimed
 )
 return;
 
-rewardClaimed=true;
+if(
+!APP.currentReward
+)
+return;
 
-await addCardToInventory(
-currentReward
-);
+APP.rewardClaimed=true;
+
+const card=
+APP.currentReward;
+
+if(
+!APP.user.inventory[
+card
+]
+){
+
+APP.user.inventory[
+card
+]=0;
+
+}
+
+APP.user.inventory[
+card
+]++;
 
 await addOpenLog(
-currentReward
+card
 );
 
 await addNotification(
 
-"Nhận thẻ",
+"Nhận Thẻ",
 
-"Bạn vừa nhận "+
-currentReward
+card
 
 );
-
-document
-.getElementById(
-"rewardModal"
-)
-.style.display=
-"none";
-
-document
-.getElementById(
-"rewardContainer"
-)
-.innerHTML="";
-
-await refreshAll();
-
-}
-
-/* =========================================
-OPEN PACK
-========================================= */
-
-window.openPack=
-async function(){
-
-if(
-userData.opensLeft<=0
-){
-
-alert(
-"Bạn đã hết lượt mở"
-);
-
-return;
-
-}
-
-rewardClaimed=false;
-
-userData.opensLeft--;
-
-currentReward=
-getRewardCard();
 
 await saveUser();
 
-refreshPlayerPanel();
+rewardCard.style.display=
+"none";
 
-document
-.getElementById(
-"rewardModal"
-)
-.style.display=
-"flex";
+APP.currentReward=null;
 
-showVideo(
-currentReward
-);
+await refreshUI();
 
-};
+}
 
-/* =========================================
-BUTTON
-========================================= */
+/* =========================
+BUTTONS
+========================= */
 
-document
-.getElementById(
-"openBtn"
-)
-.onclick=
+openPackBtn.onclick=
 openPack;
 
-/* =========================================
-RATE PANEL
-========================================= */
+claimBtn.onclick=
+claimReward;
 
-document
-.getElementById(
-"rateBox"
-)
-.innerHTML=
+/* =========================
+REFRESH UI
+========================= */
 
-`
-<h3>Tỷ lệ V4</h3>
+async function refreshUI(){
 
-<ul>
+renderPlayer();
 
-<li>BOLON 13.5%</li>
-<li>BOLON MARKET 14.5%</li>
+}
 
-<li>HUY 13.5%</li>
-<li>HUY MARKET 14.5%</li>
+/* =========================
+DEBUG
+========================= */
 
-<li>BONHO 9.5%</li>
-<li>BONHO MARKET 10.5%</li>
+console.log(
+"Pack Engine Loaded"
+);
+  /* =========================
+MARKET CARDS
+========================= */
 
-<li>BU 4.5%</li>
-<li>BU MARKET 5.5%</li>
+const MARKET_CARDS=[
 
-<li>GAO 2.5%</li>
-<li>GAO MARKET 3.5%</li>
+"BOLON_MARKET",
+"HUY_MARKET",
+"BONHO_MARKET",
+"BU_MARKET",
+"GAO_MARKET",
+"PHI_MARKET",
+"TIN_MARKET"
 
-<li>PHI 1.5%</li>
-<li>PHI MARKET 2.5%</li>
+];
 
-<li>TIN 1.5%</li>
-<li>TIN MARKET 2.5%</li>
+/* =========================
+GET BASE CARD
+========================= */
 
-</ul>
+function getBaseCard(card){
 
-<br>
+return card
+.replace("_MARKET","");
 
-<div>
+}
 
-Pity 10:
-Không reset
-
-</div>
-
-<div>
-
-Pity 30:
-BU+
-
-</div>
-
-<div>
-
-BU / GAO / PHI / TIN
-
-→ Reset pity 30
-
-</div>
-`;
-/* =========================================
-INVENTORY RENDER
-========================================= */
+/* =========================
+CREATE CARD HTML
+========================= */
 
 function createCardHTML(
 
 name,
 count,
-isMarket=false
+market=false
 
 ){
 
@@ -2219,15 +2040,18 @@ name
 );
 
 const image=
+
 CARD_DATA[
 base
-].image;
+]?.image ||
+
+"cards/default.png";
 
 return `
 
 <div
 class="cardItem
-${isMarket ? "marketCard" : ""}"
+${market ? "marketCard" : ""}"
 
 onclick="
 showPreview(
@@ -2252,33 +2076,33 @@ ${count}
 
 }
 
-/* =========================================
-LOAD INVENTORY
-========================================= */
+/* =========================
+RENDER INVENTORY
+========================= */
 
-function loadInventory(){
+function renderInventory(){
 
 let html="";
 
-/* THẺ THƯỜNG */
+/* NORMAL */
 
 html+=`
+
 <h3>
+
 ⚽ THẺ THƯỜNG
+
 </h3>
+
 `;
 
-for(
-const card
-of NORMAL_CARDS
-){
+NORMAL_CARDS.forEach(card=>{
 
-html+=
-createCardHTML(
+html+=createCardHTML(
 
 card,
 
-userData.inventory[
+APP.user.inventory[
 card
 ]||0,
 
@@ -2286,13 +2110,17 @@ false
 
 );
 
-}
+});
 
-/* THẺ MARKET */
+/* MARKET */
 
 html+=`
 
-<hr style="margin:12px 0">
+<hr
+style="
+margin:12px 0;
+opacity:.3;
+">
 
 <h3>
 
@@ -2302,17 +2130,13 @@ html+=`
 
 `;
 
-for(
-const card
-of MARKET_CARDS
-){
+MARKET_CARDS.forEach(card=>{
 
-html+=
-createCardHTML(
+html+=createCardHTML(
 
 card,
 
-userData.marketInventory[
+APP.user.marketInventory[
 card
 ]||0,
 
@@ -2320,14 +2144,7 @@ true
 
 );
 
-}
-
-if(html===""){
-
-html=
-"Chưa có thẻ";
-
-}
+});
 
 document
 .getElementById(
@@ -2338,11 +2155,11 @@ html;
 
 }
 
-/* =========================================
-NOTIFICATION
-========================================= */
+/* =========================
+LOAD NOTIFICATIONS
+========================= */
 
-async function loadNotifications(){
+async function renderNotifications(){
 
 const q=
 
@@ -2351,7 +2168,20 @@ query(
 collection(
 db,
 NOTIFICATIONS
-)
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(50)
 
 );
 
@@ -2367,11 +2197,6 @@ snap.forEach(docSnap=>{
 const data=
 docSnap.data();
 
-if(
-data.deviceId!==deviceId
-)
-return;
-
 count++;
 
 html+=`
@@ -2380,13 +2205,13 @@ html+=`
 
 <b>
 
-${data.title}
+${data.title||""}
 
 </b>
 
 <br>
 
-${data.message}
+${data.message||""}
 
 </div>
 
@@ -2394,7 +2219,9 @@ ${data.message}
 
 });
 
-if(count===0){
+if(
+html===""
+){
 
 html=
 "Không có thông báo";
@@ -2418,17 +2245,17 @@ document
 
 count>0
 ?
-"block"
+"inline-block"
 :
 "none";
 
 }
 
-/* =========================================
-OPEN LOGS
-========================================= */
+/* =========================
+OPEN HISTORY
+========================= */
 
-async function loadOpenLogs(){
+async function renderOpenLogs(){
 
 const q=
 
@@ -2437,7 +2264,12 @@ query(
 collection(
 db,
 OPEN_LOGS
+),
 
+where(
+"deviceId",
+"==",
+APP.deviceId
 ),
 
 orderBy(
@@ -2459,20 +2291,11 @@ snap.forEach(docSnap=>{
 const data=
 docSnap.data();
 
-if(
-data.deviceId!==deviceId
-)
-return;
-
 html+=`
 
 <div class="cardItem">
 
 ${data.card}
-
-<br>
-
-${data.time}
 
 </div>
 
@@ -2483,7 +2306,7 @@ ${data.time}
 if(html===""){
 
 html=
-"Chưa có lịch sử";
+"Chưa có dữ liệu";
 
 }
 
@@ -2496,11 +2319,11 @@ html;
 
 }
 
-/* =========================================
+/* =========================
 MARKET LOGS
-========================================= */
+========================= */
 
-async function loadMarketLogs(){
+async function renderMarketLogs(){
 
 const q=
 
@@ -2509,6 +2332,12 @@ query(
 collection(
 db,
 MARKET_TRADES
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
 ),
 
 orderBy(
@@ -2530,20 +2359,11 @@ snap.forEach(docSnap=>{
 const data=
 docSnap.data();
 
-if(
-data.deviceId!==deviceId
-)
-return;
-
 html+=`
 
 <div class="cardItem">
 
 ${data.text}
-
-<br>
-
-${data.time}
 
 </div>
 
@@ -2567,11 +2387,11 @@ html;
 
 }
 
-/* =========================================
+/* =========================
 TRANSFER LOGS
-========================================= */
+========================= */
 
-async function loadTransferLogs(){
+async function renderTransferLogs(){
 
 const q=
 
@@ -2580,6 +2400,12 @@ query(
 collection(
 db,
 TRANSFER_LOGS
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
 ),
 
 orderBy(
@@ -2601,20 +2427,11 @@ snap.forEach(docSnap=>{
 const data=
 docSnap.data();
 
-if(
-data.deviceId!==deviceId
-)
-return;
-
 html+=`
 
 <div class="cardItem">
 
 ${data.text}
-
-<br>
-
-${data.time}
 
 </div>
 
@@ -2625,7 +2442,7 @@ ${data.time}
 if(html===""){
 
 html=
-"Chưa có chuyển thẻ";
+"Chưa có lịch sử";
 
 }
 
@@ -2638,761 +2455,1481 @@ html;
 
 }
 
-/* =========================================
-FULL REFRESH
-========================================= */
+/* =========================
+FULL REFRESH UI
+========================= */
 
-window.refreshAll=
-async function(){
+async function refreshUI(){
 
-/* reload user */
+renderPlayer();
 
-const snap=
+renderInventory();
 
-await getDoc(
+await renderNotifications();
 
-doc(
-db,
-USERS,
-deviceId
-)
+await renderOpenLogs();
 
-);
+await renderMarketLogs();
 
-if(
-snap.exists()
-){
-
-userData=
-snap.data();
+await renderTransferLogs();
 
 }
 
-/* panel */
-
-refreshPlayerPanel();
-
-/* inventory */
-
-loadInventory();
-
-/* notifications */
-
-await loadNotifications();
-
-/* open logs */
-
-await loadOpenLogs();
-
-/* trade logs */
-
-await loadMarketLogs();
-
-/* transfer logs */
-
-await loadTransferLogs();
-
-};
-
-/* =========================================
+/* =========================
 AUTO REFRESH
-========================================= */
+========================= */
 
 setInterval(
 
-refreshAll,
+refreshUI,
 
 15000
 
 );
 
-/* =========================================
+/* =========================
 FIRST LOAD
-========================================= */
+========================= */
 
-await refreshAll();
-/* =========================================
-MARKET RECIPES
-========================================= */
+await refreshUI();
 
-const MARKET_RECIPES=[
+/* =========================
+DEBUG
+========================= */
 
-{
-result:"BOLON_MARKET",
-text:"1 Thẻ bất kỳ"
-},
+console.log(
+"Inventory Loaded"
+);
+  /* =========================
+TRANSFER UI
+========================= */
 
-{
-result:"HUY_MARKET",
-text:"1 Thẻ bất kỳ"
-},
+const transferModal=
+document.createElement(
+"div"
+);
 
-{
-result:"BONHO_MARKET",
-text:"BOLON hoặc HUY"
-},
+transferModal.className=
+"modal";
 
-{
-result:"BU_MARKET",
-text:"BONHO + (BOLON hoặc HUY)"
-},
+transferModal.id=
+"transferModal";
 
-{
-result:"GAO_MARKET",
-text:"BU + BONHO + (BOLON hoặc HUY)"
-},
+transferModal.innerHTML=`
 
-{
-result:"PHI_MARKET",
-text:"GAO + BU + BONHO + (BOLON hoặc HUY)"
-},
+<div class="modalContent">
 
-{
-result:"TIN_MARKET",
-text:"GAO + BU + BONHO + (BOLON hoặc HUY)"
+<h2>
+🎁 Chuyển Thẻ
+</h2>
+
+<br>
+
+<input
+id="transferUser"
+
+placeholder="Tên người nhận"
+
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+">
+
+<select
+id="transferCard"
+
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+">
+
+</select>
+
+<input
+
+id="transferAmount"
+
+type="number"
+
+min="1"
+
+value="1"
+
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+">
+
+<button
+id="sendTransferBtn"
+class="btn">
+
+GỬI THẺ
+
+</button>
+
+</div>
+
+`;
+
+document.body.appendChild(
+transferModal
+);
+
+/* =========================
+OPEN TRANSFER
+========================= */
+
+function openTransferModal(){
+
+const select=
+
+document.getElementById(
+"transferCard"
+);
+
+select.innerHTML="";
+
+NORMAL_CARDS.forEach(card=>{
+
+const count=
+
+APP.user.inventory[
+card
+]||0;
+
+if(count<=0)
+return;
+
+select.innerHTML+=`
+
+<option
+value="${card}">
+
+${card}
+(${count})
+
+</option>
+
+`;
+
+});
+
+transferModal.style.display=
+"flex";
+
 }
 
-];
+transferModal.onclick=
+e=>{
 
-/* =========================================
-HAS CARD
-ƯU TIÊN MARKET
-========================================= */
-
-function hasAnyCard(
-
-normal,
-market
-
+if(
+e.target===transferModal
 ){
 
-return(
+transferModal.style.display=
+"none";
 
-(userData.marketInventory[
-market
+}
+
+};
+
+/* =========================
+TRANSFER BUTTON
+========================= */
+
+const transferButton=
+document.createElement(
+"button"
+);
+
+transferButton.className=
+"btn";
+
+transferButton.innerText=
+"🎁 Chuyển Thẻ";
+
+transferButton.onclick=
+openTransferModal;
+
+document
+.querySelector(
+".leftPanel"
+)
+.appendChild(
+transferButton
+);
+
+/* =========================
+SEND TRANSFER
+========================= */
+
+let transferLock=false;
+
+document
+.getElementById(
+"sendTransferBtn"
+)
+.onclick=
+async()=>{
+
+if(
+transferLock
+)
+return;
+
+transferLock=true;
+
+try{
+
+const username=
+
+document
+.getElementById(
+"transferUser"
+)
+.value
+.trim();
+
+const card=
+
+document
+.getElementById(
+"transferCard"
+)
+.value;
+
+const amount=
+
+parseInt(
+
+document
+.getElementById(
+"transferAmount"
+)
+.value
+
+);
+
+if(
+!username
+)
+{
+
+alert(
+"Nhập người nhận"
+);
+
+return;
+
+}
+
+if(
+amount<=0
+)
+{
+
+return;
+
+}
+
+if(
+
+(APP.user.inventory[
+card
+]||0)
+
+<
+amount
+
+)
+{
+
+alert(
+"Không đủ thẻ"
+);
+
+return;
+
+}
+
+/* tìm user */
+
+const users=
+
+await getDocs(
+collection(
+db,
+USERS
+)
+);
+
+let receiver=null;
+
+users.forEach(docSnap=>{
+
+const data=
+docSnap.data();
+
+if(
+data.username===
+username
+){
+
+receiver={
+
+id:docSnap.id,
+
+...data
+
+};
+
+}
+
+});
+
+if(
+!receiver
+)
+{
+
+alert(
+"Không tìm thấy"
+);
+
+return;
+
+}
+
+/* trừ thẻ */
+
+APP.user.inventory[
+card
+]-=
+amount;
+
+await saveUser();
+
+/* transfer */
+
+await addDoc(
+
+collection(
+db,
+TRANSFERS
+),
+
+{
+
+from:
+APP.user.username,
+
+to:
+username,
+
+card,
+
+amount,
+
+status:
+"pending",
+
+createdAt:
+serverTimestamp()
+
+}
+
+);
+
+await addTransferLog(
+
+"Gửi "+
+
+card+
+
+" x"+
+
+amount+
+
+" → "+
+
+username
+
+);
+
+await addNotification(
+
+"Đã gửi",
+
+card+
+" x"+
+amount
+
+);
+
+transferModal.style.display=
+"none";
+
+await refreshUI();
+
+alert(
+"Đã gửi"
+);
+
+}
+finally{
+
+setTimeout(()=>{
+
+transferLock=false;
+
+},1500);
+
+}
+
+};
+
+/* =========================
+PENDING TRANSFER
+========================= */
+
+async function loadPendingTransfers(){
+
+const q=
+
+query(
+
+collection(
+db,
+TRANSFERS
+),
+
+where(
+"to",
+"==",
+APP.user.username
+),
+
+where(
+"status",
+"==",
+"pending"
+),
+
+limit(50)
+
+);
+
+const snap=
+await getDocs(q);
+
+let html="";
+
+let pending=0;
+
+snap.forEach(docSnap=>{
+
+const data=
+docSnap.data();
+
+pending++;
+
+html+=`
+
+<div class="cardItem">
+
+<b>
+
+${data.from}
+
+</b>
+
+<br>
+
+${data.card}
+
+x${data.amount}
+
+<br><br>
+
+<button
+class="btn"
+onclick="
+acceptTransfer(
+'${docSnap.id}'
+)
+">
+
+NHẬN
+
+</button>
+
+<button
+class="btn"
+onclick="
+rejectTransfer(
+'${docSnap.id}'
+)
+">
+
+TỪ CHỐI
+
+</button>
+
+</div>
+
+`;
+
+});
+
+if(
+pending>0
+){
+
+document
+.getElementById(
+"notifDot"
+)
+.style.display=
+"inline-block";
+
+document
+.getElementById(
+"notificationList"
+)
+.innerHTML=
+
+html+
+
+document
+.getElementById(
+"notificationList"
+)
+.innerHTML;
+
+}
+
+}
+
+/* =========================
+ACCEPT
+========================= */
+
+window.acceptTransfer=
+async function(id){
+
+const ref=
+doc(
+db,
+TRANSFERS,
+id
+);
+
+const snap=
+await getDoc(
+ref
+);
+
+if(
+!snap.exists()
+)
+return;
+
+const data=
+snap.data();
+
+if(
+data.status!=="pending"
+)
+return;
+
+APP.user.inventory[
+data.card
+]=
+
+(APP.user.inventory[
+data.card
 ]||0)
 
 +
 
-(userData.inventory[
-normal
+data.amount;
+
+await saveUser();
+
+await updateDoc(
+
+ref,
+
+{
+status:
+"accepted"
+}
+
+);
+
+await addTransferLog(
+
+"Nhận "+
+
+data.card+
+
+" x"+
+
+data.amount
+
+);
+
+await addNotification(
+
+"Nhận thẻ",
+
+data.card
+
+);
+
+await refreshUI();
+
+};
+
+/* =========================
+REJECT
+========================= */
+
+window.rejectTransfer=
+async function(id){
+
+const ref=
+doc(
+db,
+TRANSFERS,
+id
+);
+
+const snap=
+await getDoc(
+ref
+);
+
+if(
+!snap.exists()
+)
+return;
+
+const data=
+snap.data();
+
+/* hoàn trả */
+
+const users=
+
+await getDocs(
+collection(
+db,
+USERS
+)
+);
+
+for(
+const userDoc
+of users.docs
+){
+
+const u=
+userDoc.data();
+
+if(
+u.username===
+data.from
+){
+
+u.inventory[
+data.card
+]=
+
+(u.inventory[
+data.card
 ]||0)
 
-)>0;
++
+
+data.amount;
+
+await updateDoc(
+
+doc(
+db,
+USERS,
+userDoc.id
+),
+
+{
+inventory:
+u.inventory
+}
+
+);
+
+break;
 
 }
 
-/* =========================================
-CONSUME
-ƯU TIÊN MARKET
-========================================= */
+}
 
-function consumeCard(
+await updateDoc(
 
-normal,
-market
+ref,
 
-){
+{
+status:
+"rejected"
+}
+
+);
+
+await refreshUI();
+
+};
+
+/* =========================
+EXTEND REFRESH
+========================= */
+
+const oldRefresh=
+refreshUI;
+
+refreshUI=
+async function(){
+
+await oldRefresh();
+
+await loadPendingTransfers();
+
+};
+
+console.log(
+"Transfer Loaded"
+);
+  /* =========================
+ADMIN MODAL
+========================= */
+
+const adminModal=
+document.createElement(
+"div"
+);
+
+adminModal.id=
+"adminModal";
+
+adminModal.className=
+"modal";
+
+adminModal.innerHTML=`
+
+<div class="modalContent"
+style="width:900px;max-width:95%;">
+
+<h2>
+👑 ADMIN PANEL
+</h2>
+
+<br>
+
+<input
+
+id="adminSearchInput"
+
+placeholder="Tên người chơi"
+
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+">
+
+<button
+id="adminSearchBtn"
+class="btn">
+
+TÌM KIẾM
+
+</button>
+
+<hr style="margin:15px 0;">
+
+<div
+id="adminPlayerInfo">
+
+Chưa chọn người chơi
+
+</div>
+
+<hr style="margin:15px 0;">
+
+<div
+id="adminActions"
+style="display:none;">
+
+<button
+class="btn"
+id="give1Btn">
+
++1 LƯỢT
+
+</button>
+
+<button
+class="btn"
+id="give5Btn">
+
++5 LƯỢT
+
+</button>
+
+<button
+class="btn"
+id="give10Btn">
+
++10 LƯỢT
+
+</button>
+
+<br><br>
+
+<button
+class="btn"
+id="revokeBtn">
+
+THU HỒI
+
+</button>
+
+<button
+class="btn"
+id="randomRevokeBtn">
+
+RANDOM REVOKE
+
+</button>
+
+<button
+class="btn"
+id="kickBtn">
+
+KICK
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+document.body.appendChild(
+adminModal
+);
+
+/* =========================
+ADMIN OPEN
+========================= */
+
+let adminTarget=null;
+
+document
+.getElementById(
+"adminBtn"
+)
+.onclick=
+()=>{
+
+const pass=
+prompt(
+"Mật khẩu Admin"
+);
 
 if(
-
-(userData.marketInventory[
-market
-]||0)>0
-
+pass!==ADMIN_PASSWORD
 ){
 
-userData.marketInventory[
-market
+alert(
+"Sai mật khẩu"
+);
+
+return;
+
+}
+
+APP.admin=true;
+
+adminModal.style.display=
+"flex";
+
+};
+
+adminModal.onclick=
+e=>{
+
+if(
+e.target===adminModal
+){
+
+adminModal.style.display=
+"none";
+
+}
+
+};
+
+/* =========================
+SEARCH USER
+========================= */
+
+document
+.getElementById(
+"adminSearchBtn"
+)
+.onclick=
+async()=>{
+
+const username=
+
+document
+.getElementById(
+"adminSearchInput"
+)
+.value
+.trim();
+
+if(!username)
+return;
+
+const users=
+await getDocs(
+collection(
+db,
+USERS
+)
+);
+
+adminTarget=null;
+
+users.forEach(docSnap=>{
+
+const data=
+docSnap.data();
+
+if(
+data.username===
+username
+){
+
+adminTarget={
+
+id:docSnap.id,
+
+...data
+
+};
+
+}
+
+});
+
+if(
+!adminTarget
+){
+
+alert(
+"Không tìm thấy"
+);
+
+return;
+
+}
+
+renderAdminUser();
+
+};
+
+/* =========================
+RENDER USER
+========================= */
+
+function renderAdminUser(){
+
+let html=`
+
+<b>
+Tên:
+</b>
+
+${adminTarget.username}
+
+<br>
+
+<b>
+Lượt mở:
+</b>
+
+${adminTarget.opensLeft||0}
+
+<br><br>
+
+<b>
+Kho thẻ:
+</b>
+
+<br>
+
+`;
+
+NORMAL_CARDS.forEach(card=>{
+
+html+=`
+
+${card} :
+
+${adminTarget.inventory?.[
+card
+]||0}
+
+<br>
+
+`;
+
+});
+
+document
+.getElementById(
+"adminPlayerInfo"
+)
+.innerHTML=
+html;
+
+document
+.getElementById(
+"adminActions"
+)
+.style.display=
+"block";
+
+}
+
+/* =========================
+SAVE TARGET
+========================= */
+
+async function saveTarget(){
+
+await updateDoc(
+
+doc(
+db,
+USERS,
+adminTarget.id
+),
+
+{
+
+opensLeft:
+adminTarget.opensLeft,
+
+inventory:
+adminTarget.inventory
+
+}
+
+);
+
+}
+
+/* =========================
+GIVE OPENS
+========================= */
+
+document
+.getElementById(
+"give1Btn"
+)
+.onclick=
+async()=>{
+
+adminTarget.opensLeft=
+(adminTarget.opensLeft||0)+1;
+
+await saveTarget();
+
+renderAdminUser();
+
+};
+
+document
+.getElementById(
+"give5Btn"
+)
+.onclick=
+async()=>{
+
+adminTarget.opensLeft=
+(adminTarget.opensLeft||0)+5;
+
+await saveTarget();
+
+renderAdminUser();
+
+};
+
+document
+.getElementById(
+"give10Btn"
+)
+.onclick=
+async()=>{
+
+adminTarget.opensLeft=
+(adminTarget.opensLeft||0)+10;
+
+await saveTarget();
+
+renderAdminUser();
+
+};
+
+/* =========================
+REVOKE CARD
+========================= */
+
+document
+.getElementById(
+"revokeBtn"
+)
+.onclick=
+async()=>{
+
+const card=
+prompt(
+"Loại thẻ"
+);
+
+if(!card)
+return;
+
+if(
+!adminTarget.inventory[
+card
+]
+)
+return;
+
+adminTarget.inventory[
+card
 ]--;
 
-return true;
+await saveTarget();
 
-}
+renderAdminUser();
 
-if(
+};
 
-(userData.inventory[
-normal
-]||0)>0
+/* =========================
+RANDOM REVOKE
+KHÔNG ĐỤNG MARKET
+========================= */
 
-){
+document
+.getElementById(
+"randomRevokeBtn"
+)
+.onclick=
+async()=>{
 
-userData.inventory[
-normal
-]--;
+const available=[];
 
-return true;
+NORMAL_CARDS.forEach(card=>{
 
-}
+const count=
 
-return false;
-
-}
-
-/* =========================================
-MARKET UPGRADE
-========================================= */
-
-async function marketUpgrade(
-
-target
-
-){
-
-/* -------------------
-BOLON MARKET
-------------------- */
-
-if(
-target==="BOLON_MARKET"
-){
-
-for(
-const card
-of NORMAL_CARDS
-){
-
-if(
-(userData.inventory[
+adminTarget.inventory[
 card
-]||0)>0
-){
+]||0;
 
-userData.inventory[
+if(count>0){
+
+available.push(card);
+
+}
+
+});
+
+if(
+available.length===0
+)
+return;
+
+const card=
+
+available[
+Math.floor(
+Math.random()*
+available.length
+)
+];
+
+adminTarget.inventory[
 card
 ]--;
 
-userData.marketInventory[
-"BOLON_MARKET"
-]++;
-
-await saveUser();
-
-await addMarketLog(
-
-card+
-" → BOLON MARKET"
-
-);
-
-await refreshAll();
-
-return;
-
-}
-
-}
+await saveTarget();
 
 alert(
-"Không đủ nguyên liệu"
+"Đã thu hồi "+card
 );
 
-return;
+renderAdminUser();
 
-}
+};
 
-/* -------------------
-HUY MARKET
-------------------- */
+/* =========================
+KICK
+========================= */
 
-if(
-target==="HUY_MARKET"
-){
-
-for(
-const card
-of NORMAL_CARDS
-){
-
-if(
-(userData.inventory[
-card
-]||0)>0
-){
-
-userData.inventory[
-card
-]--;
-
-userData.marketInventory[
-"HUY_MARKET"
-]++;
-
-await saveUser();
-
-await addMarketLog(
-
-card+
-" → HUY MARKET"
-
-);
-
-await refreshAll();
-
-return;
-
-}
-
-}
-
-alert(
-"Không đủ nguyên liệu"
-);
-
-return;
-
-}
-
-/* -------------------
-BONHO MARKET
-------------------- */
-
-if(
-target==="BONHO_MARKET"
-){
-
-if(
-hasAnyCard(
-"BOLON",
-"BOLON_MARKET"
+document
+.getElementById(
+"kickBtn"
 )
-){
+.onclick=
+async()=>{
 
-consumeCard(
-"BOLON",
-"BOLON_MARKET"
-);
+await updateDoc(
 
+doc(
+db,
+USERS,
+adminTarget.id
+),
+
+{
+opensLeft:0
 }
-else if(
-hasAnyCard(
-"HUY",
-"HUY_MARKET"
-)
-){
 
-consumeCard(
-"HUY",
-"HUY_MARKET"
 );
-
-}
-else{
 
 alert(
-"Thiếu BOLON hoặc HUY"
+"Kick thành công"
 );
 
+};
+
+/* =========================
+ADMIN OPEN LOGS
+========================= */
+
+async function adminViewOpenLogs(){
+
+if(!adminTarget)
 return;
+
+const q=
+
+query(
+
+collection(
+db,
+OPEN_LOGS
+),
+
+where(
+"deviceId",
+"==",
+adminTarget.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(50)
+
+);
+
+const snap=
+await getDocs(q);
+
+let html="<hr><b>Lịch sử mở:</b><br>";
+
+snap.forEach(docSnap=>{
+
+html+=
+docSnap.data().card+
+"<br>";
+
+});
+
+document
+.getElementById(
+"adminPlayerInfo"
+)
+.innerHTML+=html;
 
 }
 
-userData.marketInventory[
-"BONHO_MARKET"
-]++;
+/* =========================
+ADMIN TRANSFER LOGS
+========================= */
 
-await saveUser();
+async function adminViewTransferLogs(){
 
-await addMarketLog(
-"→ BONHO MARKET"
+if(!adminTarget)
+return;
+
+const q=
+
+query(
+
+collection(
+db,
+TRANSFER_LOGS
+),
+
+where(
+"deviceId",
+"==",
+adminTarget.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(50)
+
 );
 
-await refreshAll();
+const snap=
+await getDocs(q);
 
-return;
+let html="<hr><b>Lịch sử chuyển:</b><br>";
+
+snap.forEach(docSnap=>{
+
+html+=
+docSnap.data().text+
+"<br>";
+
+});
+
+document
+.getElementById(
+"adminPlayerInfo"
+)
+.innerHTML+=html;
 
 }
 
-/* -------------------
-BU MARKET
-------------------- */
+console.log(
+"Admin Panel Loaded"
+);
+  /* =========================
+MARKET RECIPES
+========================= */
 
-if(
-target==="BU_MARKET"
-){
+const MARKET_RECIPES={
 
-if(
-!hasAnyCard(
+BOLON_MARKET:{
+need:[]
+},
+
+HUY_MARKET:{
+need:[]
+},
+
+BONHO_MARKET:{
+need:[
+"BOLON",
+"HUY"
+]
+},
+
+BU_MARKET:{
+need:[
 "BONHO",
-"BONHO_MARKET"
-)
-){
+"BOLON"
+]
+},
 
-alert(
-"Thiếu BONHO"
-);
-
-return;
-
-}
-
-consumeCard(
-"BONHO",
-"BONHO_MARKET"
-);
-
-if(
-hasAnyCard(
-"BOLON",
-"BOLON_MARKET"
-)
-){
-
-consumeCard(
-"BOLON",
-"BOLON_MARKET"
-);
-
-}
-else if(
-hasAnyCard(
-"HUY",
-"HUY_MARKET"
-)
-){
-
-consumeCard(
-"HUY",
-"HUY_MARKET"
-);
-
-}
-else{
-
-alert(
-"Thiếu BOLON hoặc HUY"
-);
-
-return;
-
-}
-
-userData.marketInventory[
-"BU_MARKET"
-]++;
-
-await saveUser();
-
-await addMarketLog(
-"→ BU MARKET"
-);
-
-await refreshAll();
-
-return;
-
-}
-
-/* -------------------
-GAO MARKET
-------------------- */
-
-if(
-target==="GAO_MARKET"
-){
-
-if(
-!hasAnyCard(
+GAO_MARKET:{
+need:[
 "BU",
-"BU_MARKET"
-)
-)return alert("Thiếu BU");
-
-if(
-!hasAnyCard(
 "BONHO",
-"BONHO_MARKET"
-)
-)return alert("Thiếu BONHO");
+"BOLON"
+]
+},
 
-consumeCard(
-"BU",
-"BU_MARKET"
-);
-
-consumeCard(
-"BONHO",
-"BONHO_MARKET"
-);
-
-if(
-hasAnyCard(
-"BOLON",
-"BOLON_MARKET"
-)
-){
-
-consumeCard(
-"BOLON",
-"BOLON_MARKET"
-);
-
-}
-else if(
-hasAnyCard(
-"HUY",
-"HUY_MARKET"
-)
-){
-
-consumeCard(
-"HUY",
-"HUY_MARKET"
-);
-
-}
-else{
-
-alert(
-"Thiếu BOLON hoặc HUY"
-);
-
-return;
-
-}
-
-userData.marketInventory[
-"GAO_MARKET"
-]++;
-
-await saveUser();
-
-await addMarketLog(
-"→ GAO MARKET"
-);
-
-await refreshAll();
-
-return;
-
-}
-
-/* -------------------
-PHI MARKET
-------------------- */
-
-if(
-target==="PHI_MARKET"
-){
-
-if(
-!hasAnyCard(
+PHI_MARKET:{
+need:[
 "GAO",
-"GAO_MARKET"
-)
-)return alert("Thiếu GAO");
-
-if(
-!hasAnyCard(
 "BU",
-"BU_MARKET"
-)
-)return alert("Thiếu BU");
-
-if(
-!hasAnyCard(
 "BONHO",
-"BONHO_MARKET"
-)
-)return alert("Thiếu BONHO");
+"BOLON"
+]
+},
 
-consumeCard(
+TIN_MARKET:{
+need:[
 "GAO",
-"GAO_MARKET"
-);
-
-consumeCard(
 "BU",
-"BU_MARKET"
-);
-
-consumeCard(
 "BONHO",
-"BONHO_MARKET"
-);
-
-if(
-hasAnyCard(
-"BOLON",
-"BOLON_MARKET"
-)
-){
-
-consumeCard(
-"BOLON",
-"BOLON_MARKET"
-);
-
-}
-else if(
-hasAnyCard(
-"HUY",
-"HUY_MARKET"
-)
-){
-
-consumeCard(
-"HUY",
-"HUY_MARKET"
-);
-
-}
-else{
-
-alert(
-"Thiếu BOLON hoặc HUY"
-);
-
-return;
-
+"BOLON"
+]
 }
 
-userData.marketInventory[
-"PHI_MARKET"
-]++;
+};
 
-await saveUser();
+/* =========================
+MARKET UI
+========================= */
 
-await addMarketLog(
-"→ PHI MARKET"
-);
-
-await refreshAll();
-
-return;
-
-}
-
-/* -------------------
-TIN MARKET
-------------------- */
-
-if(
-target==="TIN_MARKET"
-){
-
-if(
-!hasAnyCard(
-"GAO",
-"GAO_MARKET"
-)
-)return alert("Thiếu GAO");
-
-if(
-!hasAnyCard(
-"BU",
-"BU_MARKET"
-)
-)return alert("Thiếu BU");
-
-if(
-!hasAnyCard(
-"BONHO",
-"BONHO_MARKET"
-)
-)return alert("Thiếu BONHO");
-
-consumeCard(
-"GAO",
-"GAO_MARKET"
-);
-
-consumeCard(
-"BU",
-"BU_MARKET"
-);
-
-consumeCard(
-"BONHO",
-"BONHO_MARKET"
-);
-
-if(
-hasAnyCard(
-"BOLON",
-"BOLON_MARKET"
-)
-){
-
-consumeCard(
-"BOLON",
-"BOLON_MARKET"
-);
-
-}
-else if(
-hasAnyCard(
-"HUY",
-"HUY_MARKET"
-)
-){
-
-consumeCard(
-"HUY",
-"HUY_MARKET"
-);
-
-}
-else{
-
-alert(
-"Thiếu BOLON hoặc HUY"
-);
-
-return;
-
-}
-
-userData.marketInventory[
-"TIN_MARKET"
-]++;
-
-await saveUser();
-
-await addMarketLog(
-"→ TIN MARKET"
-);
-
-await refreshAll();
-
-return;
-
-}
-
-}
-
-/* =========================================
-RENDER MARKET
-========================================= */
-
-function loadMarketPanel(){
+function renderMarket(){
 
 let html="";
 
-MARKET_RECIPES.forEach(
-recipe=>{
+Object.keys(
+MARKET_RECIPES
+).forEach(card=>{
+
+const recipe=
+MARKET_RECIPES[card];
 
 html+=`
 
 <div class="cardItem marketCard">
 
 <b>
-
-${recipe.result}
-
+${card}
 </b>
 
 <br><br>
 
-${recipe.text}
+Nguyên liệu:
+
+<br>
+
+${recipe.need.join(" + ") || "1 thẻ bất kỳ"}
 
 <br><br>
 
 <button
+class="btn"
 onclick="
-marketUpgrade(
-'${recipe.result}'
+craftMarketCard(
+'${card}'
 )
 ">
 
@@ -3415,1669 +3952,263 @@ html;
 
 }
 
-/* expose */
+/* =========================
+ADD MARKET CARD
+========================= */
 
-window.marketUpgrade=
-marketUpgrade;
-
-/* load */
-
-loadMarketPanel();
-  /* =========================================
-ADMIN V4
-========================================= */
-
-let adminUsersCache=[];
-
-/* =========================================
-ADMIN LOGIN
-========================================= */
-
-async function adminLogin(){
-
-const pass=
-prompt(
-"Mật khẩu Admin"
-);
+function addMarketCard(card){
 
 if(
-pass!==ADMIN_PASSWORD
-){
-
-alert(
-"Sai mật khẩu"
-);
-
-return;
-
-}
-
-isAdmin=true;
-
-document
-.getElementById(
-"adminPanel"
-)
-.style.display=
-"block";
-
-await loadAdminPanel();
-
-}
-
-document
-.getElementById(
-"adminBtn"
-)
-.onclick=
-adminLogin;
-
-/* =========================================
-LOAD USERS
-========================================= */
-
-async function loadAdminPanel(){
-
-if(!isAdmin)
-return;
-
-const snap=
-await getDocs(
-collection(
-db,
-USERS
-)
-);
-
-adminUsersCache=[];
-
-snap.forEach(
-docSnap=>{
-
-adminUsersCache.push({
-
-id:docSnap.id,
-
-...docSnap.data()
-
-});
-
-});
-
-renderAdminUsers(
-adminUsersCache
-);
-
-}
-
-/* =========================================
-SEARCH
-========================================= */
-
-function renderAdminUsers(users){
-
-let html=`
-
-<input
-id="adminSearch"
-placeholder="Tìm người chơi"
-style="
-width:100%;
-padding:10px;
-margin-bottom:10px;
-border-radius:10px;
-">
-
-`;
-
-users.forEach(user=>{
-
-html+=`
-
-<div class="adminUser">
-
-<b>
-
-${user.username}
-
-</b>
-
-<br>
-
-Lượt:
-${user.opensLeft||0}
-
-<br><br>
-
-<button
-onclick="adminViewInventory('${user.id}')">
-
-KHO
-
-</button>
-
-<button
-onclick="adminGiveOpen('${user.id}',1)">
-
-+1
-
-</button>
-
-<button
-onclick="adminGiveOpen('${user.id}',5)">
-
-+5
-
-</button>
-
-<button
-onclick="adminGiveOpen('${user.id}',10)">
-
-+10
-
-</button>
-
-<br><br>
-
-<button
-onclick="adminOpenLogs('${user.id}')">
-
-LỊCH SỬ MỞ
-
-</button>
-
-<button
-onclick="adminTransferLogs('${user.id}')">
-
-LỊCH SỬ CHUYỂN
-
-</button>
-
-<br><br>
-
-<button
-onclick="adminRevokeCard('${user.id}')">
-
-THU HỒI
-
-</button>
-
-<button
-onclick="adminRandomRevoke('${user.id}')">
-
-RANDOM
-
-</button>
-
-<button
-onclick="adminKick('${user.id}')">
-
-KICK
-
-</button>
-
-</div>
-
-`;
-
-});
-
-document
-.getElementById(
-"adminUsers"
-)
-.innerHTML=
-html;
-
-const searchBox=
-document.getElementById(
-"adminSearch"
-);
-
-if(searchBox){
-
-searchBox.oninput=
-e=>{
-
-const value=
-e.target.value
-.toLowerCase();
-
-const filtered=
-
-adminUsersCache.filter(
-u=>
-
-u.username
-.toLowerCase()
-.includes(value)
-
-);
-
-renderAdminUsers(
-filtered
-);
-
-};
-
-}
-
-}
-
-/* =========================================
-GIVE OPEN
-========================================= */
-
-window.adminGiveOpen=
-async function(
-
-userId,
-amount
-
-){
-
-const ref=
-doc(
-db,
-USERS,
-userId
-);
-
-const snap=
-await getDoc(
-ref
-);
-
-if(!snap.exists())
-return;
-
-const data=
-snap.data();
-
-await updateDoc(
-ref,
-{
-opensLeft:
-(data.opensLeft||0)
-+
-amount
-}
-);
-
-await loadAdminPanel();
-
-};
-
-/* =========================================
-VIEW INVENTORY
-========================================= */
-
-window.adminViewInventory=
-async function(
-
-userId
-
-){
-
-const snap=
-await getDoc(
-doc(
-db,
-USERS,
-userId
-)
-);
-
-if(!snap.exists())
-return;
-
-const data=
-snap.data();
-
-let text=
-"=== THẺ THƯỜNG ===\n\n";
-
-NORMAL_CARDS.forEach(
-card=>{
-
-text+=
-
-card+
-": "+
-
-(data.inventory[
+!APP.user.marketInventory[
 card
-]||0)
+]
+){
 
-+"\n";
-
-});
-
-text+=
-"\n";
-
-text+=
-"=== MARKET ===\n\n";
-
-MARKET_CARDS.forEach(
-card=>{
-
-text+=
-
-card+
-": "+
-
-(data.marketInventory[
+APP.user.marketInventory[
 card
-]||0)
-
-+"\n";
-
-});
-
-alert(text);
-
-};
-
-/* =========================================
-OPEN LOGS USER
-========================================= */
-
-window.adminOpenLogs=
-async function(
-
-userId
-
-){
-
-const snap=
-await getDocs(
-query(
-collection(
-db,
-OPEN_LOGS
-),
-orderBy(
-"createdAt",
-"desc"
-),
-limit(100)
-)
-);
-
-let text="";
-
-snap.forEach(docSnap=>{
-
-const data=
-docSnap.data();
-
-if(
-data.deviceId===
-userId
-){
-
-text+=
-
-data.card+
-
-" | "+
-
-data.time+
-
-"\n";
+]=0;
 
 }
 
-});
-
-if(
-text===""
-){
-
-text=
-"Không có dữ liệu";
-
-}
-
-alert(text);
-
-};
-
-/* =========================================
-TRANSFER LOGS USER
-========================================= */
-
-window.adminTransferLogs=
-async function(
-
-userId
-
-){
-
-const snap=
-await getDocs(
-query(
-collection(
-db,
-TRANSFER_LOGS
-),
-orderBy(
-"createdAt",
-"desc"
-),
-limit(100)
-)
-);
-
-let text="";
-
-snap.forEach(docSnap=>{
-
-const data=
-docSnap.data();
-
-if(
-data.deviceId===
-userId
-){
-
-text+=
-
-data.text+
-
-"\n";
-
-}
-
-});
-
-if(
-text===""
-){
-
-text=
-"Không có dữ liệu";
-
-}
-
-alert(text);
-
-};
-
-/* =========================================
-REVOKE
-THẺ THƯỜNG
-========================================= */
-
-window.adminRevokeCard=
-async function(
-
-userId
-
-){
-
-const card=
-prompt(
-"Tên thẻ"
-);
-
-if(!card)
-return;
-
-const cardName=
+APP.user.marketInventory[
 card
-.trim()
-.toUpperCase();
+]++;
+
+}
+
+/* =========================
+REMOVE CARD
+ƯU TIÊN MARKET
+========================= */
+
+function removeCardPriority(card){
+
+const marketCard=
+card+"_MARKET";
 
 if(
-!NORMAL_CARDS.includes(
-cardName
-)
-){
 
-alert(
-"Chỉ thu hồi thẻ thường"
-);
-
-return;
-
-}
-
-const amount=
-parseInt(
-prompt(
-"Số lượng"
-)
-);
-
-if(
-isNaN(amount)
-||
-amount<=0
-){
-
-return;
-
-}
-
-const ref=
-doc(
-db,
-USERS,
-userId
-);
-
-const snap=
-await getDoc(
-ref
-);
-
-if(!snap.exists())
-return;
-
-const data=
-snap.data();
-
-if(
-(data.inventory[
-cardName
-]||0)
-<
-amount
-){
-
-alert(
-"Không đủ thẻ"
-);
-
-return;
-
-}
-
-data.inventory[
-cardName
-]-=
-amount;
-
-await updateDoc(
-ref,
-{
-inventory:
-data.inventory
-}
-);
-
-alert(
-"Đã thu hồi"
-);
-
-};
-
-/* =========================================
-RANDOM REVOKE
-KHÔNG ĐỤNG MARKET
-========================================= */
-
-window.adminRandomRevoke=
-async function(
-
-userId
+APP.user.marketInventory[
+marketCard
+] > 0
 
 ){
 
-const ref=
-doc(
-db,
-USERS,
-userId
-);
-
-const snap=
-await getDoc(
-ref
-);
-
-if(!snap.exists())
-return;
-
-const data=
-snap.data();
-
-const pool=[];
-
-NORMAL_CARDS.forEach(
-card=>{
-
-const count=
-data.inventory[
-card
-]||0;
-
-for(
-let i=0;
-i<count;
-i++
-){
-
-pool.push(
-card
-);
-
-}
-
-});
-
-if(
-pool.length===0
-){
-
-alert(
-"Không có thẻ thường"
-);
-
-return;
-
-}
-
-const selected=
-
-pool[
-Math.floor(
-Math.random()*
-pool.length
-)
-];
-
-data.inventory[
-selected
+APP.user.marketInventory[
+marketCard
 ]--;
 
-await updateDoc(
-ref,
-{
-inventory:
-data.inventory
+return true;
+
 }
-);
-
-alert(
-"Đã thu hồi: "+
-selected
-);
-
-};
-
-/* =========================================
-KICK
-========================================= */
-
-window.adminKick=
-async function(
-
-userId
-
-){
 
 if(
-!confirm(
-"Kick người chơi?"
-)
-){
 
-return;
-
-}
-
-await deleteDoc(
-doc(
-db,
-USERS,
-userId
-)
-);
-
-await loadAdminPanel();
-
-};
-  /* =========================================
-TRANSFER COLLECTION
-========================================= */
-
-const TRANSFERS=
-"transfers";
-
-/* =========================================
-SEND CARD
-CHỈ THẺ THƯỜNG
-========================================= */
-
-window.sendCard=
-async function(){
-
-const target=
-prompt(
-"Tên người nhận"
-);
-
-if(!target)
-return;
-
-const card=
-prompt(
-"Tên thẻ thường"
-);
-
-if(!card)
-return;
-
-const cardName=
+APP.user.inventory[
 card
-.trim()
-.toUpperCase();
+] > 0
+
+){
+
+APP.user.inventory[
+card
+]--;
+
+return true;
+
+}
+
+return false;
+
+}
+
+/* =========================
+CRAFT
+========================= */
+
+window.craftMarketCard=
+async function(card){
+
+const recipe=
+MARKET_RECIPES[
+card
+];
+
+if(!recipe)
+return;
+
+/* BOLON MARKET */
 
 if(
-!NORMAL_CARDS.includes(
-cardName
-)
+card==="BOLON_MARKET"
 ){
+
+const anyCard=
+
+NORMAL_CARDS.find(c=>
+(APP.user.inventory[c]||0)>0
+);
+
+if(!anyCard){
 
 alert(
-"Chỉ chuyển thẻ thường"
+"Thiếu nguyên liệu"
 );
 
 return;
 
 }
 
-const amount=
-parseInt(
-prompt(
-"Số lượng"
-)
-);
+APP.user.inventory[
+anyCard
+]--;
 
-if(
-isNaN(amount)
-||
-amount<=0
-){
-
-return;
+addMarketCard(card);
 
 }
 
-if(
-(userData.inventory[
-cardName
-]||0)
-<
-amount
+/* HUY MARKET */
+
+else if(
+card==="HUY_MARKET"
 ){
+
+const anyCard=
+
+NORMAL_CARDS.find(c=>
+(APP.user.inventory[c]||0)>0
+);
+
+if(!anyCard){
 
 alert(
-"Không đủ thẻ"
+"Thiếu nguyên liệu"
 );
 
 return;
 
 }
 
-/* tìm user */
+APP.user.inventory[
+anyCard
+]--;
 
-const userSnap=
-await getDocs(
-collection(
-db,
-USERS
-)
-);
-
-let receiver=null;
-
-userSnap.forEach(
-docSnap=>{
-
-const data=
-docSnap.data();
-
-if(
-data.username===
-target
-){
-
-receiver={
-id:docSnap.id,
-...data
-};
+addMarketCard(card);
 
 }
 
-});
+/* CÁC THẺ KHÁC */
 
-if(
-!receiver
-){
-
-alert(
-"Không tìm thấy người chơi"
-);
-
-return;
-
-}
-
-/* trừ trước */
-
-userData.inventory[
-cardName
-]-=
-amount;
-
-await saveUser();
-
-/* tạo transfer */
-
-await addDoc(
-
-collection(
-db,
-TRANSFERS
-),
-
-{
-
-from:
-username,
-
-to:
-target,
-
-card:
-cardName,
-
-amount,
-
-status:
-"pending",
-
-createdAt:
-serverTimestamp()
-
-}
-
-);
-
-await addTransferLog(
-
-"Gửi "+
-
-cardName+
-
-" x"+
-
-amount+
-
-" → "+
-
-target
-
-);
-
-await addNotification(
-
-"Đã gửi",
-
-cardName+
-" x"+
-amount
-
-);
-
-await refreshAll();
-
-alert(
-"Đã gửi"
-);
-
-};
-
-/* =========================================
-LOAD PENDING
-========================================= */
-
-async function loadTransferNotifications(){
-
-const snap=
-await getDocs(
-collection(
-db,
-TRANSFERS
-)
-);
-
-let html="";
-
-let pendingCount=0;
-
-snap.forEach(docSnap=>{
-
-const data=
-docSnap.data();
-
-if(
-data.to!==username
-)
-return;
-
-if(
-data.status!=="pending"
-)
-return;
-
-pendingCount++;
-
-html+=`
-
-<div class="cardItem">
-
-<b>
-
-${data.from}
-
-</b>
-
-<br>
-
-${data.card}
-
-x${data.amount}
-
-<br><br>
-
-<button
-onclick="
-acceptTransfer(
-'${docSnap.id}'
-)
-">
-
-NHẬN
-
-</button>
-
-<button
-onclick="
-rejectTransfer(
-'${docSnap.id}'
-)
-">
-
-TỪ CHỐI
-
-</button>
-
-</div>
-
-`;
-
-});
-
-if(
-html===""
-){
-
-return;
-
-}
-
-document
-.getElementById(
-"notificationList"
-)
-.innerHTML=
-
-html+
-
-document
-.getElementById(
-"notificationList"
-)
-.innerHTML;
-
-/* red dot */
-
-if(
-pendingCount>0
-){
-
-document
-.getElementById(
-"notifDot"
-)
-.style.display=
-"block";
-
-}
-
-}
-
-/* =========================================
-ACCEPT
-========================================= */
-
-window.acceptTransfer=
-async function(
-
-transferId
-
-){
-
-const ref=
-doc(
-db,
-TRANSFERS,
-transferId
-);
-
-const snap=
-await getDoc(
-ref
-);
-
-if(!snap.exists())
-return;
-
-const data=
-snap.data();
-
-if(
-data.status!=="pending"
-)
-return;
-
-/* cộng thẻ */
-
-userData.inventory[
-data.card
-]=
-
-(userData.inventory[
-data.card
-]||0)
-
-+
-
-data.amount;
-
-await saveUser();
-
-/* complete */
-
-await updateDoc(
-ref,
-{
-status:
-"accepted"
-}
-);
-
-await addTransferLog(
-
-"Nhận "+
-
-data.card+
-
-" x"+
-
-data.amount+
-
-" từ "+
-
-data.from
-
-);
-
-await addNotification(
-
-"Nhận thẻ",
-
-data.card+
-" x"+
-data.amount
-
-);
-
-await refreshAll();
-
-};
-
-/* =========================================
-REJECT
-========================================= */
-
-window.rejectTransfer=
-async function(
-
-transferId
-
-){
-
-const ref=
-doc(
-db,
-TRANSFERS,
-transferId
-);
-
-const snap=
-await getDoc(
-ref
-);
-
-if(!snap.exists())
-return;
-
-const data=
-snap.data();
-
-/* hoàn trả người gửi */
-
-const users=
-await getDocs(
-collection(
-db,
-USERS
-)
-);
-
-let senderId=null;
-let senderData=null;
-
-users.forEach(docSnap=>{
-
-const u=
-docSnap.data();
-
-if(
-u.username===
-data.from
-){
-
-senderId=
-docSnap.id;
-
-senderData=u;
-
-}
-
-});
-
-if(
-senderId
-){
-
-senderData.inventory[
-data.card
-]=
-
-(senderData.inventory[
-data.card
-]||0)
-
-+
-
-data.amount;
-
-await updateDoc(
-
-doc(
-db,
-USERS,
-senderId
-),
-
-{
-inventory:
-senderData.inventory
-}
-
-);
-
-}
-
-await updateDoc(
-ref,
-{
-status:
-"rejected"
-}
-);
-
-await refreshAll();
-
-};
-
-/* =========================================
-TRANSFER BUTTON
-========================================= */
-
-const transferBtn=
-document.createElement(
-"button"
-);
-
-transferBtn.innerText=
-"🎁 CHUYỂN THẺ";
-
-transferBtn.onclick=
-sendCard;
-
-document
-.querySelector(
-".leftPanel"
-)
-.appendChild(
-transferBtn
-);
-
-/* =========================================
-EXTEND REFRESH
-========================================= */
-
-const oldRefresh=
-refreshAll;
-
-window.refreshAll=
-async function(){
-
-await oldRefresh();
-
-await loadTransferNotifications();
-
-};
-
-await refreshAll();
-  /* =========================================
-ANTI SPAM
-========================================= */
-
-let openingPack=false;
-let transferLock=false;
-
-const originalOpenPack=
-window.openPack;
-
-window.openPack=
-async function(){
-
-if(openingPack)
-return;
-
-openingPack=true;
-
-try{
-
-await originalOpenPack();
-
-}
-finally{
-
-setTimeout(
-()=>{
-openingPack=false;
-},
-1500
-);
-
-}
-
-};
-
-/* =========================================
-ANTI DOUBLE CLAIM
-========================================= */
-
-const rewardModal=
-document.getElementById(
-"rewardModal"
-);
-
-rewardModal.addEventListener(
-
-"click",
-
-e=>{
-
-if(
-e.target===rewardModal
-){
-
-e.stopPropagation();
-
-}
-
-}
-
-);
-
-/* =========================================
-ANTI DOUBLE TRANSFER
-========================================= */
-
-const originalSendCard=
-window.sendCard;
-
-window.sendCard=
-async function(){
-
-if(
-transferLock
-)
-return;
-
-transferLock=true;
-
-try{
-
-await originalSendCard();
-
-}
-finally{
-
-setTimeout(
-()=>{
-transferLock=false;
-},
-2000
-);
-
-}
-
-};
-
-/* =========================================
-AUTO CLEAN NOTIFICATION
-========================================= */
-
-async function cleanOldNotifications(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-NOTIFICATIONS
-)
-);
-
-const now=
-Date.now();
-
-for(
-const docSnap
-of snap.docs
-){
-
-const data=
-docSnap.data();
-
-if(
-!data.createdAt
-)
-continue;
-
-const time=
-data.createdAt.toDate()
-.getTime();
-
-const age=
-now-time;
-
-if(
-age>
-1000*60*60*24*30
-){
-
-await deleteDoc(
-doc(
-db,
-NOTIFICATIONS,
-docSnap.id
-)
-);
-
-}
-
-}
-
-}
-catch(err){
-
-console.log(
-"Notification cleanup skipped"
-);
-
-}
-
-}
-
-/* =========================================
-AUTO CLEAN TRANSFERS
-========================================= */
-
-async function cleanOldTransfers(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-"transfers"
-)
-);
-
-const now=
-Date.now();
-
-for(
-const docSnap
-of snap.docs
-){
-
-const data=
-docSnap.data();
-
-if(
-!data.createdAt
-)
-continue;
-
-const time=
-data.createdAt.toDate()
-.getTime();
-
-const age=
-now-time;
-
-if(
-age>
-1000*60*60*24*30
-){
-
-await deleteDoc(
-doc(
-db,
-"transfers",
-docSnap.id
-)
-);
-
-}
-
-}
-
-}
-catch(err){
-
-console.log(
-"Transfer cleanup skipped"
-);
-
-}
-
-}
-
-/* =========================================
-RESPONSIVE FIX
-========================================= */
-
-function responsiveFix(){
-
-const width=
-window.innerWidth;
-
-if(
-width<=700
-){
-
-document.body.classList.add(
-"mobile"
-);
-
-}
 else{
 
-document.body.classList.remove(
-"mobile"
+for(
+const need
+of recipe.need
+){
+
+const ok=
+removeCardPriority(
+need
 );
+
+if(!ok){
+
+alert(
+"Thiếu "+need
+);
+
+return;
 
 }
 
 }
 
-window.addEventListener(
-"resize",
-responsiveFix
-);
-
-responsiveFix();
-
-/* =========================================
-SAFE FIRESTORE
-========================================= */
-
-window.addEventListener(
-
-"unhandledrejection",
-
-event=>{
-
-console.error(
-event.reason
+addMarketCard(
+card
 );
 
 }
 
-);
+await addMarketLog(
 
-window.addEventListener(
-
-"error",
-
-event=>{
-
-console.error(
-event.error
-);
-
-}
+"Đổi "+card
 
 );
 
-/* =========================================
-MARKET PROTECTION
-========================================= */
+await addNotification(
 
-/*
-Market card:
+"Market",
 
-- không chuyển
-- không revoke random
-- ưu tiên dùng nguyên liệu
+card
 
-Đã xử lý ở Part 5 và 7
-*/
+);
 
-/* =========================================
-PITY RULE FINAL
-========================================= */
+await saveUser();
 
-/*
+await refreshUI();
 
-PITY 10
+};
 
-Không reset
-Không bị ảnh hưởng
-Chỉ đếm
+/* =========================
+ANTI DOUBLE CLAIM
+========================= */
 
-PITY 30
+let claimLock=false;
 
-BU
-GAO
-PHI
-TIN
+const oldClaim=
+claimReward;
 
-=> reset
+claimReward=
+async function(){
 
-Đạt 30
+if(
+claimLock
+)
+return;
 
-=> đảm bảo BU+
-
-*/
-
-/* =========================================
-FINAL MAIN
-========================================= */
-
-async function main(){
+claimLock=true;
 
 try{
 
-await refreshAll();
+await oldClaim();
 
-await cleanOldNotifications();
+}
+finally{
 
-await cleanOldTransfers();
+setTimeout(()=>{
 
-console.log(
+claimLock=false;
 
-"===================="
-);
+},1000);
 
-console.log(
+}
 
-"FC PREMIUM V4 READY"
-);
+};
 
-console.log(
+/* =========================
+SAFE REFRESH
+========================= */
 
-"Version:",
-VERSION
-);
+let refreshLock=false;
 
-console.log(
+const originalRefresh=
+refreshUI;
 
-"Player:",
-username
-);
+refreshUI=
+async function(){
 
-console.log(
+if(
+refreshLock
+)
+return;
 
-"===================="
-);
+refreshLock=true;
+
+try{
+
+await originalRefresh();
+
+renderMarket();
 
 }
 catch(err){
@@ -5086,19 +4217,32 @@ console.error(
 err
 );
 
-alert(
+}
+finally{
 
-"Lỗi khởi tạo hệ thống"
+refreshLock=false;
 
+}
+
+};
+
+/* =========================
+STARTUP
+========================= */
+
+await refreshUI();
+
+/* =========================
+VERSION
+========================= */
+
+console.log(
+"FC PREMIUM V4 FIXED EDITION READY"
 );
 
-}
-
-}
-
-await main();
-
-</script>
-
+/* =========================
+END
+========================= */
+  </script>
 </body>
 </html>
