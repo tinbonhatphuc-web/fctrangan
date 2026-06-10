@@ -298,12 +298,41 @@ margin-bottom:10px;
 }
 .selectCardBtn{
     width:100%;
-    margin-bottom:8px;
-    padding:12px;
-    font-size:16px;
+    margin-bottom:10px;
+    padding:10px;
+    background:#1b2a3d;
+    color:white;
+    border:1px solid gold;
+    border-radius:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.selectCardBtn:hover{
+    transform:scale(1.03);
+    border-color:#FFD700;
+    box-shadow:0 0 12px gold;
+}
+
+.selectCardBtn img{
+    width:50px;
+    height:auto;
+    border-radius:8px;
+}
+
+.selectCardBtn .cardInfo{
+    text-align:left;
+}
+
+.selectCardBtn .cardName{
+    color:gold;
     font-weight:bold;
-    background:gold;
-    color:black;
+    font-size:16px;
+}
+
+.selectCardBtn .cardCount{
+    color:#ddd;
+    font-size:14px;
 }
 </style>
 
@@ -2597,7 +2626,7 @@ username;
 }
 );
 
-function chooseCard(cardsOwned){
+function chooseCard(cardsOwned, inv){
 
     return new Promise(resolve=>{
 
@@ -2616,9 +2645,26 @@ function chooseCard(cardsOwned){
 
             btn.className =
             "selectCardBtn";
+btn.innerHTML = `
+<div style="
+display:flex;
+align-items:center;
+gap:10px;
+">
+    <img
+    src="cards/${card.toLowerCase()}.png"
+    style="
+    width:50px;
+    height:auto;
+    border-radius:8px;
+    ">
 
-           btn.innerText =
-card + " x" + inv[card];
+    <div style="text-align:left;">
+        <b>${card}</b><br>
+        Sở hữu: x${inv[card]}
+    </div>
+</div>
+`;
 
             btn.onclick = ()=>{
 
@@ -2678,7 +2724,7 @@ if(ownedCards.length === 0){
 }
 
 let selectedCard =
-await chooseCard(ownedCards);
+await chooseCard(ownedCards, inv);
 
 selectedCard =
 selectedCard.toUpperCase();
