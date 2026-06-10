@@ -37,6 +37,7 @@ circle at top,
 color:white;
 
 min-height:100vh;
+
 }
 
 .header{
@@ -56,13 +57,13 @@ text-shadow:
 
 .marketTitle{
 
-font-size:20px;
+display:block;
+
+font-size:18px;
 
 color:gold;
 
-letter-spacing:3px;
-
-display:block;
+letter-spacing:4px;
 
 margin-top:10px;
 
@@ -80,6 +81,7 @@ grid-template-columns:
 gap:20px;
 
 padding:20px;
+
 }
 
 .panel{
@@ -101,12 +103,15 @@ rgba(255,255,255,.12);
 }
 
 .center{
+
 text-align:center;
+
 }
 
 .pack{
 
 width:280px;
+
 height:380px;
 
 margin:auto;
@@ -116,12 +121,15 @@ border-radius:24px;
 display:flex;
 
 justify-content:center;
+
 align-items:center;
 
 font-size:30px;
+
 font-weight:bold;
 
 background:
+
 linear-gradient(
 135deg,
 #123b67,
@@ -148,9 +156,9 @@ font-weight:bold;
 }
 
 .inventoryItem,
+.marketItem,
 .historyItem,
-.notifyItem,
-.marketItem{
+.notifyItem{
 
 background:
 rgba(255,255,255,.05);
@@ -171,47 +179,19 @@ overflow-y:auto;
 
 }
 
-.overlay{
+.marketCard{
 
-display:none;
+color:gold;
 
-position:fixed;
-
-inset:0;
-
-background:
-rgba(0,0,0,.9);
-
-z-index:9999;
-
-justify-content:center;
-
-align-items:center;
-
-flex-direction:column;
+font-weight:bold;
 
 }
 
-.overlay video{
+.locked{
 
-max-width:90vw;
+color:#ff6b6b;
 
-max-height:80vh;
-
-border-radius:16px;
-
-}
-
-.cardResult img{
-
-width:260px;
-
-max-width:80vw;
-
-border-radius:18px;
-
-box-shadow:
-0 0 30px gold;
+font-weight:bold;
 
 }
 
@@ -238,15 +218,6 @@ font-weight:bold;
 
 cursor:pointer;
 
-transition:.2s;
-
-}
-
-.accordion:hover{
-
-background:
-rgba(255,255,255,.15);
-
 }
 
 .accordion.active{
@@ -265,48 +236,66 @@ overflow:hidden;
 transition:
 max-height .3s ease;
 
+}
+
+.overlay{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
 background:
-rgba(255,255,255,.03);
+rgba(0,0,0,.92);
 
-border-radius:12px;
+z-index:9999;
 
-padding:0 10px;
+justify-content:center;
 
-margin-bottom:10px;
+align-items:center;
 
-}
-
-.marketCard{
-
-color:gold;
-
-font-weight:bold;
+flex-direction:column;
 
 }
 
-.locked{
+.cardResult img{
 
-color:#ff6b6b;
+width:260px;
 
-font-weight:bold;
+max-width:80vw;
+
+border-radius:18px;
+
+box-shadow:
+0 0 30px gold;
 
 }
 
 @media(max-width:900px){
 
 .layout{
+
 grid-template-columns:1fr;
+
 }
 
 .pack{
+
 width:220px;
+
 height:300px;
+
 font-size:24px;
+
 }
 
 button{
+
 width:100%;
+
 margin-bottom:10px;
+
 }
 
 }
@@ -322,13 +311,15 @@ margin-bottom:10px;
 ⚽ FC PREMIUM V2 ⚽
 
 <span class="marketTitle">
+
 MARKET EDITION
+
 </span>
 
 </div>
 
 <div class="layout">
-  <!-- PANEL TRÁI -->
+<!-- PANEL TRÁI -->
 
 <div class="panel">
 
@@ -338,40 +329,25 @@ MARKET EDITION
 
 <br>
 
-<div id="playerInfo">
-
-<div class="inventoryItem">
-
-Tên:
-<span id="playerName">
+<div id="usernameBox">
 Đang tải...
-</span>
-
-</div>
-
-<div class="inventoryItem">
-
-UID:
-<span id="playerUid">
-Đang tải...
-</span>
-
-</div>
-
-<div class="inventoryItem">
-
-Túi:
-<span id="packCount">
-0
-</span>
-
-</div>
-
 </div>
 
 <br>
 
-<button id="openPackBtn">
+<div id="uidBox">
+UID: ...
+</div>
+
+<br>
+
+<div id="opensBox">
+Lượt mở: 0
+</div>
+
+<br>
+
+<button id="openBtnLeft">
 
 🎁 MỞ TÚI
 
@@ -379,25 +355,17 @@ Túi:
 
 <br><br>
 
-<button id="dailyBtn">
+<button id="changeNameBtn">
 
-📅 ĐIỂM DANH
-
-</button>
-
-<br><br>
-
-<button id="refreshBtn">
-
-🔄 LÀM MỚI
+✏️ ĐỔI TÊN
 
 </button>
 
 <br><br>
 
-<button id="logoutBtn">
+<button id="adminBtn">
 
-🚪 ĐĂNG XUẤT
+🛠️ ADMIN
 
 </button>
 
@@ -411,91 +379,7 @@ Túi:
 
 <div class="accordionContent">
 
-<div class="inventoryItem">
-
-BOLON
-<br>
-BOLON 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-HUY
-<br>
-HUY 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-BONHO
-<br>
-BONHO 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-THONG
-<br>
-THONG 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-THIEN
-<br>
-THIEN 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-SHIN
-<br>
-SHIN 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-BU
-<br>
-BU 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-GAO
-<br>
-GAO 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-PHI
-<br>
-PHI 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-TIN
-<br>
-TIN 🔒
-
-</div>
-
-<div class="inventoryItem">
-
-TẤN
-<br>
-TẤN 🔒
+<div id="ratePanel">
 
 </div>
 
@@ -515,7 +399,7 @@ FC PACK
 
 <br>
 
-<button id="openPackBtn2">
+<button id="openBtn">
 
 🎁 MỞ TÚI
 
@@ -530,6 +414,7 @@ Chưa mở túi
 </div>
 
 </div>
+
 <!-- PANEL PHẢI -->
 
 <div class="panel">
@@ -584,6 +469,22 @@ Chưa mở túi
 
 <button class="accordion">
 
+📚 Bộ sưu tập
+
+</button>
+
+<div class="accordionContent">
+
+<div id="collection">
+
+Đang tải...
+
+</div>
+
+</div>
+
+<button class="accordion">
+
 🔔 Thông báo
 
 </button>
@@ -615,15 +516,14 @@ class="history">
 
 <button class="accordion">
 
-📚 Bộ sưu tập
+🛠️ Quản trị
 
 </button>
 
 <div class="accordionContent">
 
-<div id="collection">
-
-Đang tải...
+<div id="adminPanel"
+style="display:none;">
 
 </div>
 
@@ -649,111 +549,183 @@ class="overlay">
 
 </div>
 
-<script>
+<script type="module">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-const CARDS=[
+import {
+
+getFirestore,
+
+doc,
+getDoc,
+setDoc,
+updateDoc,
+
+collection,
+getDocs,
+addDoc,
+deleteDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig={
+
+apiKey:"AIzaSyC7zCqjOfpyj3bR37xHj4CA5XIxyc_x_Yk",
+
+authDomain:"fc-mystery-pack.firebaseapp.com",
+
+projectId:"fc-mystery-pack",
+
+storageBucket:"fc-mystery-pack.firebasestorage.app",
+
+messagingSenderId:"64482739800",
+
+appId:"1:64482739800:web:f2fc37048fa577f19cec2d"
+
+};
+
+const app=
+initializeApp(
+firebaseConfig
+);
+
+const db=
+getFirestore(
+app
+);
+
+const ADMIN_PASSWORD=
+"nhatisreal";
+
+const APP_VERSION=
+"3.0-MARKET";
+
+let isAdmin=
+false;
+
+let username=
+"";
+
+let deviceId=
+"";
+
+let opensLeft=
+0;
+
+let rewardClaimed=
+false;
+
+const cards=[
 
 {
 name:"BOLON",
-rarity:"common",
-marketWeight:11,
-normalWeight:10
+chance:14,
+marketChance:15
 },
 
 {
 name:"HUY",
-rarity:"common",
-marketWeight:11,
-normalWeight:10
+chance:14,
+marketChance:15
 },
 
 {
 name:"BONHO",
-rarity:"uncommon",
-marketWeight:4,
-normalWeight:3
+chance:4,
+marketChance:5
 },
 
 {
 name:"THONG",
-rarity:"uncommon",
-marketWeight:4,
-normalWeight:3
+chance:4,
+marketChance:5
 },
 
 {
 name:"THIEN",
-rarity:"uncommon",
-marketWeight:4,
-normalWeight:3
+chance:4,
+marketChance:5
 },
 
 {
 name:"SHIN",
-rarity:"uncommon",
-marketWeight:4,
-normalWeight:3
+chance:4,
+marketChance:5
 },
 
 {
 name:"BU",
-rarity:"rare",
-marketWeight:3,
-normalWeight:2
+chance:7,
+marketChance:8
 },
 
 {
 name:"GAO",
-rarity:"epic",
-marketWeight:2,
-normalWeight:1
+chance:6,
+marketChance:7
 },
 
 {
 name:"PHI",
-rarity:"legend",
-marketWeight:2,
-normalWeight:1
+chance:1,
+marketChance:2
 },
 
 {
 name:"TIN",
-rarity:"legend",
-marketWeight:2,
-normalWeight:1
+chance:1,
+marketChance:2
 },
 
 {
 name:"TAN",
-rarity:"legend",
-marketWeight:2,
-normalWeight:1
+chance:1,
+marketChance:2
 }
 
 ];
+
+const videoMap={
+
+BOLON:"videos/bolon.mp4",
+HUY:"videos/huy.mp4",
+BONHO:"videos/bonho.mp4",
+THONG:"videos/thong.mp4",
+THIEN:"videos/thien.mp4",
+SHIN:"videos/shin.mp4",
+BU:"videos/bu.mp4",
+GAO:"videos/gao.mp4",
+PHI:"videos/phi.mp4",
+TIN:"videos/tin.mp4",
+TAN:"videos/tan.mp4"
+
+};
 
 const MARKET_RULES=[
 
 {
 result:"BOLON",
-cost:["ANY"]
+cost:["1 THẺ BẤT KỲ"]
 },
 
 {
 result:"HUY",
-cost:["ANY"]
+cost:["1 THẺ BẤT KỲ"]
 },
 
 {
 result:"BONHO",
-cost:["BOLON|HUY"]
+cost:["BOLON hoặc HUY"]
 },
 
 {
 result:"BU",
 cost:[
 "BONHO",
-"BOLON|HUY"
+"BOLON hoặc HUY"
 ]
 },
 
@@ -762,7 +734,7 @@ result:"GAO",
 cost:[
 "BU",
 "BONHO",
-"BOLON|HUY"
+"BOLON hoặc HUY"
 ]
 },
 
@@ -772,7 +744,7 @@ cost:[
 "GAO",
 "BU",
 "BONHO",
-"BOLON|HUY"
+"BOLON hoặc HUY"
 ]
 },
 
@@ -782,46 +754,60 @@ cost:[
 "GAO",
 "BU",
 "BONHO",
-"BOLON|HUY"
+"BOLON hoặc HUY"
+]
+},
+
+{
+result:"TAN",
+cost:[
+"GAO",
+"BU",
+"BONHO",
+"BOLON hoặc HUY"
 ]
 }
 
 ];
-
-let userData=null;
 function initAccordion(){
 
 document
-.querySelectorAll(".accordion")
-.forEach(btn=>{
+.querySelectorAll(
+".accordion"
+)
+.forEach(
+btn=>{
 
-btn.addEventListener(
-"click",
+btn.onclick=
 function(){
 
 this.classList.toggle(
 "active"
 );
 
-const panel =
+const panel=
 this.nextElementSibling;
 
-if(panel.style.maxHeight){
+if(
+panel.style.maxHeight
+){
 
-panel.style.maxHeight =
+panel.style.maxHeight=
 null;
 
 }else{
 
-panel.style.maxHeight =
-panel.scrollHeight +
+panel.style.maxHeight=
+
+panel.scrollHeight+
 "px";
 
 }
 
-});
+};
 
-});
+}
+);
 
 }
 
@@ -829,54 +815,41 @@ function showCardPreview(
 cardName
 ){
 
-const card=
-CARDS.find(
-x=>x.name===cardName
+const overlay=
+document.getElementById(
+"overlay"
 );
 
-if(!card)return;
-
-document
-.getElementById(
-"overlay"
-)
-.style.display=
+overlay.style.display=
 "flex";
 
-document
-.getElementById(
+document.getElementById(
 "videoHolder"
-)
-.innerHTML="";
+).innerHTML="";
 
-document
-.getElementById(
+document.getElementById(
 "cardHolder"
-)
-.innerHTML=`
+).innerHTML=
 
-<div
-class="cardResult">
+`
+<div class="cardResult">
 
 <img
-src="images/${card.name}.png">
+src="cards/${cardName.toLowerCase()}.png">
 
 <br><br>
 
 <h2>
-${card.name}
+
+${cardName}
+
 </h2>
 
 <br>
 
 <button
 onclick="
-document
-.getElementById(
-'overlay'
-)
-.style.display=
-'none'
+document.getElementById('overlay').style.display='none'
 ">
 
 ĐÓNG
@@ -884,806 +857,31 @@ document
 </button>
 
 </div>
-
 `;
 
 }
 
-function renderInventory(){
+function updateOpenText(){
 
-const holder=
-document
-.getElementById(
-"inventory"
-);
-
-if(!holder)return;
-
-holder.innerHTML="";
-
-Object.entries(
-userData.inventory
-)
-.forEach(
-([name,count])=>{
-
-holder.innerHTML+=`
-
-<div
-class="inventoryItem">
-
-<b
-style="
-cursor:pointer;
-color:gold;
-"
-onclick="
-showCardPreview(
-'${name}'
-)
-">
-
-${name}
-
-</b>
-
-<br>
-
-Số lượng:
-${count}
-
-<br><br>
-
-<button
-onclick="
-sendCardPrompt(
-'${name}'
-)
-">
-
-Gửi
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-function renderMarketInventory(){
-
-const holder=
-document
-.getElementById(
-"marketInventory"
-);
-
-if(!holder)return;
-
-holder.innerHTML="";
-
-Object.entries(
-userData.marketInventory
-)
-.forEach(
-([name,count])=>{
-
-holder.innerHTML+=`
-
-<div
-class="inventoryItem">
-
-<b
-class="marketCard"
-style="
-cursor:pointer;
-"
-onclick="
-showCardPreview(
-'${name}'
-)
-">
-
-${name}
-🔒
-
-</b>
-
-<br>
-
-Số lượng:
-${count}
-
-<br>
-
-<span
-class="locked">
-
-Không giao dịch
-
-</span>
-
-</div>
-
-`;
-
-});
-
-}
-
-function renderCollection(){
-
-const holder=
-document
-.getElementById(
-"collection"
-);
-
-if(!holder)return;
-
-holder.innerHTML="";
-
-CARDS.forEach(
-card=>{
-
-const owned=
-
-(
-userData.inventory[
-card.name
-]||0
-)
-
-+
-
-(
-userData.marketInventory[
-card.name
-]||0
-);
-
-holder.innerHTML+=`
-
-<div
-class="inventoryItem">
-
-<b
-style="
-cursor:pointer;
-color:gold;
-"
-onclick="
-showCardPreview(
-'${card.name}'
-)
-">
-
-${card.name}
-
-</b>
-
-<br>
-
-${owned>0
-?
-"✅ Đã sở hữu"
-:
-"❌ Chưa sở hữu"
-}
-
-</div>
-
-`;
-
-});
-
-}
-  function renderMarket(){
-
-const holder=
 document.getElementById(
-"market"
-);
+"opensBox"
+).innerText=
 
-if(!holder)return;
-
-holder.innerHTML="";
-
-MARKET_RULES.forEach(
-rule=>{
-
-holder.innerHTML+=`
-
-<div
-class="marketItem">
-
-<b>
-
-${rule.result}
-🔒
-
-</b>
-
-<br><br>
-
-Yêu cầu:
-
-<br>
-
-${rule.cost.join(
-" + "
-)}
-
-<br><br>
-
-<button
-onclick="
-exchangeCard(
-'${rule.result}'
-)
-">
-
-ĐỔI
-
-</button>
-
-</div>
-
-`;
-
-});
+"Lượt mở: "+
+opensLeft;
 
 }
 
-function addHistory(
-text
-){
-
-userData.history.unshift({
-
-time:
-new Date()
-.toLocaleString(
-"vi-VN"
-),
-
-text
-
-});
-
-if(
-userData.history.length
->100
-){
-
-userData.history.length=
-100;
-
-}
-
-renderHistory();
-
-}
-
-function renderHistory(){
-
-const holder=
-document.getElementById(
-"history"
-);
-
-if(!holder)return;
-
-holder.innerHTML="";
-
-userData.history.forEach(
-item=>{
-
-holder.innerHTML+=`
-
-<div
-class="historyItem">
-
-<b>
-
-${item.time}
-
-</b>
-
-<br>
-
-${item.text}
-
-</div>
-
-`;
-
-});
-
-}
-  function consumeCard(
-cardName,
-market=false
-){
-
-const source=
-market
-?
-userData.marketInventory
-:
-userData.inventory;
-
-if(
-(source[
-cardName
-]||0)<=0
-){
-
-return false;
-
-}
-
-source[
-cardName
-]--;
-
-return true;
-
-}
-
-function addMarketCard(
-cardName
-){
-
-userData
-.marketInventory[
-cardName
-]++;
-
-}
-
-function exchangeCard(
-target
-){
-
-switch(target){
-
-case "BOLON":
-
-exchangeAny(
-"BOLON"
-);
-
-break;
-
-case "HUY":
-
-exchangeAny(
-"HUY"
-);
-
-break;
-
-case "BONHO":
-
-exchangeChoice(
-"BONHO",
-[
-"BOLON",
-"HUY"
-]
-);
-
-break;
-
-case "BU":
-
-exchangeCombo(
-"BU",
-[
-"BONHO"
-],
-[
-"BOLON",
-"HUY"
-]
-);
-
-break;
-
-case "GAO":
-
-exchangeCombo2(
-"GAO",
-[
-"BU",
-"BONHO"
-],
-[
-"BOLON",
-"HUY"
-]
-);
-
-break;
-
-case "PHI":
-
-exchangeCombo3(
-"PHI",
-[
-"GAO",
-"BU",
-"BONHO"
-],
-[
-"BOLON",
-"HUY"
-]
-);
-
-break;
-
-case "TIN":
-
-exchangeCombo3(
-"TIN",
-[
-"GAO",
-"BU",
-"BONHO"
-],
-[
-"BOLON",
-"HUY"
-]
-);
-
-break;
-
-}
-
-}
-  function exchangeAny(
-reward
-){
-
-const card=
-prompt(
-"Nhập tên thẻ đổi:"
-);
-
-if(
-!card
-)return;
-
-if(
-(
-userData.marketInventory[
-card
-]||0
-)>0
-){
-
-userData
-.marketInventory[
-card
-]--;
-
-addMarketCard(
-reward
-);
-
-addHistory(
-`Đổi ${card} 🔒 thành ${reward} 🔒`
-);
-
-refreshAll();
-
-return;
-
-}
-
-if(
-(
-userData.inventory[
-card
-]||0
-)>0
-){
-
-userData
-.inventory[
-card
-]--;
-
-addMarketCard(
-reward
-);
-
-addHistory(
-`Đổi ${card} thành ${reward} 🔒`
-);
-
-refreshAll();
-
-return;
-
-}
-
-alert(
-"Không đủ thẻ"
-);
-
-}
-  function exchangeChoice(
-reward,
-choices
-){
-
-let found=null;
-
-choices.forEach(
-c=>{
-
-if(found)return;
-
-if(
-(userData.marketInventory[c]||0)>0
-){
-
-userData.marketInventory[c]--;
-
-found=c;
-
-return;
-
-}
-
-if(
-(userData.inventory[c]||0)>0
-){
-
-userData.inventory[c]--;
-
-found=c;
-
-}
-
-});
-
-if(!found){
-
-alert(
-"Không đủ thẻ"
-);
-
-return;
-
-}
-
-addMarketCard(
-reward
-);
-
-addHistory(
-`Đổi ${found} thành ${reward} 🔒`
-);
-
-refreshAll();
-
-}
-
-function exchangeCombo(
-reward,
-fixed,
-choice
-){
-
-if(
-!consumeMixed(
-fixed[0]
-)
-){
-
-alert(
-"Thiếu BONHO"
-);
-
-return;
-
-}
-
-if(
-!consumeMixed(
-choice[0]
-)
-&&
-!consumeMixed(
-choice[1]
-)
-){
-
-alert(
-"Thiếu BOLON/HUY"
-);
-
-return;
-
-}
-
-addMarketCard(
-reward
-);
-
-addHistory(
-`Đổi thành ${reward} 🔒`
-);
-
-refreshAll();
-
-}
-  function exchangeCombo2(
-reward,
-fixed,
-choice
-){
-
-for(
-const c
-of fixed
-){
-
-if(
-!consumeMixed(
-c
-)
-){
-
-alert(
-"Thiếu "+c
-);
-
-return;
-
-}
-
-}
-
-if(
-!consumeMixed(
-choice[0]
-)
-&&
-!consumeMixed(
-choice[1]
-)
-){
-
-alert(
-"Thiếu BOLON/HUY"
-);
-
-return;
-
-}
-
-addMarketCard(
-reward
-);
-
-addHistory(
-`Đổi thành ${reward} 🔒`
-);
-
-refreshAll();
-
-}
-
-function exchangeCombo3(
-reward,
-fixed,
-choice
-){
-
-for(
-const c
-of fixed
-){
-
-if(
-!consumeMixed(
-c
-)
-){
-
-alert(
-"Thiếu "+c
-);
-
-return;
-
-}
-
-}
-
-if(
-!consumeMixed(
-choice[0]
-)
-&&
-!consumeMixed(
-choice[1]
-)
-){
-
-alert(
-"Thiếu BOLON/HUY"
-);
-
-return;
-
-}
-
-addMarketCard(
-reward
-);
-
-addHistory(
-`Đổi thành ${reward} 🔒`
-);
-
-refreshAll();
-
-}
-  function consumeMixed(
-card
-){
-
-if(
-(userData.marketInventory[
-card
-]||0)>0
-){
-
-userData.marketInventory[
-card
-]--;
-
-return true;
-
-}
-
-if(
-(userData.inventory[
-card
-]||0)>0
-){
-
-userData.inventory[
-card
-]--;
-
-return true;
-
-}
-
-return false;
-
-}
-  function buildPool(){
+function buildPool(){
 
 const pool=[];
 
-CARDS.forEach(
+cards.forEach(
 card=>{
 
 for(
 let i=0;
-i<card.normalWeight;
+i<card.chance;
 i++
 ){
 
@@ -1700,7 +898,7 @@ market:false
 
 for(
 let i=0;
-i<card.marketWeight;
+i<card.marketChance;
 i++
 ){
 
@@ -1721,14 +919,12 @@ return pool;
 
 }
 
-function openPack(){
+function randomCard(){
 
 const pool=
 buildPool();
 
-const reward=
-
-pool[
+return pool[
 Math.floor(
 Math.random()
 *
@@ -1736,71 +932,145 @@ pool.length
 )
 ];
 
-if(
-reward.market
-){
-
-userData
-.marketInventory[
-reward.name
-]++;
-
-}else{
-
-userData
-.inventory[
-reward.name
-]++;
-
 }
 
-document
-.getElementById(
-"lastReward"
-)
-.innerHTML=`
+function renderRatePanel(){
 
-<h2>
+let html="";
 
-${reward.name}
+cards.forEach(
+card=>{
 
-${reward.market
-?
-"🔒"
-:
-""
-}
+html+=`
 
-</h2>
+<div
+class="inventoryItem">
+
+<b>
+
+${card.name}
+
+</b>
+
+<br>
+
+Thường:
+${card.chance}%
+
+<br>
+
+Chợ:
+${card.marketChance}%
+
+</div>
 
 `;
 
-addHistory(
+});
 
-`Mở túi nhận ${reward.name}${reward.market?" 🔒":""}`
+document
+.getElementById(
+"ratePanel"
+)
+.innerHTML=
+html;
 
+}
+async function initUser(){
+
+deviceId=
+localStorage.getItem(
+"deviceId"
 );
 
-refreshAll();
+if(!deviceId){
 
-}
-  function refreshAll(){
+deviceId=
+crypto.randomUUID();
 
-renderInventory();
-
-renderMarketInventory();
-
-renderCollection();
-
-renderMarket();
-
-renderHistory();
+localStorage.setItem(
+"deviceId",
+deviceId
+);
 
 }
 
-function initUser(){
+if(
+localStorage.getItem(
+"app_version"
+)!==APP_VERSION
+){
 
-userData={
+localStorage.setItem(
+"app_version",
+APP_VERSION
+);
+
+}
+
+username=
+localStorage.getItem(
+"username"
+);
+
+while(
+
+!username ||
+
+username.trim()==="" ||
+
+username==="Người chơi"
+
+){
+
+username=
+prompt(
+"Nhập tên người chơi:"
+);
+
+if(
+username===null
+)
+continue;
+
+username=
+username.trim();
+
+if(
+username.length<3
+)
+username="";
+
+}
+
+localStorage.setItem(
+"username",
+username
+);
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const userSnap=
+await getDoc(
+userRef
+);
+
+if(
+!userSnap.exists()
+){
+
+await setDoc(
+userRef,
+{
+
+username,
+
+opensLeft:1,
 
 inventory:{
 
@@ -1834,30 +1104,1607 @@ TAN:0
 
 },
 
-history:[]
+history:[],
+
+marketHistory:[]
+
+}
+);
+
+opensLeft=1;
+
+}else{
+
+const data=
+userSnap.data();
+
+opensLeft=
+data.opensLeft||0;
+
+let changed=
+false;
+
+if(
+!data.marketInventory
+){
+
+data.marketInventory={
+
+BOLON:0,
+HUY:0,
+BONHO:0,
+THONG:0,
+THIEN:0,
+SHIN:0,
+BU:0,
+GAO:0,
+PHI:0,
+TIN:0,
+TAN:0
 
 };
 
-refreshAll();
+changed=true;
 
 }
 
-initAccordion();
+if(
+!data.marketHistory
+){
 
-initUser();
+data.marketHistory=[];
+
+changed=true;
+
+}
+
+if(changed){
+
+await updateDoc(
+userRef,
+{
+
+marketInventory:
+data.marketInventory,
+
+marketHistory:
+data.marketHistory
+
+}
+);
+
+}
+
+}
+
+document.getElementById(
+"usernameBox"
+).innerText=
+
+"Tên: "+
+username;
+
+document.getElementById(
+"uidBox"
+).innerText=
+
+"UID: "+
+deviceId;
+
+updateOpenText();
+
+}
+async function renderInventory(){
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const snap=
+await getDoc(
+userRef
+);
+
+if(!snap.exists())
+return;
+
+const data=
+snap.data();
+
+let html="";
+
+for(
+const card
+of cards
+){
+
+html+=`
+
+<div
+class="inventoryItem">
+
+<b
+style="
+cursor:pointer;
+color:gold;
+"
+onclick="
+showCardPreview(
+'${card.name}'
+)
+">
+
+${card.name}
+
+</b>
+
+<br>
+
+Sở hữu:
+
+${
+
+data.inventory[
+card.name
+]||0
+
+}
+
+<br><br>
+
+<button
+onclick="
+sendCardPrompt(
+'${card.name}'
+)
+">
+
+GỬI
+
+</button>
+
+</div>
+
+`;
+
+}
 
 document
 .getElementById(
-"openPackBtn"
+"inventory"
 )
-.onclick=openPack;
+.innerHTML=
+html;
+
+}
+
+async function renderMarketInventory(){
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const snap=
+await getDoc(
+userRef
+);
+
+if(!snap.exists())
+return;
+
+const data=
+snap.data();
+
+let html="";
+
+for(
+const card
+of cards
+){
+
+html+=`
+
+<div
+class="inventoryItem">
+
+<b
+class="marketCard"
+style="
+cursor:pointer;
+"
+onclick="
+showCardPreview(
+'${card.name}'
+)
+">
+
+${card.name}
+🔒
+
+</b>
+
+<br>
+
+Sở hữu:
+
+${
+
+data.marketInventory[
+card.name
+]||0
+
+}
+
+<br>
+
+<span
+class="locked">
+
+Không giao dịch
+
+</span>
+
+</div>
+
+`;
+
+}
 
 document
 .getElementById(
-"openPackBtn2"
+"marketInventory"
 )
-.onclick=openPack;
-  </script>
+.innerHTML=
+html;
+
+}
+
+async function renderCollection(){
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const snap=
+await getDoc(
+userRef
+);
+
+if(!snap.exists())
+return;
+
+const data=
+snap.data();
+
+let html="";
+
+for(
+const card
+of cards
+){
+
+const owned=
+
+(
+data.inventory[
+card.name
+]||0
+)
+
++
+
+(
+data.marketInventory[
+card.name
+]||0
+);
+
+html+=`
+
+<div
+class="inventoryItem">
+
+<b
+style="
+cursor:pointer;
+color:gold;
+"
+onclick="
+showCardPreview(
+'${card.name}'
+)
+">
+
+${card.name}
+
+</b>
+
+<br>
+
+${
+owned>0
+?
+"✅ Đã sở hữu"
+:
+"❌ Chưa sở hữu"
+}
+
+</div>
+
+`;
+
+}
+
+document
+.getElementById(
+"collection"
+)
+.innerHTML=
+html;
+
+}
+async function renderHistory(){
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const snap=
+await getDoc(
+userRef
+);
+
+if(!snap.exists())
+return;
+
+const data=
+snap.data();
+
+let html="";
+
+if(
+data.marketHistory
+){
+
+data.marketHistory.forEach(
+item=>{
+
+html+=`
+
+<div
+class="historyItem">
+
+<b>
+
+${item.time}
+
+</b>
+
+<br>
+
+🛒
+
+${item.card}
+
+</div>
+
+`;
+
+});
+
+}
+
+if(
+data.history
+){
+
+data.history.forEach(
+item=>{
+
+html+=`
+
+<div
+class="historyItem">
+
+<b>
+
+${item.time}
+
+</b>
+
+<br>
+
+🎴
+
+${item.card}
+
+</div>
+
+`;
+
+});
+
+}
+
+document
+.getElementById(
+"history"
+)
+.innerHTML=
+html;
+
+}
+
+async function renderMarket(){
+
+let html="";
+
+MARKET_RULES.forEach(
+rule=>{
+
+html+=`
+
+<div
+class="marketItem">
+
+<b>
+
+${rule.result}
+🔒
+
+</b>
+
+<br><br>
+
+${rule.cost.join(
+"<br>"
+)}
+
+<br><br>
+
+<button
+onclick="
+exchangeCard(
+'${rule.result}'
+)
+">
+
+ĐỔI
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document
+.getElementById(
+"market"
+)
+.innerHTML=
+html;
+
+}
+async function addCard(
+reward
+){
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const snap=
+await getDoc(
+userRef
+);
+
+const data=
+snap.data();
+
+if(
+reward.market
+){
+
+data.marketInventory[
+reward.name
+]++;
+
+if(
+!data.marketHistory
+){
+
+data.marketHistory=
+[];
+
+}
+
+data.marketHistory.unshift({
+
+card:
+reward.name+
+" 🔒",
+
+time:
+new Date()
+.toLocaleString()
+
+});
+
+if(
+data.marketHistory.length
+>100
+){
+
+data.marketHistory.pop();
+
+}
+
+}else{
+
+data.inventory[
+reward.name
+]++;
+
+}
+
+data.history.unshift({
+
+card:
+reward.name+
+
+(
+reward.market
+?
+" 🔒"
+:
+""
+),
+
+time:
+new Date()
+.toLocaleString()
+
+});
+
+if(
+data.history.length
+>100
+){
+
+data.history.pop();
+
+}
+
+await updateDoc(
+userRef,
+{
+
+inventory:
+data.inventory,
+
+marketInventory:
+data.marketInventory,
+
+history:
+data.history,
+
+marketHistory:
+data.marketHistory
+
+}
+);
+
+}
+
+window.closeReward=
+async function(
+cardName,
+market
+){
+
+if(
+rewardClaimed
+)return;
+
+rewardClaimed=
+true;
+
+await addCard({
+
+name:
+cardName,
+
+market
+
+});
+
+document
+.getElementById(
+"overlay"
+)
+.style.display=
+"none";
+
+await renderInventory();
+
+await renderMarketInventory();
+
+await renderCollection();
+
+await renderHistory();
+
+};
+
+window.openPack=
+async function(){
+
+if(
+!isAdmin
+&&
+opensLeft<=0
+){
+
+alert(
+"Bạn đã hết lượt mở!"
+);
+
+return;
+
+}
+
+const reward=
+randomCard();
+
+rewardClaimed=
+false;
+
+if(
+!isAdmin
+){
+
+opensLeft--;
+
+updateOpenText();
+
+await updateDoc(
+doc(
+db,
+"users",
+deviceId
+),
+{
+opensLeft
+}
+);
+
+}
+
+document
+.getElementById(
+"lastReward"
+)
+.innerHTML=
+
+`
+<h2>
+
+${reward.name}
+
+${reward.market?" 🔒":""}
+
+</h2>
+`;
+
+const overlay=
+document.getElementById(
+"overlay"
+);
+
+overlay.style.display=
+"flex";
+
+document
+.getElementById(
+"videoHolder"
+)
+.innerHTML=
+
+`
+<video
+id="packVideo"
+autoplay
+playsinline>
+
+<source
+src="${videoMap[reward.name]}"
+type="video/mp4">
+
+</video>
+`;
+
+document
+.getElementById(
+"cardHolder"
+)
+.innerHTML="";
+
+const video=
+document.getElementById(
+"packVideo"
+);
+
+video.onended=
+function(){
+
+document
+.getElementById(
+"videoHolder"
+)
+.innerHTML="";
+
+document
+.getElementById(
+"cardHolder"
+)
+.innerHTML=
+
+`
+
+<div
+class="cardResult">
+
+<img
+src="cards/${reward.name.toLowerCase()}.png">
+
+<br><br>
+
+<h2>
+
+${reward.name}
+
+${reward.market?" 🔒":""}
+
+</h2>
+
+<br>
+
+<button
+onclick="
+closeReward(
+'${reward.name}',
+${reward.market}
+)
+">
+
+NHẬN THẺ
+
+</button>
+
+</div>
+
+`;
+
+};
+
+};
+window.sendCardPrompt=
+async function(
+cardName
+){
+
+const receiver=
+prompt(
+"Tên người nhận:"
+);
+
+if(!receiver)
+return;
+
+const amount=
+parseInt(
+prompt(
+"Số lượng:"
+)
+);
+
+if(
+isNaN(amount)
+||
+amount<=0
+){
+
+return;
+
+}
+
+const userRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const userSnap=
+await getDoc(
+userRef
+);
+
+const user=
+userSnap.data();
+
+if(
+(user.inventory[cardName]||0)
+< amount
+){
+alert("Không đủ thẻ");
+return;
+}
+
+user.inventory[
+cardName
+]-=amount;
+
+await updateDoc(
+userRef,
+{
+inventory:
+user.inventory
+}
+);
+
+await addDoc(
+collection(
+db,
+"transfers"
+),
+{
+
+from:
+username,
+
+fromId:
+deviceId,
+
+to:
+receiver,
+
+card:
+cardName,
+
+amount,
+
+status:
+"pending",
+
+time:
+new Date()
+.toLocaleString()
+
+}
+);
+
+alert(
+"Đã gửi yêu cầu"
+);
+
+};
+
+async function loadNotifications(){
+
+const snap=
+await getDocs(
+collection(
+db,
+"transfers"
+)
+);
+
+let html="";
+
+snap.forEach(
+docSnap=>{
+
+const data=
+docSnap.data();
+
+if(
+
+data.to===
+username
+
+&&
+
+data.status===
+"pending"
+
+){
+
+html+=`
+
+<div
+class="notifyItem">
+
+<b>
+
+${data.from}
+
+</b>
+
+<br>
+
+${data.card}
+x${data.amount}
+
+<br><br>
+
+<button
+onclick="
+acceptTransfer(
+'${docSnap.id}'
+)
+">
+
+NHẬN
+
+</button>
+
+<button
+onclick="
+rejectTransfer(
+'${docSnap.id}'
+)
+">
+
+TỪ CHỐI
+
+</button>
+
+</div>
+
+`;
+
+}
+
+});
+
+if(
+html===""
+){
+
+html=
+"Chưa có thông báo";
+
+}
+
+document
+.getElementById(
+"notifications"
+)
+.innerHTML=
+html;
+
+}
+
+window.acceptTransfer=
+async function(
+id
+){
+
+const transferRef=
+doc(
+db,
+"transfers",
+id
+);
+
+const transferSnap=
+await getDoc(
+transferRef
+);
+
+if(
+!transferSnap.exists()
+)
+return;
+
+const transfer=
+transferSnap.data();
+
+const senderRef=
+doc(
+db,
+"users",
+transfer.fromId
+);
+
+const senderSnap=
+await getDoc(
+senderRef
+);
+if(
+!senderSnap.exists()
+){
+alert(
+"Người gửi không tồn tại"
+);
+return;
+}
+
+const sender=
+senderSnap.data();
+
+if(
+
+(
+sender.inventory[
+transfer.card
+]||0
+
+)
+
+<
+transfer.amount
+
+){
+
+alert(
+"Người gửi không đủ thẻ"
+);
+
+return;
+
+}
+
+sender.inventory[
+transfer.card
+]-=
+transfer.amount;
+
+await updateDoc(
+senderRef,
+{
+inventory:
+sender.inventory
+}
+);
+
+const myRef=
+doc(
+db,
+"users",
+deviceId
+);
+
+const mySnap=
+await getDoc(
+myRef
+);
+
+const me=
+mySnap.data();
+
+me.inventory[
+transfer.card
+]+=transfer.amount;
+
+await updateDoc(
+myRef,
+{
+inventory:
+me.inventory
+}
+);
+
+await deleteDoc(
+transferRef
+);
+
+await renderInventory();
+
+await loadNotifications();
+
+alert(
+"Đã nhận thẻ"
+);
+
+};
+
+window.rejectTransfer=
+async function(
+id
+){
+
+const transferRef=
+doc(
+db,
+"transfers",
+id
+);
+
+const transferSnap=
+await getDoc(
+transferRef
+);
+
+if(
+!transferSnap.exists()
+)return;
+
+const transfer=
+transferSnap.data();
+
+const senderRef=
+doc(
+db,
+"users",
+transfer.fromId
+);
+
+const senderSnap=
+await getDoc(
+senderRef
+);
+
+if(
+senderSnap.exists()
+){
+
+const sender=
+senderSnap.data();
+
+sender.inventory[
+transfer.card
+]+=
+transfer.amount;
+
+await updateDoc(
+senderRef,
+{
+inventory:
+sender.inventory
+}
+);
+
+}
+
+await deleteDoc(
+transferRef
+);
+
+await loadNotifications();
+
+};
+
+window.adminLogin=
+async function(){
+
+const pass=
+prompt(
+"Mật khẩu Admin:"
+);
+
+if(
+pass!==
+ADMIN_PASSWORD
+){
+
+alert(
+"Sai mật khẩu"
+);
+
+return;
+
+}
+
+isAdmin=true;
+
+document
+.getElementById(
+"adminPanel"
+)
+.style.display=
+"block";
+
+await loadAdminPanel();
+
+};
+
+async function loadAdminPanel(){
+
+if(
+!isAdmin
+)return;
+
+const snap=
+await getDocs(
+collection(
+db,
+"users"
+)
+);
+
+let html=
+"<h3>Quản trị</h3>";
+
+snap.forEach(
+userDoc=>{
+
+const data=
+userDoc.data();
+
+html+=`
+
+<div
+class="historyItem">
+
+<b>
+
+${data.username}
+
+</b>
+
+<br>
+
+Lượt:
+
+${data.opensLeft||0}
+
+<br><br>
+
+<button
+onclick="
+giveOpen(
+'${userDoc.id}',
+1
+)
+">
+
++1
+
+</button>
+
+<button
+onclick="
+giveOpen(
+'${userDoc.id}',
+5
+)
+">
+
++5
+
+</button>
+
+<button
+onclick="
+giveOpen(
+'${userDoc.id}',
+10
+)
+">
+
++10
+
+</button>
+
+<button
+onclick="
+randomRecall(
+'${userDoc.id}'
+)
+">
+
+THU HỒI
+
+</button>
+
+<button
+onclick="
+kickUser(
+'${userDoc.id}'
+)
+">
+
+KICK
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document
+.getElementById(
+"adminPanel"
+)
+.innerHTML=
+html;
+
+}
+
+window.giveOpen=
+async function(
+userId,
+amount
+){
+
+const userRef=
+doc(
+db,
+"users",
+userId
+);
+
+const snap=
+await getDoc(
+userRef
+);
+
+const data=
+snap.data();
+
+await updateDoc(
+userRef,
+{
+opensLeft:
+(
+data.opensLeft||0
+)
++
+amount
+}
+);
+
+await loadAdminPanel();
+
+};
+
+window.randomRecall=
+async function(
+userId
+){
+
+const userRef=
+doc(
+db,
+"users",
+userId
+);
+
+const snap=
+await getDoc(
+userRef
+);
+
+const data=
+snap.data();
+
+if(!data.history){
+data.history=[];
+}
+
+const pool=[];
+
+Object.entries(
+data.inventory
+)
+.forEach(
+([card,count])=>{
+
+for(
+let i=0;
+i<count;
+i++
+){
+
+pool.push(
+card
+);
+
+}
+
+});
+
+if(
+pool.length===0
+){
+
+alert(
+"Không có thẻ để thu hồi"
+);
+
+return;
+
+}
+
+const target=
+
+pool[
+Math.floor(
+Math.random()
+*
+pool.length
+)
+];
+
+data.inventory[
+target
+]--;
+
+data.history.unshift({
+
+card:
+"❌ Thu hồi "+target,
+
+time:
+new Date()
+.toLocaleString()
+
+});
+
+await updateDoc(
+userRef,
+{
+
+inventory:
+data.inventory,
+
+history:
+data.history
+
+}
+);
+
+alert(
+"Đã thu hồi "+target
+);
+
+};
+
+window.kickUser=
+async function(
+userId
+){
+
+if(
+!confirm(
+"Kick tài khoản này?"
+)
+)
+return;
+
+await deleteDoc(
+doc(
+db,
+"users",
+userId
+)
+);
+
+await loadAdminPanel();
+
+};
+
+document
+.getElementById(
+"openBtn"
+)
+.addEventListener(
+"click",
+openPack
+);
+
+document
+.getElementById(
+"openBtnLeft"
+)
+.addEventListener(
+"click",
+openPack
+);
+
+document
+.getElementById(
+"adminBtn"
+)
+.addEventListener(
+"click",
+adminLogin
+);
+
+document
+.getElementById(
+"changeNameBtn"
+)
+.addEventListener(
+"click",
+async()=>{
+
+let newName=
+prompt(
+"Tên mới:"
+);
+
+if(
+!newName
+)return;
+
+newName=
+newName.trim();
+
+if(
+newName.length<3
+)return;
+
+username=
+newName;
+
+localStorage.setItem(
+"username",
+username
+);
+
+await updateDoc(
+doc(
+db,
+"users",
+deviceId
+),
+{
+username
+}
+);
+
+document
+.getElementById(
+"usernameBox"
+)
+.innerText=
+"Tên: "+
+username;
+
+}
+);
+
+await initUser();
+
+await renderInventory();
+
+await renderMarketInventory();
+
+await renderCollection();
+
+await renderMarket();
+
+await renderHistory();
+
+await loadNotifications();
+
+setInterval(
+loadNotifications,
+5000
+);
+
+</script>
 
 </body>
 
