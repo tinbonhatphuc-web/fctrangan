@@ -10,7 +10,7 @@ name="viewport"
 content="width=device-width, initial-scale=1.0">
 
 <title>
-FC Premium - COMING SOON FOR WORLD CUP 
+FC PREMIUM - COMING SOON FOR WORLD CUP
 </title>
 
 <style>
@@ -57,15 +57,12 @@ text-shadow:
 
 .marketTitle{
 
-display:block;
-
-font-size:18px;
-
-color:gold;
-
-letter-spacing:4px;
-
-margin-top:10px;
+  display:block;
+    font-size:18px;
+    color:#FFD700;
+    letter-spacing:4px;
+    margin-top:10px;
+    text-shadow:0 0 10px gold;
 
 }
 
@@ -299,7 +296,15 @@ margin-bottom:10px;
 }
 
 }
-
+.selectCardBtn{
+    width:100%;
+    margin-bottom:8px;
+    padding:12px;
+    font-size:16px;
+    font-weight:bold;
+    background:gold;
+    color:black;
+}
 </style>
 
 </head>
@@ -548,6 +553,21 @@ class="overlay">
 </div>
 
 </div>
+<div id="selectCardModal" class="overlay">
+    <div class="panel" style="max-width:400px;width:90%;">
+        <h2>Chọn thẻ để đổi</h2>
+        <br>
+        <div id="selectCardList"></div>
+
+        <br>
+
+        <button onclick="
+        document.getElementById('selectCardModal').style.display='none'
+        ">
+            Đóng
+        </button>
+    </div>
+</div> 
 
 <script type="module">
 import { initializeApp }
@@ -601,7 +621,7 @@ const ADMIN_PASSWORD=
 "nhatisreal";
 
 const APP_VERSION=
-"3.0-MARKET";
+"COMING-SOON-WC";
 
 let isAdmin=
 false;
@@ -2577,6 +2597,47 @@ username;
 }
 );
 
+function chooseCard(cardsOwned){
+
+    return new Promise(resolve=>{
+
+        const modal =
+        document.getElementById("selectCardModal");
+
+        const list =
+        document.getElementById("selectCardList");
+
+        list.innerHTML="";
+
+        cardsOwned.forEach(card=>{
+
+            const btn =
+            document.createElement("button");
+
+            btn.className =
+            "selectCardBtn";
+
+           btn.innerText =
+card + " x" + inv[card];
+
+            btn.onclick = ()=>{
+
+                modal.style.display="none";
+
+                resolve(card);
+
+            };
+
+            list.appendChild(btn);
+
+        });
+
+        modal.style.display="flex";
+
+    });
+
+}
+
 window.exchangeCard =
 async function(resultCard){
 
@@ -2607,18 +2668,31 @@ switch(resultCard){
 case "BOLON":
 case "HUY":
 
-const anyCard =
+const ownedCards =
 Object.keys(inv)
-.find(
-c => inv[c] > 0
-);
+.filter(card => inv[card] > 0);
 
-if(!anyCard){
-alert("Không đủ nguyên liệu");
-return;
+if(ownedCards.length === 0){
+    alert("Bạn không có thẻ nào");
+    return;
 }
 
-inv[anyCard]--;
+let selectedCard =
+await chooseCard(ownedCards);
+
+selectedCard =
+selectedCard.toUpperCase();
+
+if(
+!inv[selectedCard] ||
+inv[selectedCard] <= 0
+){
+    alert("Bạn không sở hữu thẻ này");
+    return;
+}
+
+inv[selectedCard]--;
+
 break;
 
 case "BONHO":
@@ -2728,6 +2802,14 @@ break;
 default:
 return;
 
+}
+
+if(!data.marketInventory){
+    data.marketInventory = {};
+}
+
+if(!data.marketInventory[resultCard]){
+    data.marketInventory[resultCard] = 0;
 }
 
 data.marketInventory[resultCard]++;
