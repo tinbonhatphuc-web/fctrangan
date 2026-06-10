@@ -1409,37 +1409,28 @@ card.name
 );
 
 html+=`
+<div class="inventoryItem">
 
-<div
-class="inventoryItem">
-
-<b
+<img
+src="cards/${card.name.toLowerCase()}.png"
 style="
+width:80px;
+border-radius:10px;
 cursor:pointer;
-color:gold;
 "
 onclick="
-showCardPreview(
-'${card.name}'
-)
+showCardPreview('${card.name}')
 ">
 
-${card.name}
+<br><br>
 
-</b>
+<b>${card.name}</b>
 
 <br>
 
-${
-owned>0
-?
-"✅ Đã sở hữu"
-:
-"❌ Chưa sở hữu"
-}
+${owned>0?"✅ Đã sở hữu":"❌ Chưa sở hữu"}
 
 </div>
-
 `;
 
 }
@@ -1956,18 +1947,6 @@ if(
 alert("Không đủ thẻ");
 return;
 }
-
-user.inventory[
-cardName
-]-=amount;
-
-await updateDoc(
-userRef,
-{
-inventory:
-user.inventory
-}
-);
 
 await addDoc(
 collection(
@@ -2696,6 +2675,8 @@ await renderMarketInventory();
 await renderCollection();
 
 await renderMarket();
+
+renderRatePanel();
 
 await renderHistory();
 
