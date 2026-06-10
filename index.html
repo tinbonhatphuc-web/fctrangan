@@ -1,478 +1,223 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-FC Premium V4 Fixed Edition
-</title>
+<title>FC Premium V4 Production</title>
 
 <style>
 
-/* =========================
-RESET
-========================= */
+:root{
+
+--bg:#111827;
+--panel:#1f2937;
+--card:#374151;
+
+--gold:#facc15;
+--green:#22c55e;
+--red:#ef4444;
+
+}
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-}
-
-html,
-body{
-height:100%;
+font-family:Arial,sans-serif;
 }
 
 body{
-
-font-family:
-Arial,
-sans-serif;
-
-background:
-linear-gradient(
-180deg,
-#0f172a,
-#111827
-);
-
+background:#0f172a;
 color:white;
-
-overflow:hidden;
-
-}
-
-/* =========================
-APP
-========================= */
-
-.app{
-
 height:100vh;
-
-display:flex;
-flex-direction:column;
-
+overflow:hidden;
 }
 
-/* =========================
-HEADER
-========================= */
+/* HEADER */
 
-.header{
-
-height:70px;
-
-flex-shrink:0;
-
+header{
+height:60px;
 display:flex;
 align-items:center;
 justify-content:center;
-
-font-size:28px;
+background:#111827;
+border-bottom:1px solid #333;
 font-weight:bold;
-
-background:
-
-rgba(
-255,
-255,
-255,
-0.08
-);
-
-backdrop-filter:
-blur(12px);
-
-border-bottom:
-
-1px solid rgba(
-255,
-255,
-255,
-0.12
-);
-
+font-size:22px;
 }
 
-/* =========================
-MAIN
-========================= */
+/* LAYOUT */
 
-.main{
-
-flex:1;
-
+.layout{
+height:calc(100vh - 60px);
 display:grid;
-
 grid-template-columns:
-
-300px
+280px
 1fr
-380px;
-
-gap:12px;
-
-padding:12px;
-
-overflow:hidden;
-
+420px;
+gap:10px;
+padding:10px;
 }
 
-/* =========================
-PANELS
-========================= */
+/* PANEL */
 
 .panel{
 
-background:
+background:var(--panel);
 
-rgba(
-255,
-255,
-255,
-0.06
-);
-
-border:
-
-1px solid rgba(
-255,
-255,
-255,
-0.1
-);
-
-border-radius:18px;
-
-backdrop-filter:
-blur(10px);
+border-radius:12px;
 
 overflow:hidden;
-
-}
-
-/* =========================
-LEFT
-========================= */
-
-.leftPanel{
 
 display:flex;
 flex-direction:column;
 
+}
+
+/* LEFT */
+
+.left-panel{
+
 padding:15px;
-gap:12px;
 
-overflow-y:auto;
-
-}
-
-.playerBox{
-
-background:
-
-rgba(
-255,
-255,
-255,
-0.08
-);
-
-border-radius:14px;
-
-padding:12px;
+gap:10px;
 
 }
 
-.playerTitle{
+/* CENTER */
 
-font-size:18px;
-font-weight:bold;
+.center-panel{
 
-margin-bottom:8px;
-
-}
-
-.stat{
-
-margin-top:6px;
-font-size:14px;
+align-items:center;
+justify-content:center;
 
 }
 
-/* =========================
-PITY
-========================= */
+/* RIGHT */
 
-.pityWrap{
-
-margin-top:8px;
-
-}
-
-.pityLabel{
-
-font-size:13px;
-
-margin-bottom:5px;
-
-}
-
-.pityBar{
-
-height:12px;
-
-background:
-rgba(
-255,
-255,
-255,
-0.1
-);
-
-border-radius:999px;
+.right-panel{
 
 overflow:hidden;
 
 }
 
-.pityFill{
-
-height:100%;
-
-width:0%;
-
-background:
-
-linear-gradient(
-90deg,
-#22c55e,
-#3b82f6
-);
-
-transition:
-0.3s;
-
-}
-
-/* =========================
-BUTTON
-========================= */
+/* BUTTON */
 
 .btn{
 
 border:none;
 
-padding:10px 14px;
+padding:12px;
 
-border-radius:12px;
+border-radius:8px;
 
 cursor:pointer;
 
 font-weight:bold;
 
-background:
-#2563eb;
+}
 
+.btn-primary{
+
+background:var(--gold);
+color:black;
+
+}
+
+.btn-danger{
+
+background:var(--red);
 color:white;
 
 }
 
-.btn:hover{
+/* PACK */
 
-opacity:0.9;
-
-}
-
-/* =========================
-CENTER
-========================= */
-
-.centerPanel{
+.pack-box{
 
 display:flex;
-
 flex-direction:column;
 
 align-items:center;
 
-justify-content:center;
-
-gap:20px;
-
-padding:20px;
-
-position:relative;
+gap:15px;
 
 }
 
-/* =========================
-PACK
-========================= */
-
-.packImage{
-
-width:320px;
-
-max-width:90%;
-
-cursor:pointer;
-
-transition:0.3s;
-
-}
-
-.packImage:hover{
-
-transform:scale(1.05);
-
-}
-
-.openBtn{
-
-font-size:20px;
-
-padding:14px 26px;
-
-}
-
-/* =========================
-REWARD
-========================= */
-
-.rewardCard{
-
-display:none;
-
-flex-direction:column;
-
-align-items:center;
-
-gap:12px;
-
-}
-
-.rewardCard img{
+.pack-box img{
 
 width:260px;
 
-border-radius:18px;
+max-width:90%;
 
 }
 
-/* =========================
-RIGHT
-========================= */
+/* REWARD */
 
-.rightPanel{
-
-display:flex;
-
-flex-direction:column;
-
-overflow:hidden;
-
-}
-
-/* =========================
-ACCORDION
-========================= */
-
-.accordionItem{
-
-border-bottom:
-
-1px solid rgba(
-255,
-255,
-255,
-0.08
-);
-
-}
-
-.accordionHeader{
-
-padding:15px;
-
-cursor:pointer;
-
-font-weight:bold;
-
-background:
-
-rgba(
-255,
-255,
-255,
-0.05
-);
-
-}
-
-.accordionBody{
+.reward-card{
 
 display:none;
 
-height:400px;
+flex-direction:column;
 
-overflow-y:auto;
+align-items:center;
 
-padding:12px;
+gap:10px;
 
 }
 
-.accordionItem.active
-.accordionBody{
+/* ACCORDION */
+
+.accordion{
+
+display:flex;
+flex-direction:column;
+
+height:100%;
+
+overflow:auto;
+
+}
+
+.accordion-item{
+
+border-bottom:1px solid #444;
+
+}
+
+.accordion-header{
+
+padding:14px;
+
+cursor:pointer;
+
+background:#1e293b;
+
+font-weight:bold;
+
+}
+
+.accordion-content{
+
+display:none;
+
+padding:10px;
+
+max-height:500px;
+
+overflow:auto;
+
+}
+
+.accordion-item.active
+.accordion-content{
 
 display:block;
 
 }
 
-/* =========================
-CARD ITEM
-========================= */
-
-.cardItem{
-
-padding:12px;
-
-margin-bottom:10px;
-
-border-radius:12px;
-
-background:
-
-rgba(
-255,
-255,
-255,
-0.06
-);
-
-cursor:pointer;
-
-}
-
-.marketCard{
-
-border:
-
-1px solid gold;
-
-}
-
-/* =========================
-MODAL
-========================= */
+/* MODAL */
 
 .modal{
 
@@ -482,84 +227,40 @@ position:fixed;
 
 inset:0;
 
-background:
-
-rgba(
-0,
-0,
-0,
-0.85
-);
-
-align-items:center;
+background:rgba(0,0,0,.7);
 
 justify-content:center;
 
-z-index:999;
+align-items:center;
+
+z-index:9999;
 
 }
 
-.modalContent{
+.modal-box{
 
-background:
-#111827;
+background:#1f2937;
 
 padding:20px;
 
-border-radius:18px;
+border-radius:12px;
 
-max-width:90%;
+width:500px;
 
-max-height:90%;
-
-overflow:auto;
+max-width:95%;
 
 }
 
-.modalContent img{
+/* MOBILE */
 
-max-width:100%;
+@media(max-width:900px){
 
-}
+.layout{
 
-/* =========================
-NOTIFICATION DOT
-========================= */
+display:flex;
+flex-direction:column;
 
-.redDot{
-
-width:12px;
-height:12px;
-
-border-radius:50%;
-
-background:red;
-
-display:none;
-
-}
-
-/* =========================
-TABLET
-========================= */
-
-@media
-(max-width:1200px){
-
-.main{
-
-grid-template-columns:
-1fr;
-
-overflow-y:auto;
-
-}
-
-.leftPanel,
-.centerPanel,
-.rightPanel{
-
-min-height:500px;
+height:auto;
 
 }
 
@@ -571,138 +272,67 @@ overflow:auto;
 
 }
 
-/* =========================
-MOBILE
-========================= */
-
-@media
-(max-width:700px){
-
-.header{
-
-font-size:20px;
-
-}
-
-.packImage{
-
-width:220px;
-
-}
-
-.openBtn{
-
-font-size:16px;
-
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
 
-<div class="app">
+<header>
 
-<!-- HEADER -->
+FC PREMIUM V4 PRODUCTION
 
-<div class="header">
+</header>
 
-⚽ FC PREMIUM V4 FIXED ⚽
-
-</div>
-
-<!-- MAIN -->
-
-<div class="main">
+<div class="layout">
 
 <!-- LEFT -->
 
-<div class="panel leftPanel">
+<div class="panel left-panel">
 
-<div class="playerBox">
-
-<div class="playerTitle">
+<h3 id="playerName">
 
 Người Chơi
 
+</h3>
+
+<div>
+
+Lượt mở:
+<span id="opensLeft">0</span>
+
 </div>
 
-<div id="playerName">
+<div>
 
-Đang tải...
+Pity 10
+
+<div class="bar">
+<div id="pity10Bar"></div>
+</div>
+
+</div>
+
+<div>
+
+Pity 30
+
+<div class="bar">
+<div id="pity30Bar"></div>
+</div>
 
 </div>
 
 <button
-class="btn"
+class="btn btn-primary"
 id="changeNameBtn">
 
 Đổi Tên
 
 </button>
 
-<div class="stat">
-
-Lượt mở:
-<span id="openCount">
-0
-</span>
-
-</div>
-
-<div class="pityWrap">
-
-<div class="pityLabel">
-
-Pity 10
-
-</div>
-
-<div class="pityBar">
-
-<div
-id="pity10Bar"
-class="pityFill">
-
-</div>
-
-</div>
-
-</div>
-
-<div class="pityWrap">
-
-<div class="pityLabel">
-
-Pity 30 (BU+)
-
-</div>
-
-<div class="pityBar">
-
-<div
-id="pity30Bar"
-class="pityFill">
-
-</div>
-
-</div>
-
-</div>
-
-<div class="stat">
-
-Version:
-V4 Fixed
-
-</div>
-
 <button
-id="adminBtn"
-class="btn">
+class="btn"
+id="adminBtn">
 
 Admin
 
@@ -710,47 +340,39 @@ Admin
 
 </div>
 
-</div>
-
 <!-- CENTER -->
 
-<div class="panel centerPanel">
+<div class="panel center-panel">
+
+<div class="pack-box">
 
 <img
-
-id="packImage"
-
-class="packImage"
-
 src="fc-mystery-pack.png"
-
-alt="Pack">
+id="packImage">
 
 <button
-
 id="openPackBtn"
-
-class="btn openBtn">
+class="btn btn-primary">
 
 MỞ PACK
 
 </button>
 
+</div>
+
 <div
 id="rewardCard"
-class="rewardCard">
+class="reward-card">
 
 <img
-id="rewardImage">
+id="rewardImage"
+width="220">
 
-<div
-id="rewardName">
-
-</div>
+<h2 id="rewardName"></h2>
 
 <button
 id="claimBtn"
-class="btn">
+class="btn btn-primary">
 
 NHẬN
 
@@ -762,117 +384,101 @@ NHẬN
 
 <!-- RIGHT -->
 
-<div class="panel rightPanel">
+<div class="panel right-panel">
 
-<div
-class="accordionItem">
+<div class="accordion">
 
-<div
-class="accordionHeader">
+<div class="accordion-item">
+
+<div class="accordion-header">
 
 📦 Kho Thẻ
 
 </div>
 
 <div
-id="inventoryList"
-class="accordionBody">
+class="accordion-content"
+id="inventoryPanel">
 
 </div>
 
 </div>
 
-<div
-class="accordionItem">
+<div class="accordion-item">
 
-<div
-class="accordionHeader">
+<div class="accordion-header">
 
 🏪 Chợ Market
 
 </div>
 
 <div
-id="marketList"
-class="accordionBody">
+class="accordion-content"
+id="marketPanel">
 
 </div>
 
 </div>
 
-<div
-class="accordionItem">
+<div class="accordion-item">
 
-<div
-class="accordionHeader">
+<div class="accordion-header">
 
 🔔 Thông Báo
 
-<span
-id="notifDot"
-class="redDot">
-
-</span>
-
 </div>
 
 <div
-id="notificationList"
-class="accordionBody">
+class="accordion-content"
+id="notificationPanel">
 
 </div>
 
 </div>
 
-<div
-class="accordionItem">
+<div class="accordion-item">
 
-<div
-class="accordionHeader">
+<div class="accordion-header">
 
 📜 Lịch Sử Mở
 
 </div>
 
 <div
-id="openHistory"
-class="accordionBody">
+class="accordion-content"
+id="openLogPanel">
 
 </div>
 
 </div>
 
-<div
-class="accordionItem">
+<div class="accordion-item">
 
-<div
-class="accordionHeader">
+<div class="accordion-header">
 
-💱 Lịch Sử Giao Dịch
-
-</div>
-
-<div
-id="tradeHistory"
-class="accordionBody">
-
-</div>
+💱 Giao Dịch
 
 </div>
 
 <div
-class="accordionItem">
+class="accordion-content"
+id="tradePanel">
 
-<div
-class="accordionHeader">
+</div>
 
-🎁 Lịch Sử Chuyển
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+
+🎁 Chuyển Thẻ
 
 </div>
 
 <div
-id="transferHistory"
-class="accordionBody">
+class="accordion-content"
+id="transferPanel">
 
 </div>
 
@@ -884,64 +490,88 @@ class="accordionBody">
 
 </div>
 
-<!-- MODAL -->
+<!-- PREVIEW -->
 
 <div
 id="previewModal"
 class="modal">
 
-<div
-class="modalContent">
+<div class="modal-box">
 
 <img
-id="previewImage">
+id="previewImage"
+style="width:100%">
 
 </div>
 
 </div>
+
+<!-- APP MODULE -->
+
 <script type="module">
 
-/* =========================
+// Firebase
+// State
+// Pack Engine
+// Inventory Engine
+// Market Engine
+// Transfer Engine
+// Admin Engine
+
+</script>
+
+</body>
+</html>
+/* ==================================================
+FC PREMIUM V4 PRODUCTION
+PHASE 2
+Firebase + State Manager
+================================================== */
+
+/* ==================================================
 FIREBASE IMPORT
-========================= */
+================================================== */
 
 import {
-
 initializeApp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 
 getFirestore,
+
 doc,
 getDoc,
 setDoc,
 updateDoc,
+
 addDoc,
-deleteDoc,
+
 collection,
+
 query,
 where,
-orderBy,
 limit,
+orderBy,
+
 getDocs,
-serverTimestamp
+
+serverTimestamp,
+
+onSnapshot,
+
+runTransaction
 
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* =========================
+/* ==================================================
 FIREBASE CONFIG
-THAY BẰNG CONFIG CỦA BẠN
-========================= */
+THAY THÔNG TIN THẬT
+================================================== */
 
 const firebaseConfig={
 
@@ -949,7 +579,7 @@ apiKey:"YOUR_API_KEY",
 
 authDomain:"YOUR_PROJECT.firebaseapp.com",
 
-projectId:"YOUR_PROJECT_ID",
+projectId:"YOUR_PROJECT",
 
 storageBucket:"YOUR_PROJECT.appspot.com",
 
@@ -959,106 +589,99 @@ appId:"YOUR_APP_ID"
 
 };
 
-const app=
+const firebaseApp=
 initializeApp(
 firebaseConfig
 );
 
 const db=
 getFirestore(
-app
+firebaseApp
 );
 
-/* =========================
+/* ==================================================
 COLLECTIONS
-========================= */
+================================================== */
 
-const USERS=
-"users";
+const COLLECTIONS={
 
-const OPEN_LOGS=
-"openLogs";
+users:"users",
 
-const NOTIFICATIONS=
-"notifications";
+openLogs:"openLogs",
 
-const MARKET_TRADES=
-"marketTrades";
+notifications:"notifications",
 
-const TRANSFER_LOGS=
-"transferLogs";
+marketTrades:"marketTrades",
 
-const TRANSFERS=
-"transfers";
+transferLogs:"transferLogs",
 
-/* =========================
-VERSION
-========================= */
+transfers:"transfers",
 
-const VERSION=
-"FC Premium V4 Fixed";
-
-/* =========================
-ADMIN PASSWORD
-========================= */
-
-const ADMIN_PASSWORD=
-"nhatisreal";
-
-/* =========================
-APP STATE
-========================= */
-
-const APP={
-
-version:VERSION,
-
-admin:false,
-
-opening:false,
-
-rewardClaimed:false,
-
-currentReward:null,
-
-deviceId:null,
-
-user:null
+config:"config"
 
 };
 
-/* =========================
+/* ==================================================
+APP STATE
+CHỈ DUY NHẤT 1 STATE
+================================================== */
+
+const APP={
+
+version:"FC Premium V4 Production",
+
+deviceId:null,
+
+user:null,
+
+admin:false,
+
+online:true,
+
+opening:false,
+
+claiming:false,
+
+refreshing:false,
+
+reward:null,
+
+rewardClaimed:false,
+
+cache:{},
+
+listeners:[]
+
+};
+
+/* ==================================================
 DEVICE ID
-========================= */
+================================================== */
 
 function getDeviceId(){
 
 let id=
-
 localStorage.getItem(
 "fc_device_id"
 );
 
-if(!id){
+if(id)
+return id;
 
 id=
 
 "FC_"+
 
-Date.now()+
-
-"_"+
+Date.now()+"_"+
 
 Math.random()
 .toString(36)
-.substring(2,8);
+.substring(2,10);
 
 localStorage.setItem(
 "fc_device_id",
 id
 );
-
-}
 
 return id;
 
@@ -1067,11 +690,11 @@ return id;
 APP.deviceId=
 getDeviceId();
 
-/* =========================
+/* ==================================================
 DEFAULT USER
-========================= */
+================================================== */
 
-function createDefaultUser(){
+function createUser(){
 
 return{
 
@@ -1084,10 +707,10 @@ username:
 opensLeft:
 10,
 
-normalPity:
+pity10:
 0,
 
-buPity:
+pity30:
 0,
 
 inventory:{},
@@ -1101,17 +724,25 @@ Date.now()
 
 }
 
-/* =========================
+/* ==================================================
+USER CACHE
+================================================== */
+
+let USER_CACHE=null;
+
+/* ==================================================
 LOAD USER
-========================= */
+================================================== */
 
 async function loadUser(){
+
+try{
 
 const ref=
 
 doc(
 db,
-USERS,
+COLLECTIONS.users,
 APP.deviceId
 );
 
@@ -1127,11 +758,18 @@ snap.exists()
 APP.user=
 snap.data();
 
+USER_CACHE=
+snap.data();
+
+return;
+
 }
-else{
 
 APP.user=
-createDefaultUser();
+createUser();
+
+USER_CACHE=
+APP.user;
 
 await setDoc(
 ref,
@@ -1139,20 +777,38 @@ APP.user
 );
 
 }
+catch(err){
+
+console.error(
+"LOAD USER ERROR",
+err
+);
 
 }
 
-/* =========================
+}
+
+/* ==================================================
 SAVE USER
-========================= */
+ANTI WRITE SPAM
+================================================== */
+
+let saveLock=false;
 
 async function saveUser(){
+
+if(saveLock)
+return;
+
+saveLock=true;
+
+try{
 
 await setDoc(
 
 doc(
 db,
-USERS,
+COLLECTIONS.users,
 APP.deviceId
 ),
 
@@ -1164,243 +820,193 @@ merge:true
 
 );
 
+USER_CACHE=
+structuredClone(
+APP.user
+);
+
 }
+catch(err){
 
-/* =========================
-RENDER PLAYER
-========================= */
-
-function renderPlayer(){
-
-document
-.getElementById(
-"playerName"
-)
-.innerText=
-
-APP.user.username;
-
-document
-.getElementById(
-"openCount"
-)
-.innerText=
-
-APP.user.opensLeft||0;
-
-/* pity10 */
-
-const pity10=
-
-Math.min(
-
-100,
-
-(
-(APP.user.normalPity||0)
-/
-10
-)
-*100
-
+console.error(
+err
 );
 
-document
-.getElementById(
-"pity10Bar"
-)
-.style.width=
+}
+finally{
 
-pity10+"%";
-
-/* pity30 */
-
-const pity30=
-
-Math.min(
-
-100,
-
-(
-(APP.user.buPity||0)
-/
-30
-)
-*100
-
-);
-
-document
-.getElementById(
-"pity30Bar"
-)
-.style.width=
-
-pity30+"%";
+saveLock=false;
 
 }
 
-/* =========================
-ĐỔI TÊN
-========================= */
+}
 
-document
-.getElementById(
-"changeNameBtn"
-)
-.onclick=
-async()=>{
+/* ==================================================
+NETWORK WATCHER
+================================================== */
 
-const name=
+window.addEventListener(
 
-prompt(
-"Tên mới"
-);
+"online",
 
-if(!name)
-return;
-
-APP.user.username=
-name.trim();
-
-await saveUser();
-
-renderPlayer();
-
-};
-
-/* =========================
-ADMIN LOGIN
-========================= */
-
-document
-.getElementById(
-"adminBtn"
-)
-.onclick=
 ()=>{
 
-const pass=
-prompt(
-"Mật khẩu Admin"
+APP.online=true;
+
+console.log(
+"ONLINE"
 );
+
+}
+
+);
+
+window.addEventListener(
+
+"offline",
+
+()=>{
+
+APP.online=false;
+
+console.log(
+"OFFLINE"
+);
+
+}
+
+);
+
+/* ==================================================
+RETRY QUEUE
+KHI MẤT MẠNG
+================================================== */
+
+const RETRY_QUEUE=[];
+
+function queueAction(fn){
+
+RETRY_QUEUE.push(fn);
+
+}
+
+async function processQueue(){
 
 if(
-pass!==ADMIN_PASSWORD
-){
-
-alert(
-"Sai mật khẩu"
-);
-
+!APP.online
+)
 return;
 
+while(
+RETRY_QUEUE.length
+){
+
+const action=
+RETRY_QUEUE.shift();
+
+try{
+
+await action();
+
 }
+catch(err){
 
-APP.admin=true;
-
-alert(
-"Admin Mode"
-);
-
-};
-
-/* =========================
-ACCORDION
-========================= */
-
-function setupAccordion(){
-
-const items=
-
-document.querySelectorAll(
-".accordionItem"
-);
-
-items.forEach(item=>{
-
-const header=
-
-item.querySelector(
-".accordionHeader"
-);
-
-header.onclick=
-()=>{
-
-items.forEach(i=>{
-
-if(i!==item){
-
-i.classList.remove(
-"active"
+console.error(
+err
 );
 
 }
 
-});
-
-item.classList.toggle(
-"active"
-);
-
-};
-
-});
+}
 
 }
 
-/* =========================
-PREVIEW MODAL
-========================= */
+setInterval(
 
-const previewModal=
+processQueue,
 
-document.getElementById(
-"previewModal"
+5000
+
 );
 
-const previewImage=
+/* ==================================================
+NOTIFICATION SERVICE
+================================================== */
 
-document.getElementById(
-"previewImage"
+function startNotificationListener(){
+
+const q=
+
+query(
+
+collection(
+db,
+COLLECTIONS.notifications
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(50)
+
 );
 
-window.showPreview=
-function(src){
+const unsubscribe=
 
-previewImage.src=
-src;
+onSnapshot(
 
-previewModal.style.display=
-"flex";
+q,
 
-};
+(snapshot)=>{
 
-previewModal.onclick=
-()=>{
+renderNotifications(
+snapshot
+);
 
-previewModal.style.display=
-"none";
+},
 
-};
+(err)=>{
 
-/* =========================
-NOTIFICATION
-========================= */
+console.error(
+err
+);
 
-async function addNotification(
+}
+
+);
+
+APP.listeners.push(
+unsubscribe
+);
+
+}
+
+/* ==================================================
+SAFE NOTIFICATION
+================================================== */
+
+async function pushNotification(
 
 title,
 message
 
 ){
 
+try{
+
 await addDoc(
 
 collection(
 db,
-NOTIFICATIONS
+COLLECTIONS.notifications
 ),
 
 {
@@ -1420,22 +1026,32 @@ serverTimestamp()
 );
 
 }
+catch(err){
 
-/* =========================
+queueAction(
+()=>pushNotification(
+title,
+message
+)
+);
+
+}
+
+}
+
+/* ==================================================
 OPEN LOG
-========================= */
+================================================== */
 
-async function addOpenLog(
+async function addOpenLog(card){
 
-card
-
-){
+try{
 
 await addDoc(
 
 collection(
 db,
-OPEN_LOGS
+COLLECTIONS.openLogs
 ),
 
 {
@@ -1453,55 +1069,25 @@ serverTimestamp()
 );
 
 }
+catch(err){
 
-/* =========================
-MARKET LOG
-========================= */
-
-async function addMarketLog(
-
-text
-
-){
-
-await addDoc(
-
-collection(
-db,
-MARKET_TRADES
-),
-
-{
-
-deviceId:
-APP.deviceId,
-
-text,
-
-createdAt:
-serverTimestamp()
+console.error(err);
 
 }
 
-);
-
 }
 
-/* =========================
+/* ==================================================
 TRANSFER LOG
-========================= */
+================================================== */
 
-async function addTransferLog(
-
-text
-
-){
+async function addTransferLog(text){
 
 await addDoc(
 
 collection(
 db,
-TRANSFER_LOGS
+COLLECTIONS.transferLogs
 ),
 
 {
@@ -1520,71 +1106,167 @@ serverTimestamp()
 
 }
 
-/* =========================
-BOOT
-========================= */
+/* ==================================================
+MARKET LOG
+================================================== */
 
-await loadUser();
+async function addMarketLog(text){
+
+await addDoc(
+
+collection(
+db,
+COLLECTIONS.marketTrades
+),
+
+{
+
+deviceId:
+APP.deviceId,
+
+text,
+
+createdAt:
+serverTimestamp()
+
+}
+
+);
+
+}
+
+/* ==================================================
+ONE REFRESH ONLY
+================================================== */
+
+async function refreshUI(){
+
+if(
+APP.refreshing
+)
+return;
+
+APP.refreshing=true;
+
+try{
 
 renderPlayer();
 
-setupAccordion();
+}
+finally{
+
+APP.refreshing=false;
+
+}
+
+}
+
+/* ==================================================
+RENDER PLAYER
+================================================== */
+
+function renderPlayer(){
+
+if(!APP.user)
+return;
+
+document
+.getElementById(
+"playerName"
+)
+.textContent=
+
+APP.user.username;
+
+document
+.getElementById(
+"opensLeft"
+)
+.textContent=
+
+APP.user.opensLeft||0;
+
+}
+
+/* ==================================================
+STARTUP
+================================================== */
+
+await loadUser();
+
+await refreshUI();
+
+startNotificationListener();
 
 console.log(
-"FC Premium V4 Fixed Ready"
+"PHASE 2 READY"
 );
-  /* =========================
-CARD DATA
-========================= */
+/* ==================================================
+PACK ENGINE PRODUCTION
+================================================== */
 
-const CARD_DATA={
+/* ==================================================
+CARD DATABASE
+================================================== */
+
+const CARDS={
 
 BOLON:{
+rarity:"COMMON",
+weight:40,
 image:"cards/bolon.png",
-video:"videos/bolon.mp4",
-weight:40
+video:"videos/bolon.mp4"
 },
 
 HUY:{
+rarity:"COMMON",
+weight:30,
 image:"cards/huy.png",
-video:"videos/huy.mp4",
-weight:30
+video:"videos/huy.mp4"
 },
 
 BONHO:{
+rarity:"RARE",
+weight:18,
 image:"cards/bonho.png",
-video:"videos/bonho.mp4",
-weight:18
+video:"videos/bonho.mp4"
 },
 
 BU:{
+rarity:"EPIC",
+weight:8,
 image:"cards/bu.png",
-video:"videos/bu.mp4",
-weight:8
+video:"videos/bu.mp4"
 },
 
 GAO:{
+rarity:"LEGEND",
+weight:3,
 image:"cards/gao.png",
-video:"videos/gao.mp4",
-weight:3
+video:"videos/gao.mp4"
 },
 
 PHI:{
+rarity:"MYTHIC",
+weight:0.8,
 image:"cards/phi.png",
-video:"videos/phi.mp4",
-weight:0.8
+video:"videos/phi.mp4"
 },
 
 TIN:{
+rarity:"DIVINE",
+weight:0.2,
 image:"cards/tin.png",
-video:"videos/tin.mp4",
-weight:0.2
+video:"videos/tin.mp4"
 }
 
 };
 
-const NORMAL_CARDS=[
+/* ==================================================
+POOL
+================================================== */
 
+const NORMAL_POOL=[
 "BOLON",
 "HUY",
 "BONHO",
@@ -1592,21 +1274,18 @@ const NORMAL_CARDS=[
 "GAO",
 "PHI",
 "TIN"
-
 ];
 
 const BU_PLUS=[
-
 "BU",
 "GAO",
 "PHI",
 "TIN"
-
 ];
 
-/* =========================
-PACK UI
-========================= */
+/* ==================================================
+DOM
+================================================== */
 
 const openPackBtn=
 document.getElementById(
@@ -1633,26 +1312,20 @@ document.getElementById(
 "claimBtn"
 );
 
-/* =========================
-ANTI SPAM
-========================= */
+/* ==================================================
+WEIGHT ROLL
+================================================== */
 
-let packLocked=false;
-
-/* =========================
-ROLL NORMAL
-========================= */
-
-function rollCard(){
+function weightedRoll(){
 
 const total=
 
-NORMAL_CARDS.reduce(
+NORMAL_POOL.reduce(
 
-(sum,name)=>
+(sum,card)=>
 
 sum+
-CARD_DATA[name].weight,
+CARDS[card].weight,
 
 0
 
@@ -1663,14 +1336,10 @@ Math.random()*total;
 
 for(
 const card
-of NORMAL_CARDS
+of NORMAL_POOL
 ){
 
-random-=
-
-CARD_DATA[
-card
-].weight;
+random-=CARDS[card].weight;
 
 if(
 random<=0
@@ -1686,38 +1355,37 @@ return "BOLON";
 
 }
 
-/* =========================
+/* ==================================================
 ROLL BU+
-========================= */
+================================================== */
 
 function rollBUPlus(){
 
-const pool=[
+const random=
+Math.random();
 
-"BU",
-"GAO",
-"PHI",
-"TIN"
+if(random<0.70)
+return "BU";
 
-];
+if(random<0.90)
+return "GAO";
 
-return pool[
-Math.floor(
-Math.random()*pool.length
-)
-];
+if(random<0.98)
+return "PHI";
+
+return "TIN";
 
 }
 
-/* =========================
-VIDEO POPUP
-========================= */
+/* ==================================================
+VIDEO PLAYER
+================================================== */
 
 function playRewardVideo(card){
 
 const old=
 document.getElementById(
-"rewardVideoModal"
+"rewardVideo"
 );
 
 if(old)
@@ -1729,7 +1397,7 @@ document.createElement(
 );
 
 modal.id=
-"rewardVideoModal";
+"rewardVideo";
 
 modal.className=
 "modal";
@@ -1739,28 +1407,15 @@ modal.style.display=
 
 modal.innerHTML=`
 
-<div class="modalContent">
+<div class="modal-box">
 
 <video
-
-autoplay
-
 controls
-
-style="
-max-width:700px;
-width:100%;
-border-radius:15px;
-">
+autoplay
+style="width:100%;">
 
 <source
-
-src="${
-CARD_DATA[
-card
-].video
-}"
-
+src="${CARDS[card].video}"
 type="video/mp4">
 
 </video>
@@ -1773,23 +1428,84 @@ document.body.appendChild(
 modal
 );
 
-setTimeout(()=>{
-
 modal.onclick=
 ()=>modal.remove();
 
-},500);
+}
+
+/* ==================================================
+SHOW REWARD
+================================================== */
+
+function showReward(card){
+
+APP.reward=
+card;
+
+APP.rewardClaimed=false;
+
+rewardImage.src=
+CARDS[card].image;
+
+rewardName.textContent=
+card;
+
+rewardCard.style.display=
+"flex";
+
+playRewardVideo(
+card
+);
 
 }
 
-/* =========================
-OPEN PACK
-========================= */
+/* ==================================================
+PITY UPDATE
+================================================== */
+
+function updatePity(card){
+
+APP.user.pity10++;
+
+APP.user.pity30++;
+
+if(
+BU_PLUS.includes(card)
+){
+
+APP.user.pity30=0;
+
+}
+
+}
+
+/* ==================================================
+ROLL ENGINE
+================================================== */
+
+function rollReward(){
+
+/* pity 30 */
+
+if(
+APP.user.pity30>=30
+){
+
+APP.user.pity30=0;
+
+return rollBUPlus();
+
+}
+
+return weightedRoll();
+
+}
+
+/* ==================================================
+TRANSACTION OPEN
+================================================== */
 
 async function openPack(){
-
-if(packLocked)
-return;
 
 if(APP.opening)
 return;
@@ -1807,77 +1523,25 @@ return;
 }
 
 APP.opening=true;
-packLocked=true;
 
 try{
 
+const reward=
+rollReward();
+
+updatePity(
+reward
+);
+
 APP.user.opensLeft--;
 
-APP.user.normalPity++;
-
-APP.user.buPity++;
-
-let reward;
-
-/* =========================
-PITY 30
-========================= */
-
-if(
-(APP.user.buPity||0)>=30
-){
-
-reward=
-rollBUPlus();
-
-APP.user.buPity=0;
-
-}
-else{
-
-reward=
-rollCard();
-
-if(
-BU_PLUS.includes(
-reward
-)
-){
-
-APP.user.buPity=0;
-
-}
-
-}
-
-/* =========================
-SHOW REWARD
-========================= */
-
-APP.currentReward=
-reward;
-
-APP.rewardClaimed=false;
-
-rewardImage.src=
-
-CARD_DATA[
-reward
-].image;
-
-rewardName.innerText=
-reward;
-
-rewardCard.style.display=
-"flex";
-
-playRewardVideo(
+showReward(
 reward
 );
 
 await saveUser();
 
-renderPlayer();
+await refreshUI();
 
 }
 catch(err){
@@ -1895,58 +1559,53 @@ finally{
 
 APP.opening=false;
 
-setTimeout(()=>{
-
-packLocked=false;
-
-},1500);
-
 }
 
 }
 
-/* =========================
+/* ==================================================
 CLAIM REWARD
-========================= */
+================================================== */
 
 async function claimReward(){
+
+if(APP.claiming)
+return;
+
+if(
+!APP.reward
+)
+return;
 
 if(
 APP.rewardClaimed
 )
 return;
 
-if(
-!APP.currentReward
-)
-return;
+APP.claiming=true;
 
-APP.rewardClaimed=true;
+try{
 
 const card=
-APP.currentReward;
+APP.reward;
 
 if(
-!APP.user.inventory[
-card
-]
+!APP.user.inventory[card]
 ){
 
-APP.user.inventory[
-card
-]=0;
+APP.user.inventory[card]=0;
 
 }
 
-APP.user.inventory[
-card
-]++;
+APP.user.inventory[card]++;
+
+APP.rewardClaimed=true;
 
 await addOpenLog(
 card
 );
 
-await addNotification(
+await pushNotification(
 
 "Nhận Thẻ",
 
@@ -1959,15 +1618,85 @@ await saveUser();
 rewardCard.style.display=
 "none";
 
-APP.currentReward=null;
+APP.reward=null;
 
 await refreshUI();
 
 }
+catch(err){
 
-/* =========================
-BUTTONS
-========================= */
+console.error(
+err
+);
+
+}
+finally{
+
+APP.claiming=false;
+
+}
+
+}
+
+/* ==================================================
+PITY BAR
+================================================== */
+
+function renderPity(){
+
+const pity10=
+
+Math.min(
+100,
+(APP.user.pity10/10)*100
+);
+
+const pity30=
+
+Math.min(
+100,
+(APP.user.pity30/30)*100
+);
+
+const pity10Bar=
+document.getElementById(
+"pity10Bar"
+);
+
+const pity30Bar=
+document.getElementById(
+"pity30Bar"
+);
+
+if(pity10Bar)
+pity10Bar.style.width=
+pity10+"%";
+
+if(pity30Bar)
+pity30Bar.style.width=
+pity30+"%";
+
+}
+
+/* ==================================================
+EXTEND PLAYER RENDER
+================================================== */
+
+const oldRenderPlayer=
+renderPlayer;
+
+renderPlayer=
+function(){
+
+oldRenderPlayer();
+
+renderPity();
+
+};
+
+/* ==================================================
+BUTTON EVENTS
+================================================== */
 
 openPackBtn.onclick=
 openPack;
@@ -1975,28 +1704,34 @@ openPack;
 claimBtn.onclick=
 claimReward;
 
-/* =========================
-REFRESH UI
-========================= */
-
-async function refreshUI(){
-
-renderPlayer();
-
-}
-
-/* =========================
-DEBUG
-========================= */
+/* ==================================================
+BOOT
+================================================== */
 
 console.log(
-"Pack Engine Loaded"
+"PACK ENGINE READY"
 );
-  /* =========================
-MARKET CARDS
-========================= */
+  /* ==================================================
+INVENTORY ENGINE PRODUCTION
+================================================== */
 
-const MARKET_CARDS=[
+/* ==================================================
+CARD ORDER
+================================================== */
+
+const INVENTORY_ORDER=[
+
+"BOLON",
+"HUY",
+"BONHO",
+"BU",
+"GAO",
+"PHI",
+"TIN"
+
+];
+
+const MARKET_ORDER=[
 
 "BOLON_MARKET",
 "HUY_MARKET",
@@ -2008,22 +1743,40 @@ const MARKET_CARDS=[
 
 ];
 
-/* =========================
-GET BASE CARD
-========================= */
+/* ==================================================
+DOM
+================================================== */
 
-function getBaseCard(card){
+const inventoryPanel=
+document.getElementById(
+"inventoryPanel"
+);
 
-return card
-.replace("_MARKET","");
+/* ==================================================
+SAFE INVENTORY
+================================================== */
+
+function ensureInventory(){
+
+if(!APP.user.inventory){
+
+APP.user.inventory={};
 
 }
 
-/* =========================
-CREATE CARD HTML
-========================= */
+if(!APP.user.marketInventory){
 
-function createCardHTML(
+APP.user.marketInventory={};
+
+}
+
+}
+
+/* ==================================================
+CARD HTML
+================================================== */
+
+function createInventoryCard(
 
 name,
 count,
@@ -2035,40 +1788,60 @@ if(count<=0)
 return "";
 
 const base=
-getBaseCard(
-name
-);
+
+market
+
+?
+
+name.replace(
+"_MARKET",
+""
+)
+
+:
+
+name;
 
 const image=
 
-CARD_DATA[
-base
-]?.image ||
+CARDS[base]?.image ||
 
 "cards/default.png";
 
 return `
 
 <div
-class="cardItem
-${market ? "marketCard" : ""}"
+class="inventory-card"
 
-onclick="
-showPreview(
-'${image}'
-)
-">
+data-card="${name}">
 
-<b>
+<div
+class="inventory-image">
+
+<img
+src="${image}"
+loading="lazy">
+
+</div>
+
+<div
+class="inventory-info">
+
+<div
+class="inventory-name">
 
 ${name}
 
-</b>
+</div>
 
-<br>
+<div
+class="inventory-count">
 
-Số lượng:
-${count}
+x${count}
+
+</div>
+
+</div>
 
 </div>
 
@@ -2076,17 +1849,13 @@ ${count}
 
 }
 
-/* =========================
-RENDER INVENTORY
-========================= */
+/* ==================================================
+RENDER NORMAL
+================================================== */
 
-function renderInventory(){
+function renderNormalCards(){
 
-let html="";
-
-/* NORMAL */
-
-html+=`
+let html=`
 
 <h3>
 
@@ -2096,9 +1865,14 @@ html+=`
 
 `;
 
-NORMAL_CARDS.forEach(card=>{
+for(
+const card
+of INVENTORY_ORDER
+){
 
-html+=createCardHTML(
+html+=
+
+createInventoryCard(
 
 card,
 
@@ -2110,17 +1884,21 @@ false
 
 );
 
-});
+}
 
-/* MARKET */
+return html;
 
-html+=`
+}
 
-<hr
-style="
-margin:12px 0;
-opacity:.3;
-">
+/* ==================================================
+RENDER MARKET
+================================================== */
+
+function renderMarketCards(){
+
+let html=`
+
+<hr>
 
 <h3>
 
@@ -2130,9 +1908,14 @@ opacity:.3;
 
 `;
 
-MARKET_CARDS.forEach(card=>{
+for(
+const card
+of MARKET_ORDER
+){
 
-html+=createCardHTML(
+html+=
+
+createInventoryCard(
 
 card,
 
@@ -2144,430 +1927,652 @@ true
 
 );
 
-});
+}
 
-document
-.getElementById(
-"inventoryList"
-)
-.innerHTML=
-html;
+return html;
 
 }
 
-/* =========================
-LOAD NOTIFICATIONS
-========================= */
+/* ==================================================
+RENDER INVENTORY
+================================================== */
 
-async function renderNotifications(){
+function renderInventory(){
 
-const q=
+ensureInventory();
 
-query(
+inventoryPanel.innerHTML=
 
-collection(
-db,
-NOTIFICATIONS
-),
+renderNormalCards()
 
-where(
-"deviceId",
-"==",
-APP.deviceId
-),
++
 
-orderBy(
-"createdAt",
-"desc"
-),
+renderMarketCards();
 
-limit(50)
+bindInventoryEvents();
 
+}
+
+/* ==================================================
+PREVIEW IMAGE
+================================================== */
+
+function openPreview(src){
+
+const modal=
+
+document.getElementById(
+"previewModal"
 );
 
-const snap=
-await getDocs(q);
+const image=
 
-let html="";
+document.getElementById(
+"previewImage"
+);
 
-let count=0;
+image.src=
+src;
 
-snap.forEach(docSnap=>{
-
-const data=
-docSnap.data();
-
-count++;
-
-html+=`
-
-<div class="cardItem">
-
-<b>
-
-${data.title||""}
-
-</b>
-
-<br>
-
-${data.message||""}
-
-</div>
-
-`;
-
-});
-
-if(
-html===""
-){
-
-html=
-"Không có thông báo";
+modal.style.display=
+"flex";
 
 }
 
-document
-.getElementById(
-"notificationList"
-)
-.innerHTML=
-html;
-
-/* RED DOT */
+function closePreview(){
 
 document
 .getElementById(
-"notifDot"
+"previewModal"
 )
 .style.display=
-
-count>0
-?
-"inline-block"
-:
 "none";
 
 }
 
-/* =========================
-OPEN HISTORY
-========================= */
+document
+.getElementById(
+"previewModal"
+)
+.onclick=
+closePreview;
 
-async function renderOpenLogs(){
+/* ==================================================
+BIND EVENTS
+================================================== */
 
-const q=
+function bindInventoryEvents(){
 
-query(
+const cards=
 
-collection(
-db,
-OPEN_LOGS
-),
+document.querySelectorAll(
+".inventory-card"
+);
 
-where(
-"deviceId",
-"==",
-APP.deviceId
-),
+cards.forEach(card=>{
 
-orderBy(
-"createdAt",
-"desc"
-),
+card.onclick=
+()=>{
 
-limit(100)
+const cardName=
+
+card.dataset.card;
+
+const base=
+
+cardName.replace(
+"_MARKET",
+""
+);
+
+openPreview(
+
+CARDS[
+base
+].image
 
 );
 
-const snap=
-await getDocs(q);
+};
 
-let html="";
+});
 
-snap.forEach(docSnap=>{
+}
 
-const data=
-docSnap.data();
+/* ==================================================
+COUNT TOTAL
+================================================== */
 
-html+=`
+function getTotalCards(){
 
-<div class="cardItem">
+let total=0;
 
-${data.card}
+Object.values(
+
+APP.user.inventory
+
+).forEach(v=>{
+
+total+=v||0;
+
+});
+
+Object.values(
+
+APP.user.marketInventory
+
+).forEach(v=>{
+
+total+=v||0;
+
+});
+
+return total;
+
+}
+
+/* ==================================================
+INVENTORY STATS
+================================================== */
+
+function renderInventoryStats(){
+
+const total=
+getTotalCards();
+
+const stats=`
+
+<div
+class="inventory-stats">
+
+Tổng số thẻ:
+<b>
+
+${total}
+
+</b>
 
 </div>
 
 `;
 
-});
+inventoryPanel.innerHTML=
 
-if(html===""){
+stats+
 
-html=
-"Chưa có dữ liệu";
-
-}
-
-document
-.getElementById(
-"openHistory"
-)
-.innerHTML=
-html;
+inventoryPanel.innerHTML;
 
 }
 
-/* =========================
-MARKET LOGS
-========================= */
+/* ==================================================
+AUTO RECOVERY
+================================================== */
 
-async function renderMarketLogs(){
+function validateInventory(){
 
-const q=
+ensureInventory();
 
-query(
+for(
+const card
+of INVENTORY_ORDER
+){
 
-collection(
-db,
-MARKET_TRADES
-),
+if(
 
-where(
-"deviceId",
-"==",
-APP.deviceId
-),
+APP.user.inventory[
+card
+] < 0
 
-orderBy(
-"createdAt",
-"desc"
-),
+){
 
-limit(100)
-
-);
-
-const snap=
-await getDocs(q);
-
-let html="";
-
-snap.forEach(docSnap=>{
-
-const data=
-docSnap.data();
-
-html+=`
-
-<div class="cardItem">
-
-${data.text}
-
-</div>
-
-`;
-
-});
-
-if(html===""){
-
-html=
-"Chưa có giao dịch";
+APP.user.inventory[
+card
+]=0;
 
 }
 
-document
-.getElementById(
-"tradeHistory"
-)
-.innerHTML=
-html;
+}
+
+for(
+const card
+of MARKET_ORDER
+){
+
+if(
+
+APP.user.marketInventory[
+card
+] < 0
+
+){
+
+APP.user.marketInventory[
+card
+]=0;
 
 }
 
-/* =========================
-TRANSFER LOGS
-========================= */
-
-async function renderTransferLogs(){
-
-const q=
-
-query(
-
-collection(
-db,
-TRANSFER_LOGS
-),
-
-where(
-"deviceId",
-"==",
-APP.deviceId
-),
-
-orderBy(
-"createdAt",
-"desc"
-),
-
-limit(100)
-
-);
-
-const snap=
-await getDocs(q);
-
-let html="";
-
-snap.forEach(docSnap=>{
-
-const data=
-docSnap.data();
-
-html+=`
-
-<div class="cardItem">
-
-${data.text}
-
-</div>
-
-`;
-
-});
-
-if(html===""){
-
-html=
-"Chưa có lịch sử";
+}
 
 }
 
-document
-.getElementById(
-"transferHistory"
-)
-.innerHTML=
-html;
+/* ==================================================
+EXTEND REFRESH
+================================================== */
 
-}
+const oldRefreshUI=
+refreshUI;
 
-/* =========================
-FULL REFRESH UI
-========================= */
+refreshUI=
+async function(){
 
-async function refreshUI(){
+await oldRefreshUI();
 
-renderPlayer();
+validateInventory();
 
 renderInventory();
 
-await renderNotifications();
+renderInventoryStats();
 
-await renderOpenLogs();
+};
 
-await renderMarketLogs();
+/* ==================================================
+INVENTORY READY
+================================================== */
 
-await renderTransferLogs();
+console.log(
+"INVENTORY ENGINE READY"
+);
+  /* ==================================================
+MARKET ENGINE PRODUCTION
+================================================== */
+
+/* ==================================================
+MARKET RECIPES
+================================================== */
+
+const MARKET_RECIPES={
+
+BOLON_MARKET:{
+type:"ANY",
+amount:1
+},
+
+HUY_MARKET:{
+type:"ANY",
+amount:1
+},
+
+BONHO_MARKET:{
+type:"SELECT",
+cards:["BOLON","HUY"]
+},
+
+BU_MARKET:{
+type:"COMBO",
+cards:["BONHO","BOLON"]
+},
+
+GAO_MARKET:{
+type:"COMBO",
+cards:["BU","BONHO","BOLON"]
+},
+
+PHI_MARKET:{
+type:"COMBO",
+cards:["GAO","BU","BONHO","BOLON"]
+},
+
+TIN_MARKET:{
+type:"COMBO",
+cards:["GAO","BU","BONHO","BOLON"]
+}
+
+};
+
+/* ==================================================
+DOM
+================================================== */
+
+const marketPanel=
+document.getElementById(
+"marketPanel"
+);
+
+/* ==================================================
+ANTI DOUBLE CRAFT
+================================================== */
+
+let crafting=false;
+
+/* ==================================================
+GET CARD TOTAL
+ƯU TIÊN MARKET
+================================================== */
+
+function getCardTotal(card){
+
+return (
+
+(APP.user.marketInventory[
+card+"_MARKET"
+] || 0)
+
++
+
+(APP.user.inventory[
+card
+] || 0)
+
+);
 
 }
 
-/* =========================
-AUTO REFRESH
-========================= */
+/* ==================================================
+HAS MATERIALS
+================================================== */
 
-setInterval(
+function canCraftMarket(card){
 
-refreshUI,
+const recipe=
+MARKET_RECIPES[card];
 
-15000
+if(!recipe)
+return false;
+
+/* ANY */
+
+if(
+recipe.type==="ANY"
+){
+
+let total=0;
+
+NORMAL_POOL.forEach(c=>{
+
+total+=
+(APP.user.inventory[c]||0);
+
+});
+
+return total>=1;
+
+}
+
+/* SELECT */
+
+if(
+recipe.type==="SELECT"
+){
+
+return recipe.cards.some(c=>
+getCardTotal(c)>0
+);
+
+}
+
+/* COMBO */
+
+if(
+recipe.type==="COMBO"
+){
+
+return recipe.cards.every(c=>
+getCardTotal(c)>0
+);
+
+}
+
+return false;
+
+}
+
+/* ==================================================
+CONSUME
+ƯU TIÊN MARKET CARD
+================================================== */
+
+function consumeMaterial(card){
+
+const marketCard=
+card+"_MARKET";
+
+/* ưu tiên market */
+
+if(
+
+(APP.user.marketInventory[
+marketCard
+]||0)>0
+
+){
+
+APP.user.marketInventory[
+marketCard
+]--;
+
+return true;
+
+}
+
+/* thường */
+
+if(
+
+(APP.user.inventory[
+card
+]||0)>0
+
+){
+
+APP.user.inventory[
+card
+]--;
+
+return true;
+
+}
+
+return false;
+
+}
+
+/* ==================================================
+SAFE CRAFT
+================================================== */
+
+async function craftMarket(card){
+
+if(crafting)
+return;
+
+crafting=true;
+
+try{
+
+if(
+!canCraftMarket(card)
+){
+
+alert(
+"Không đủ nguyên liệu"
+);
+
+return;
+
+}
+
+const recipe=
+MARKET_RECIPES[card];
+
+/* ===== ANY ===== */
+
+if(
+recipe.type==="ANY"
+){
+
+const source=
+
+NORMAL_POOL.find(c=>
+(APP.user.inventory[c]||0)>0
+);
+
+APP.user.inventory[
+source
+]--;
+
+}
+
+/* ===== SELECT ===== */
+
+else if(
+recipe.type==="SELECT"
+){
+
+const source=
+
+recipe.cards.find(c=>
+getCardTotal(c)>0
+);
+
+consumeMaterial(
+source
+);
+
+}
+
+/* ===== COMBO ===== */
+
+else{
+
+for(
+const need
+of recipe.cards
+){
+
+consumeMaterial(
+need
+);
+
+}
+
+}
+
+/* nhận market */
+
+if(
+!APP.user.marketInventory[
+card
+]
+){
+
+APP.user.marketInventory[
+card
+]=0;
+
+}
+
+APP.user.marketInventory[
+card
+]++;
+
+/* log */
+
+await addMarketLog(
+
+"Craft "+card
 
 );
 
-/* =========================
-FIRST LOAD
-========================= */
+await pushNotification(
+
+"Market",
+
+"Nhận "+card
+
+);
+
+await saveUser();
 
 await refreshUI();
 
-/* =========================
-DEBUG
-========================= */
+}
+catch(err){
 
-console.log(
-"Inventory Loaded"
-);
-  /* =========================
-TRANSFER UI
-========================= */
-
-const transferModal=
-document.createElement(
-"div"
+console.error(
+err
 );
 
-transferModal.className=
-"modal";
+alert(
+"Lỗi craft"
+);
 
-transferModal.id=
-"transferModal";
+}
+finally{
 
-transferModal.innerHTML=`
+crafting=false;
 
-<div class="modalContent">
+}
 
-<h2>
-🎁 Chuyển Thẻ
-</h2>
+}
 
-<br>
+/* ==================================================
+MARKET CARD UI
+================================================== */
 
-<input
-id="transferUser"
+function createMarketUI(card){
 
-placeholder="Tên người nhận"
+const recipe=
+MARKET_RECIPES[
+card
+];
 
-style="
-width:100%;
-padding:10px;
-margin-bottom:10px;
-">
+let desc="";
 
-<select
-id="transferCard"
+if(
+recipe.type==="ANY"
+){
 
-style="
-width:100%;
-padding:10px;
-margin-bottom:10px;
-">
+desc=
+"1 thẻ bất kỳ";
 
-</select>
+}
+else{
 
-<input
+desc=
+recipe.cards.join(
+" + "
+);
 
-id="transferAmount"
+}
 
-type="number"
+return `
 
-min="1"
+<div class="market-item">
 
-value="1"
+<h4>
 
-style="
-width:100%;
-padding:10px;
-margin-bottom:10px;
-">
+${card}
+
+</h4>
+
+<p>
+
+${desc}
+
+</p>
 
 <button
-id="sendTransferBtn"
-class="btn">
 
-GỬI THẺ
+class="btn btn-primary"
+
+onclick="
+window.craftMarketCard(
+'${card}'
+)
+">
+
+ĐỔI NGAY
 
 </button>
 
@@ -2575,110 +2580,219 @@ GỬI THẺ
 
 `;
 
-document.body.appendChild(
-transferModal
-);
+}
 
-/* =========================
-OPEN TRANSFER
-========================= */
+/* ==================================================
+RENDER MARKET
+================================================== */
 
-function openTransferModal(){
+function renderMarket(){
 
-const select=
+let html=`
+<h3>🏪 MARKET</h3>
+`;
 
-document.getElementById(
-"transferCard"
-);
+Object.keys(
+MARKET_RECIPES
+).forEach(card=>{
 
-select.innerHTML="";
-
-NORMAL_CARDS.forEach(card=>{
-
-const count=
-
-APP.user.inventory[
+html+=
+createMarketUI(
 card
-]||0;
+);
 
-if(count<=0)
-return;
+});
 
-select.innerHTML+=`
+marketPanel.innerHTML=
+html;
 
-<option
-value="${card}">
+}
 
+/* ==================================================
+GLOBAL
+================================================== */
+
+window.craftMarketCard=
+craftMarket;
+
+/* ==================================================
+VALIDATE MARKET
+================================================== */
+
+function validateMarketInventory(){
+
+if(
+!APP.user.marketInventory
+){
+
+APP.user.marketInventory=
+{};
+
+}
+
+Object.keys(
+APP.user.marketInventory
+).forEach(card=>{
+
+if(
+
+APP.user.marketInventory[
+card
+] < 0
+
+){
+
+APP.user.marketInventory[
+card
+]=0;
+
+}
+
+});
+
+}
+
+/* ==================================================
+EXTEND REFRESH
+================================================== */
+
+const inventoryRefresh=
+refreshUI;
+
+refreshUI=
+async function(){
+
+await inventoryRefresh();
+
+validateMarketInventory();
+
+renderMarket();
+
+};
+
+/* ==================================================
+MARKET READY
+================================================== */
+
+console.log(
+"MARKET ENGINE READY"
+);
+  /* ==================================================
+TRANSFER ENGINE PRODUCTION
+================================================== */
+
+/* ==================================================
+DOM
+================================================== */
+
+const transferPanel =
+document.getElementById(
+"transferPanel"
+);
+
+/* ==================================================
+TRANSFER LOCK
+================================================== */
+
+let transferLock = false;
+
+/* ==================================================
+NORMAL CARDS ONLY
+MARKET CARD KHÔNG ĐƯỢC CHUYỂN
+================================================== */
+
+function getTransferableCards(){
+
+return INVENTORY_ORDER.filter(card=>
+
+(APP.user.inventory?.[card] || 0) > 0
+
+);
+
+}
+
+/* ==================================================
+TRANSFER UI
+================================================== */
+
+function renderTransferPanel(){
+
+let options="";
+
+getTransferableCards().forEach(card=>{
+
+options += `
+<option value="${card}">
 ${card}
-(${count})
-
 </option>
-
 `;
 
 });
 
-transferModal.style.display=
-"flex";
+transferPanel.innerHTML = `
 
-}
+<h3>🎁 CHUYỂN THẺ</h3>
 
-transferModal.onclick=
-e=>{
+<div style="margin-top:10px">
 
-if(
-e.target===transferModal
-){
+<input
+id="transferUser"
+placeholder="Tên người nhận"
+style="width:100%;padding:10px;">
 
-transferModal.style.display=
-"none";
+</div>
 
-}
+<div style="margin-top:10px">
 
-};
+<select
+id="transferCard"
+style="width:100%;padding:10px;">
 
-/* =========================
-TRANSFER BUTTON
-========================= */
+${options}
 
-const transferButton=
-document.createElement(
-"button"
-);
+</select>
 
-transferButton.className=
-"btn";
+</div>
 
-transferButton.innerText=
-"🎁 Chuyển Thẻ";
+<div style="margin-top:10px">
 
-transferButton.onclick=
-openTransferModal;
+<button
+id="sendTransferBtn"
+class="btn btn-primary">
 
-document
-.querySelector(
-".leftPanel"
-)
-.appendChild(
-transferButton
-);
+GỬI THẺ
 
-/* =========================
-SEND TRANSFER
-========================= */
+</button>
 
-let transferLock=false;
+</div>
+
+<div
+id="transferHistory"
+style="
+margin-top:15px;
+max-height:300px;
+overflow:auto;
+">
+</div>
+
+`;
 
 document
 .getElementById(
 "sendTransferBtn"
 )
 .onclick=
-async()=>{
+sendTransfer;
 
-if(
-transferLock
-)
+}
+
+/* ==================================================
+SEND TRANSFER
+================================================== */
+
+async function sendTransfer(){
+
+if(transferLock)
 return;
 
 transferLock=true;
@@ -2702,25 +2816,10 @@ document
 )
 .value;
 
-const amount=
-
-parseInt(
-
-document
-.getElementById(
-"transferAmount"
-)
-.value
-
-);
-
-if(
-!username
-)
-{
+if(!username){
 
 alert(
-"Nhập người nhận"
+"Nhập tên người nhận"
 );
 
 return;
@@ -2728,25 +2827,26 @@ return;
 }
 
 if(
-amount<=0
-)
-{
+!card
+){
+
+alert(
+"Chọn thẻ"
+);
 
 return;
 
 }
+
+/* kiểm tra tồn kho */
 
 if(
 
 (APP.user.inventory[
 card
-]||0)
+]||0)<=0
 
-<
-amount
-
-)
-{
+){
 
 alert(
 "Không đủ thẻ"
@@ -2758,84 +2858,85 @@ return;
 
 /* tìm user */
 
-const users=
+const q=query(
 
-await getDocs(
 collection(
 db,
-USERS
-)
+COLLECTIONS.users
+),
+
+where(
+"username",
+"==",
+username
+),
+
+limit(1)
+
 );
 
-let receiver=null;
-
-users.forEach(docSnap=>{
-
-const data=
-docSnap.data();
+const snap=
+await getDocs(q);
 
 if(
-data.username===
-username
+snap.empty
 ){
 
-receiver={
-
-id:docSnap.id,
-
-...data
-
-};
-
-}
-
-});
-
-if(
-!receiver
-)
-{
-
 alert(
-"Không tìm thấy"
+"Không tìm thấy người nhận"
 );
 
 return;
 
 }
 
-/* trừ thẻ */
+const receiverDoc=
+snap.docs[0];
 
-APP.user.inventory[
-card
-]-=
-amount;
+const receiver=
+receiverDoc.data();
 
-await saveUser();
+/* không gửi cho chính mình */
 
-/* transfer */
+if(
+receiver.deviceId===
+APP.deviceId
+){
+
+alert(
+"Không thể tự gửi"
+);
+
+return;
+
+}
+
+/* tạo transfer */
 
 await addDoc(
 
 collection(
 db,
-TRANSFERS
+COLLECTIONS.transfers
 ),
 
 {
 
 from:
-APP.user.username,
+APP.deviceId,
 
 to:
-username,
+receiver.deviceId,
+
+fromName:
+APP.user.username,
+
+toName:
+receiver.username,
 
 card,
 
-amount,
-
-status:
-"pending",
+status:"pending",
 
 createdAt:
 serverTimestamp()
@@ -2844,136 +2945,147 @@ serverTimestamp()
 
 );
 
+/* trừ thẻ */
+
+APP.user.inventory[
+card
+]--;
+
+await saveUser();
+
 await addTransferLog(
 
-"Gửi "+
-
-card+
-
-" x"+
-
-amount+
-
-" → "+
-
-username
+`Đã gửi ${card} cho ${username}`
 
 );
 
-await addNotification(
+await pushNotification(
 
-"Đã gửi",
+"Chuyển Thẻ",
 
-card+
-" x"+
-amount
+`Đã gửi ${card}`
 
 );
-
-transferModal.style.display=
-"none";
 
 await refreshUI();
 
 alert(
-"Đã gửi"
+"Gửi thành công"
+);
+
+}
+catch(err){
+
+console.error(
+err
+);
+
+alert(
+"Lỗi chuyển thẻ"
 );
 
 }
 finally{
 
-setTimeout(()=>{
-
 transferLock=false;
-
-},1500);
 
 }
 
-};
+}
 
-/* =========================
-PENDING TRANSFER
-========================= */
+/* ==================================================
+LOAD PENDING TRANSFERS
+================================================== */
 
-async function loadPendingTransfers(){
+async function loadTransfers(){
 
-const q=
-
-query(
+const q=query(
 
 collection(
 db,
-TRANSFERS
+COLLECTIONS.transfers
 ),
 
 where(
 "to",
 "==",
-APP.user.username
+APP.deviceId
 ),
 
 where(
 "status",
 "==",
 "pending"
-),
-
-limit(50)
+)
 
 );
 
 const snap=
 await getDocs(q);
 
-let html="";
+renderTransferInbox(
+snap.docs
+);
 
-let pending=0;
+}
 
-snap.forEach(docSnap=>{
+/* ==================================================
+INBOX UI
+================================================== */
+
+function renderTransferInbox(docs){
+
+const history=
+document.getElementById(
+"transferHistory"
+);
+
+if(!history)
+return;
+
+let html=`
+<h4>Yêu cầu nhận</h4>
+`;
+
+docs.forEach(docSnap=>{
 
 const data=
 docSnap.data();
 
-pending++;
-
 html+=`
 
-<div class="cardItem">
+<div
+class="transfer-item">
 
 <b>
-
-${data.from}
-
+${data.fromName}
 </b>
 
-<br>
+→
 
 ${data.card}
-
-x${data.amount}
 
 <br><br>
 
 <button
-class="btn"
 onclick="
 acceptTransfer(
 '${docSnap.id}'
 )
-">
+"
+class="btn btn-primary">
 
 NHẬN
 
 </button>
 
 <button
-class="btn"
 onclick="
 rejectTransfer(
 '${docSnap.id}'
 )
-">
+"
+class="btn btn-danger">
 
 TỪ CHỐI
 
@@ -2981,55 +3093,42 @@ TỪ CHỐI
 
 </div>
 
+<hr>
+
 `;
 
 });
 
-if(
-pending>0
-){
-
-document
-.getElementById(
-"notifDot"
-)
-.style.display=
-"inline-block";
-
-document
-.getElementById(
-"notificationList"
-)
-.innerHTML=
-
-html+
-
-document
-.getElementById(
-"notificationList"
-)
-.innerHTML;
+history.innerHTML=
+html;
 
 }
 
-}
-
-/* =========================
+/* ==================================================
 ACCEPT
-========================= */
+================================================== */
 
 window.acceptTransfer=
 async function(id){
 
+try{
+
 const ref=
+
 doc(
 db,
-TRANSFERS,
+COLLECTIONS.transfers,
 id
 );
 
+await runTransaction(
+
+db,
+
+async(transaction)=>{
+
 const snap=
-await getDoc(
+await transaction.get(
 ref
 );
 
@@ -3046,146 +3145,106 @@ data.status!=="pending"
 )
 return;
 
-APP.user.inventory[
+const userRef=
+
+doc(
+db,
+COLLECTIONS.users,
+APP.deviceId
+);
+
+const userSnap=
+await transaction.get(
+userRef
+);
+
+const user=
+userSnap.data();
+
+if(
+!user.inventory
+)
+user.inventory={};
+
+if(
+!user.inventory[
 data.card
-]=
+]
+){
 
-(APP.user.inventory[
+user.inventory[
 data.card
-]||0)
+]=0;
 
-+
+}
 
-data.amount;
+user.inventory[
+data.card
+]++;
 
-await saveUser();
+transaction.update(
 
-await updateDoc(
-
-ref,
+userRef,
 
 {
-status:
-"accepted"
+inventory:
+user.inventory
 }
 
 );
 
-await addTransferLog(
+transaction.update(
 
-"Nhận "+
+ref,
 
-data.card+
-
-" x"+
-
-data.amount
+{
+status:"accepted"
+}
 
 );
 
-await addNotification(
+}
 
-"Nhận thẻ",
+);
 
-data.card
+await pushNotification(
+
+"Nhận Thẻ",
+
+"Bạn đã nhận quà"
 
 );
 
 await refreshUI();
 
+}
+catch(err){
+
+console.error(
+err
+);
+
+}
+
 };
 
-/* =========================
+/* ==================================================
 REJECT
-========================= */
+================================================== */
 
 window.rejectTransfer=
 async function(id){
 
-const ref=
-doc(
-db,
-TRANSFERS,
-id
-);
-
-const snap=
-await getDoc(
-ref
-);
-
-if(
-!snap.exists()
-)
-return;
-
-const data=
-snap.data();
-
-/* hoàn trả */
-
-const users=
-
-await getDocs(
-collection(
-db,
-USERS
-)
-);
-
-for(
-const userDoc
-of users.docs
-){
-
-const u=
-userDoc.data();
-
-if(
-u.username===
-data.from
-){
-
-u.inventory[
-data.card
-]=
-
-(u.inventory[
-data.card
-]||0)
-
-+
-
-data.amount;
-
 await updateDoc(
 
 doc(
 db,
-USERS,
-userDoc.id
+COLLECTIONS.transfers,
+id
 ),
 
 {
-inventory:
-u.inventory
-}
-
-);
-
-break;
-
-}
-
-}
-
-await updateDoc(
-
-ref,
-
-{
-status:
-"rejected"
+status:"rejected"
 }
 
 );
@@ -3194,135 +3253,1284 @@ await refreshUI();
 
 };
 
-/* =========================
-EXTEND REFRESH
-========================= */
+/* ==================================================
+TRANSFER LOGS
+================================================== */
 
-const oldRefresh=
+async function renderTransferLogs(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.transferLogs
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(50)
+
+);
+
+const snap=
+await getDocs(q);
+
+console.log(
+"Transfer Logs",
+snap.size
+);
+
+}
+
+/* ==================================================
+REALTIME TRANSFER LISTENER
+================================================== */
+
+function startTransferListener(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.transfers
+),
+
+where(
+"to",
+"==",
+APP.deviceId
+),
+
+where(
+"status",
+"==",
+"pending"
+)
+
+);
+
+const unsubscribe=
+
+onSnapshot(
+
+q,
+
+()=>{
+
+loadTransfers();
+
+}
+
+);
+
+APP.listeners.push(
+unsubscribe
+);
+
+}
+
+/* ==================================================
+EXTEND REFRESH
+================================================== */
+
+const marketRefresh=
 refreshUI;
 
 refreshUI=
 async function(){
 
-await oldRefresh();
+await marketRefresh();
 
-await loadPendingTransfers();
+renderTransferPanel();
+
+await loadTransfers();
 
 };
 
-console.log(
-"Transfer Loaded"
-);
-  /* =========================
-ADMIN MODAL
-========================= */
+/* ==================================================
+BOOT
+================================================== */
 
-const adminModal=
+startTransferListener();
+
+console.log(
+"TRANSFER ENGINE READY"
+);
+  /* ==================================================
+NOTIFICATION ENGINE PRODUCTION
+================================================== */
+
+/* ==================================================
+DOM
+================================================== */
+
+const notificationPanel=
+document.getElementById(
+"notificationPanel"
+);
+
+/* ==================================================
+STATE
+================================================== */
+
+APP.unreadNotifications=0;
+
+/* ==================================================
+CREATE NOTIFICATION
+================================================== */
+
+async function createNotification(
+
+title,
+message
+
+){
+
+try{
+
+await addDoc(
+
+collection(
+db,
+COLLECTIONS.notifications
+),
+
+{
+
+deviceId:
+APP.deviceId,
+
+title,
+
+message,
+
+read:false,
+
+createdAt:
+serverTimestamp()
+
+}
+
+);
+
+}
+catch(err){
+
+console.error(
+err
+);
+
+}
+
+}
+
+/* ==================================================
+RENDER NOTIFICATIONS
+================================================== */
+
+function renderNotifications(snapshot){
+
+if(!snapshot){
+
+notificationPanel.innerHTML=
+"Không có dữ liệu";
+
+return;
+
+}
+
+let html="";
+
+let unread=0;
+
+snapshot.forEach(docSnap=>{
+
+const n=
+docSnap.data();
+
+if(!n.read)
+unread++;
+
+html+=`
+
+<div class="notification-item">
+
+<div>
+
+<b>
+${n.title}
+</b>
+
+</div>
+
+<div>
+
+${n.message}
+
+</div>
+
+<div>
+
+<button
+
+onclick="
+markNotificationRead(
+'${docSnap.id}'
+)
+"
+
+class="btn">
+
+Đã đọc
+
+</button>
+
+</div>
+
+</div>
+
+<hr>
+
+`;
+
+});
+
+APP.unreadNotifications=
+unread;
+
+updateNotificationBadge();
+
+notificationPanel.innerHTML=
+html;
+
+}
+
+/* ==================================================
+BADGE
+================================================== */
+
+function updateNotificationBadge(){
+
+const header=
+
+document.querySelectorAll(
+".accordion-header"
+);
+
+header.forEach(el=>{
+
+if(
+el.innerText.includes(
+"Thông Báo"
+)
+){
+
+if(
+APP.unreadNotifications>0
+){
+
+el.innerHTML=
+
+`🔔 Thông Báo
+<span
+style="
+background:red;
+padding:2px 8px;
+border-radius:999px;
+margin-left:5px;
+">
+
+${APP.unreadNotifications}
+
+</span>`;
+
+}
+else{
+
+el.innerHTML=
+"🔔 Thông Báo";
+
+}
+
+}
+
+});
+
+}
+
+/* ==================================================
+MARK READ
+================================================== */
+
+window.markNotificationRead=
+async function(id){
+
+try{
+
+await updateDoc(
+
+doc(
+db,
+COLLECTIONS.notifications,
+id
+),
+
+{
+read:true
+}
+
+);
+
+}
+catch(err){
+
+console.error(
+err
+);
+
+}
+
+};
+
+/* ==================================================
+MARK ALL READ
+================================================== */
+
+async function markAllNotificationsRead(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.notifications
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+where(
+"read",
+"==",
+false
+)
+
+);
+
+const snap=
+await getDocs(q);
+
+for(
+const d
+of snap.docs
+){
+
+await updateDoc(
+
+doc(
+db,
+COLLECTIONS.notifications,
+d.id
+),
+
+{
+read:true
+}
+
+);
+
+}
+
+}
+
+/* ==================================================
+AUTO CLEANUP
+GIỮ 100 THÔNG BÁO
+================================================== */
+
+async function cleanupNotifications(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.notifications
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+
+)
+
+);
+
+const snap=
+await getDocs(q);
+
+if(
+snap.size<=100
+)
+return;
+
+const docs=
+snap.docs;
+
+for(
+
+let i=100;
+
+i<docs.length;
+
+i++
+
+){
+
+await deleteDoc(
+
+doc(
+db,
+COLLECTIONS.notifications,
+docs[i].id
+)
+
+);
+
+}
+
+}
+
+/* ==================================================
+REALTIME LISTENER
+================================================== */
+
+function startNotificationRealtime(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.notifications
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(100)
+
+);
+
+const unsubscribe=
+
+onSnapshot(
+
+q,
+
+(snapshot)=>{
+
+renderNotifications(
+snapshot
+);
+
+}
+
+);
+
+APP.listeners.push(
+unsubscribe
+);
+
+}
+
+/* ==================================================
+BUTTON
+================================================== */
+
+function injectNotificationTools(){
+
+const tools=
 document.createElement(
 "div"
 );
 
-adminModal.id=
-"adminModal";
+tools.innerHTML=`
 
-adminModal.className=
-"modal";
+<button
+id="readAllBtn"
+class="btn">
 
-adminModal.innerHTML=`
+Đọc tất cả
 
-<div class="modalContent"
-style="width:900px;max-width:95%;">
+</button>
 
-<h2>
-👑 ADMIN PANEL
-</h2>
+`;
+
+notificationPanel.prepend(
+tools
+);
+
+document
+.getElementById(
+"readAllBtn"
+)
+.onclick=
+markAllNotificationsRead;
+
+}
+
+/* ==================================================
+BOOT
+================================================== */
+
+startNotificationRealtime();
+
+setInterval(
+
+cleanupNotifications,
+
+60000
+
+);
+
+console.log(
+"NOTIFICATION ENGINE READY"
+);
+  /* ==================================================
+HISTORY ENGINE PRODUCTION
+================================================== */
+
+/* ==================================================
+DOM
+================================================== */
+
+const openLogPanel=
+document.getElementById(
+"openLogPanel"
+);
+
+const tradePanel=
+document.getElementById(
+"tradePanel"
+);
+
+/* ==================================================
+LIMITS
+================================================== */
+
+const HISTORY_LIMIT=200;
+
+/* ==================================================
+FORMAT DATE
+================================================== */
+
+function formatDate(timestamp){
+
+try{
+
+if(!timestamp)
+return "-";
+
+if(timestamp.seconds){
+
+return new Date(
+timestamp.seconds*1000
+).toLocaleString();
+
+}
+
+return new Date(
+timestamp
+).toLocaleString();
+
+}
+catch{
+
+return "-";
+
+}
+
+}
+
+/* ==================================================
+OPEN LOGS
+================================================== */
+
+async function renderOpenLogs(){
+
+try{
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.openLogs
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(
+HISTORY_LIMIT
+)
+
+);
+
+const snap=
+await getDocs(q);
+
+let html=`
+<h3>📜 LỊCH SỬ MỞ</h3>
+`;
+
+snap.forEach(docSnap=>{
+
+const data=
+docSnap.data();
+
+html+=`
+
+<div class="log-item">
+
+<b>${data.card}</b>
 
 <br>
 
+<small>
+
+${formatDate(
+data.createdAt
+)}
+
+</small>
+
+</div>
+
+<hr>
+
+`;
+
+});
+
+openLogPanel.innerHTML=
+html;
+
+}
+catch(err){
+
+console.error(
+"OPEN LOG ERROR",
+err
+);
+
+}
+
+}
+
+/* ==================================================
+MARKET LOGS
+================================================== */
+
+async function renderMarketLogs(){
+
+try{
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.marketTrades
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(
+HISTORY_LIMIT
+)
+
+);
+
+const snap=
+await getDocs(q);
+
+let html=`
+<h3>🏪 LỊCH SỬ MARKET</h3>
+`;
+
+snap.forEach(docSnap=>{
+
+const data=
+docSnap.data();
+
+html+=`
+
+<div class="log-item">
+
+${data.text}
+
+<br>
+
+<small>
+
+${formatDate(
+data.createdAt
+)}
+
+</small>
+
+</div>
+
+<hr>
+
+`;
+
+});
+
+tradePanel.innerHTML=
+html;
+
+}
+catch(err){
+
+console.error(
+"MARKET LOG ERROR",
+err
+);
+
+}
+
+}
+
+/* ==================================================
+TRANSFER LOGS
+================================================== */
+
+async function renderTransferHistory(){
+
+try{
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.transferLogs
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(
+HISTORY_LIMIT
+)
+
+);
+
+const snap=
+await getDocs(q);
+
+let html=`
+<h3>🎁 LỊCH SỬ CHUYỂN</h3>
+`;
+
+snap.forEach(docSnap=>{
+
+const data=
+docSnap.data();
+
+html+=`
+
+<div class="log-item">
+
+${data.text}
+
+<br>
+
+<small>
+
+${formatDate(
+data.createdAt
+)}
+
+</small>
+
+</div>
+
+<hr>
+
+`;
+
+});
+
+/* ghép dưới transfer panel */
+
+const historyContainer=
+document.createElement(
+"div"
+);
+
+historyContainer.innerHTML=
+html;
+
+const transferHistory=
+document.getElementById(
+"transferHistory"
+);
+
+if(
+transferHistory
+){
+
+transferHistory.appendChild(
+historyContainer
+);
+
+}
+
+}
+catch(err){
+
+console.error(
+"TRANSFER LOG ERROR",
+err
+);
+
+}
+
+}
+
+/* ==================================================
+AUTO CLEANUP
+================================================== */
+
+async function cleanupCollection(
+
+collectionName
+
+){
+
+try{
+
+const q=query(
+
+collection(
+db,
+collectionName
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+)
+
+);
+
+const snap=
+await getDocs(q);
+
+if(
+snap.size<=HISTORY_LIMIT
+)
+return;
+
+const docs=
+snap.docs;
+
+for(
+
+let i=HISTORY_LIMIT;
+
+i<docs.length;
+
+i++
+
+){
+
+await deleteDoc(
+
+doc(
+db,
+collectionName,
+docs[i].id
+)
+
+);
+
+}
+
+}
+catch(err){
+
+console.error(
+err
+);
+
+}
+
+}
+
+/* ==================================================
+CLEANUP ALL
+================================================== */
+
+async function cleanupLogs(){
+
+await cleanupCollection(
+COLLECTIONS.openLogs
+);
+
+await cleanupCollection(
+COLLECTIONS.marketTrades
+);
+
+await cleanupCollection(
+COLLECTIONS.transferLogs
+);
+
+}
+
+/* ==================================================
+REALTIME OPEN LOGS
+================================================== */
+
+function startOpenLogsRealtime(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.openLogs
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(
+HISTORY_LIMIT
+)
+
+);
+
+const unsubscribe=
+
+onSnapshot(
+
+q,
+
+()=>{
+
+renderOpenLogs();
+
+}
+
+);
+
+APP.listeners.push(
+unsubscribe
+);
+
+}
+
+/* ==================================================
+REALTIME MARKET LOGS
+================================================== */
+
+function startMarketLogsRealtime(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.marketTrades
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(
+HISTORY_LIMIT
+)
+
+);
+
+const unsubscribe=
+
+onSnapshot(
+
+q,
+
+()=>{
+
+renderMarketLogs();
+
+}
+
+);
+
+APP.listeners.push(
+unsubscribe
+);
+
+}
+
+/* ==================================================
+REALTIME TRANSFER LOGS
+================================================== */
+
+function startTransferLogsRealtime(){
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.transferLogs
+),
+
+where(
+"deviceId",
+"==",
+APP.deviceId
+),
+
+orderBy(
+"createdAt",
+"desc"
+),
+
+limit(
+HISTORY_LIMIT
+)
+
+);
+
+const unsubscribe=
+
+onSnapshot(
+
+q,
+
+()=>{
+
+renderTransferHistory();
+
+}
+
+);
+
+APP.listeners.push(
+unsubscribe
+);
+
+}
+
+/* ==================================================
+EXTEND REFRESH
+================================================== */
+
+const transferRefresh=
+refreshUI;
+
+refreshUI=
+async function(){
+
+await transferRefresh();
+
+await renderOpenLogs();
+
+await renderMarketLogs();
+
+await renderTransferHistory();
+
+};
+
+/* ==================================================
+BOOT
+================================================== */
+
+startOpenLogsRealtime();
+
+startMarketLogsRealtime();
+
+startTransferLogsRealtime();
+
+setInterval(
+
+cleanupLogs,
+
+300000
+
+);
+
+console.log(
+"HISTORY ENGINE READY"
+);
+  /* ==================================================
+ADMIN ENGINE PRODUCTION
+================================================== */
+
+/* ==================================================
+CONFIG
+================================================== */
+
+const ADMIN_CONFIG_DOC="admin";
+
+let ADMIN_OPEN=false;
+
+let ADMIN_SEARCH_LOCK=false;
+
+/* ==================================================
+ADMIN MODAL HTML
+================================================== */
+
+function createAdminModal(){
+
+if(
+document.getElementById(
+"adminModal"
+)
+)
+return;
+
+const modal=
+document.createElement(
+"div"
+);
+
+modal.id=
+"adminModal";
+
+modal.className=
+"modal";
+
+modal.innerHTML=`
+
+<div class="modal-box">
+
+<h2>
+ADMIN PANEL
+</h2>
+
+<hr><br>
+
 <input
-
-id="adminSearchInput"
-
-placeholder="Tên người chơi"
-
+id="adminPassword"
+type="password"
+placeholder="Mật khẩu Admin"
 style="
 width:100%;
 padding:10px;
-margin-bottom:10px;
 ">
+
+<br><br>
+
+<button
+id="adminLoginBtn"
+class="btn btn-primary">
+
+ĐĂNG NHẬP
+
+</button>
+
+<hr><br>
+
+<div
+id="adminContent"
+style="display:none;">
+
+<input
+id="adminSearchUser"
+placeholder="Tên người chơi"
+style="
+width:100%;
+padding:10px;
+">
+
+<br><br>
 
 <button
 id="adminSearchBtn"
 class="btn">
 
-TÌM KIẾM
+TÌM NGƯỜI CHƠI
 
 </button>
 
-<hr style="margin:15px 0;">
+<hr><br>
 
 <div
-id="adminPlayerInfo">
-
-Chưa chọn người chơi
+id="adminResult">
 
 </div>
-
-<hr style="margin:15px 0;">
-
-<div
-id="adminActions"
-style="display:none;">
-
-<button
-class="btn"
-id="give1Btn">
-
-+1 LƯỢT
-
-</button>
-
-<button
-class="btn"
-id="give5Btn">
-
-+5 LƯỢT
-
-</button>
-
-<button
-class="btn"
-id="give10Btn">
-
-+10 LƯỢT
-
-</button>
-
-<br><br>
-
-<button
-class="btn"
-id="revokeBtn">
-
-THU HỒI
-
-</button>
-
-<button
-class="btn"
-id="randomRevokeBtn">
-
-RANDOM REVOKE
-
-</button>
-
-<button
-class="btn"
-id="kickBtn">
-
-KICK
-
-</button>
 
 </div>
 
@@ -3331,29 +4539,106 @@ KICK
 `;
 
 document.body.appendChild(
-adminModal
+modal
 );
 
-/* =========================
-ADMIN OPEN
-========================= */
+}
 
-let adminTarget=null;
+/* ==================================================
+OPEN ADMIN
+================================================== */
+
+function openAdmin(){
+
+createAdminModal();
+
+document
+.getElementById(
+"adminModal"
+)
+.style.display=
+"flex";
+
+}
 
 document
 .getElementById(
 "adminBtn"
 )
 .onclick=
-()=>{
+openAdmin;
 
-const pass=
-prompt(
-"Mật khẩu Admin"
+/* ==================================================
+LOAD ADMIN CONFIG
+================================================== */
+
+async function getAdminPassword(){
+
+try{
+
+const snap=
+await getDoc(
+
+doc(
+db,
+COLLECTIONS.config,
+ADMIN_CONFIG_DOC
+)
+
 );
 
 if(
-pass!==ADMIN_PASSWORD
+!snap.exists()
+){
+
+return null;
+
+}
+
+return snap.data()
+.password;
+
+}
+catch{
+
+return null;
+
+}
+
+}
+
+/* ==================================================
+LOGIN
+================================================== */
+
+async function adminLogin(){
+
+const pass=
+
+document
+.getElementById(
+"adminPassword"
+)
+.value
+.trim();
+
+const realPass=
+await getAdminPassword();
+
+if(
+!realPass
+){
+
+alert(
+"Chưa cấu hình Admin"
+);
+
+return;
+
+}
+
+if(
+pass!==realPass
 ){
 
 alert(
@@ -3366,82 +4651,79 @@ return;
 
 APP.admin=true;
 
-adminModal.style.display=
-"flex";
+document
+.getElementById(
+"adminContent"
+)
+.style.display=
+"block";
 
-};
-
-adminModal.onclick=
-e=>{
-
-if(
-e.target===adminModal
-){
-
-adminModal.style.display=
-"none";
+alert(
+"Đăng nhập thành công"
+);
 
 }
 
-};
-
-/* =========================
-SEARCH USER
-========================= */
-
-document
-.getElementById(
-"adminSearchBtn"
-)
-.onclick=
-async()=>{
-
-const username=
-
-document
-.getElementById(
-"adminSearchInput"
-)
-.value
-.trim();
-
-if(!username)
-return;
-
-const users=
-await getDocs(
-collection(
-db,
-USERS
-)
-);
-
-adminTarget=null;
-
-users.forEach(docSnap=>{
-
-const data=
-docSnap.data();
+document.addEventListener(
+"click",
+e=>{
 
 if(
-data.username===
-username
+e.target.id==="adminLoginBtn"
 ){
 
-adminTarget={
-
-id:docSnap.id,
-
-...data
-
-};
+adminLogin();
 
 }
 
 });
 
+/* ==================================================
+SEARCH USER
+================================================== */
+
+async function adminSearchUser(){
+
 if(
-!adminTarget
+ADMIN_SEARCH_LOCK
+)
+return;
+
+ADMIN_SEARCH_LOCK=true;
+
+try{
+
+const username=
+
+document
+.getElementById(
+"adminSearchUser"
+)
+.value
+.trim();
+
+const q=query(
+
+collection(
+db,
+COLLECTIONS.users
+),
+
+where(
+"username",
+"==",
+username
+),
+
+limit(1)
+
+);
+
+const snap=
+await getDocs(q);
+
+if(
+snap.empty
 ){
 
 alert(
@@ -3452,306 +4734,273 @@ return;
 
 }
 
-renderAdminUser();
+const userDoc=
+snap.docs[0];
 
-};
+const user=
+userDoc.data();
 
-/* =========================
-RENDER USER
-========================= */
+renderAdminUser(
 
-function renderAdminUser(){
+userDoc.id,
 
-let html=`
+user
 
-<b>
-Tên:
-</b>
+);
 
-${adminTarget.username}
+}
+finally{
 
-<br>
-
-<b>
-Lượt mở:
-</b>
-
-${adminTarget.opensLeft||0}
-
-<br><br>
-
-<b>
-Kho thẻ:
-</b>
-
-<br>
-
-`;
-
-NORMAL_CARDS.forEach(card=>{
-
-html+=`
-
-${card} :
-
-${adminTarget.inventory?.[
-card
-]||0}
-
-<br>
-
-`;
-
-});
-
-document
-.getElementById(
-"adminPlayerInfo"
-)
-.innerHTML=
-html;
-
-document
-.getElementById(
-"adminActions"
-)
-.style.display=
-"block";
+ADMIN_SEARCH_LOCK=false;
 
 }
 
-/* =========================
-SAVE TARGET
-========================= */
+}
 
-async function saveTarget(){
+/* ==================================================
+RENDER USER
+================================================== */
 
-await updateDoc(
+function renderAdminUser(
+
+userId,
+user
+
+){
+
+const el=
+
+document.getElementById(
+"adminResult"
+);
+
+el.innerHTML=`
+
+<h3>
+
+${user.username}
+
+</h3>
+
+<p>
+Lượt mở:
+${user.opensLeft||0}
+</p>
+
+<button
+onclick="
+adminGrantOpen(
+'${userId}'
+)
+"
+class="btn">
+
++100 Lượt
+
+</button>
+
+<button
+onclick="
+adminKick(
+'${userId}'
+)
+"
+class="btn btn-danger">
+
+KICK
+
+</button>
+
+<hr>
+
+<button
+onclick="
+adminViewInventory(
+'${userId}'
+)
+"
+class="btn">
+
+XEM KHO
+
+</button>
+
+<button
+onclick="
+adminViewLogs(
+'${userId}'
+)
+"
+class="btn">
+
+XEM LOG
+
+</button>
+
+<button
+onclick="
+adminRandomRevoke(
+'${userId}'
+)
+"
+class="btn btn-danger">
+
+THU HỒI NGẪU NHIÊN
+
+</button>
+
+<div
+id="adminExtra">
+
+</div>
+
+`;
+
+}
+
+/* ==================================================
+GRANT OPEN
+================================================== */
+
+window.adminGrantOpen=
+async function(userId){
+
+const ref=
 
 doc(
 db,
-USERS,
-adminTarget.id
-),
+COLLECTIONS.users,
+userId
+);
+
+const snap=
+await getDoc(ref);
+
+if(
+!snap.exists()
+)
+return;
+
+const data=
+snap.data();
+
+await updateDoc(
+
+ref,
 
 {
 
 opensLeft:
-adminTarget.opensLeft,
-
-inventory:
-adminTarget.inventory
+(data.opensLeft||0)+100
 
 }
 
 );
 
-}
-
-/* =========================
-GIVE OPENS
-========================= */
-
-document
-.getElementById(
-"give1Btn"
-)
-.onclick=
-async()=>{
-
-adminTarget.opensLeft=
-(adminTarget.opensLeft||0)+1;
-
-await saveTarget();
-
-renderAdminUser();
-
-};
-
-document
-.getElementById(
-"give5Btn"
-)
-.onclick=
-async()=>{
-
-adminTarget.opensLeft=
-(adminTarget.opensLeft||0)+5;
-
-await saveTarget();
-
-renderAdminUser();
-
-};
-
-document
-.getElementById(
-"give10Btn"
-)
-.onclick=
-async()=>{
-
-adminTarget.opensLeft=
-(adminTarget.opensLeft||0)+10;
-
-await saveTarget();
-
-renderAdminUser();
-
-};
-
-/* =========================
-REVOKE CARD
-========================= */
-
-document
-.getElementById(
-"revokeBtn"
-)
-.onclick=
-async()=>{
-
-const card=
-prompt(
-"Loại thẻ"
+await addMarketLog(
+"ADMIN GRANT OPEN"
 );
-
-if(!card)
-return;
-
-if(
-!adminTarget.inventory[
-card
-]
-)
-return;
-
-adminTarget.inventory[
-card
-]--;
-
-await saveTarget();
-
-renderAdminUser();
-
-};
-
-/* =========================
-RANDOM REVOKE
-KHÔNG ĐỤNG MARKET
-========================= */
-
-document
-.getElementById(
-"randomRevokeBtn"
-)
-.onclick=
-async()=>{
-
-const available=[];
-
-NORMAL_CARDS.forEach(card=>{
-
-const count=
-
-adminTarget.inventory[
-card
-]||0;
-
-if(count>0){
-
-available.push(card);
-
-}
-
-});
-
-if(
-available.length===0
-)
-return;
-
-const card=
-
-available[
-Math.floor(
-Math.random()*
-available.length
-)
-];
-
-adminTarget.inventory[
-card
-]--;
-
-await saveTarget();
 
 alert(
-"Đã thu hồi "+card
+"Đã cấp 100 lượt"
 );
-
-renderAdminUser();
 
 };
 
-/* =========================
+/* ==================================================
 KICK
-========================= */
+================================================== */
 
-document
-.getElementById(
-"kickBtn"
-)
-.onclick=
-async()=>{
+window.adminKick=
+async function(userId){
 
 await updateDoc(
 
 doc(
 db,
-USERS,
-adminTarget.id
+COLLECTIONS.users,
+userId
 ),
 
 {
+
 opensLeft:0
+
 }
 
 );
 
 alert(
-"Kick thành công"
+"Đã kick"
 );
 
 };
 
-/* =========================
-ADMIN OPEN LOGS
-========================= */
+/* ==================================================
+VIEW INVENTORY
+================================================== */
 
-async function adminViewOpenLogs(){
+window.adminViewInventory=
+async function(userId){
 
-if(!adminTarget)
+const snap=
+await getDoc(
+
+doc(
+db,
+COLLECTIONS.users,
+userId
+)
+
+);
+
+if(
+!snap.exists()
+)
 return;
 
-const q=
+const user=
+snap.data();
 
-query(
+const extra=
+document.getElementById(
+"adminExtra"
+);
+
+extra.innerHTML=`
+
+<pre>
+
+${JSON.stringify(
+user.inventory,
+null,
+2
+)}
+
+</pre>
+
+`;
+
+};
+
+/* ==================================================
+VIEW LOGS
+================================================== */
+
+window.adminViewLogs=
+async function(userId){
+
+const q=query(
 
 collection(
 db,
-OPEN_LOGS
+COLLECTIONS.openLogs
 ),
 
 where(
 "deviceId",
 "==",
-adminTarget.deviceId
-),
-
-orderBy(
-"createdAt",
-"desc"
+userId
 ),
 
 limit(50)
@@ -3760,182 +5009,16 @@ limit(50)
 
 const snap=
 await getDocs(q);
-
-let html="<hr><b>Lịch sử mở:</b><br>";
-
-snap.forEach(docSnap=>{
-
-html+=
-docSnap.data().card+
-"<br>";
-
-});
-
-document
-.getElementById(
-"adminPlayerInfo"
-)
-.innerHTML+=html;
-
-}
-
-/* =========================
-ADMIN TRANSFER LOGS
-========================= */
-
-async function adminViewTransferLogs(){
-
-if(!adminTarget)
-return;
-
-const q=
-
-query(
-
-collection(
-db,
-TRANSFER_LOGS
-),
-
-where(
-"deviceId",
-"==",
-adminTarget.deviceId
-),
-
-orderBy(
-"createdAt",
-"desc"
-),
-
-limit(50)
-
-);
-
-const snap=
-await getDocs(q);
-
-let html="<hr><b>Lịch sử chuyển:</b><br>";
-
-snap.forEach(docSnap=>{
-
-html+=
-docSnap.data().text+
-"<br>";
-
-});
-
-document
-.getElementById(
-"adminPlayerInfo"
-)
-.innerHTML+=html;
-
-}
-
-console.log(
-"Admin Panel Loaded"
-);
-  /* =========================
-MARKET RECIPES
-========================= */
-
-const MARKET_RECIPES={
-
-BOLON_MARKET:{
-need:[]
-},
-
-HUY_MARKET:{
-need:[]
-},
-
-BONHO_MARKET:{
-need:[
-"BOLON",
-"HUY"
-]
-},
-
-BU_MARKET:{
-need:[
-"BONHO",
-"BOLON"
-]
-},
-
-GAO_MARKET:{
-need:[
-"BU",
-"BONHO",
-"BOLON"
-]
-},
-
-PHI_MARKET:{
-need:[
-"GAO",
-"BU",
-"BONHO",
-"BOLON"
-]
-},
-
-TIN_MARKET:{
-need:[
-"GAO",
-"BU",
-"BONHO",
-"BOLON"
-]
-}
-
-};
-
-/* =========================
-MARKET UI
-========================= */
-
-function renderMarket(){
 
 let html="";
 
-Object.keys(
-MARKET_RECIPES
-).forEach(card=>{
-
-const recipe=
-MARKET_RECIPES[card];
+snap.forEach(doc=>{
 
 html+=`
 
-<div class="cardItem marketCard">
+<div>
 
-<b>
-${card}
-</b>
-
-<br><br>
-
-Nguyên liệu:
-
-<br>
-
-${recipe.need.join(" + ") || "1 thẻ bất kỳ"}
-
-<br><br>
-
-<button
-class="btn"
-onclick="
-craftMarketCard(
-'${card}'
-)
-">
-
-ĐỔI NGAY
-
-</button>
+${doc.data().card}
 
 </div>
 
@@ -3945,270 +5028,213 @@ craftMarketCard(
 
 document
 .getElementById(
-"marketList"
+"adminExtra"
 )
 .innerHTML=
 html;
 
-}
-
-/* =========================
-ADD MARKET CARD
-========================= */
-
-function addMarketCard(card){
-
-if(
-!APP.user.marketInventory[
-card
-]
-){
-
-APP.user.marketInventory[
-card
-]=0;
-
-}
-
-APP.user.marketInventory[
-card
-]++;
-
-}
-
-/* =========================
-REMOVE CARD
-ƯU TIÊN MARKET
-========================= */
-
-function removeCardPriority(card){
-
-const marketCard=
-card+"_MARKET";
-
-if(
-
-APP.user.marketInventory[
-marketCard
-] > 0
-
-){
-
-APP.user.marketInventory[
-marketCard
-]--;
-
-return true;
-
-}
-
-if(
-
-APP.user.inventory[
-card
-] > 0
-
-){
-
-APP.user.inventory[
-card
-]--;
-
-return true;
-
-}
-
-return false;
-
-}
-
-/* =========================
-CRAFT
-========================= */
-
-window.craftMarketCard=
-async function(card){
-
-const recipe=
-MARKET_RECIPES[
-card
-];
-
-if(!recipe)
-return;
-
-/* BOLON MARKET */
-
-if(
-card==="BOLON_MARKET"
-){
-
-const anyCard=
-
-NORMAL_CARDS.find(c=>
-(APP.user.inventory[c]||0)>0
-);
-
-if(!anyCard){
-
-alert(
-"Thiếu nguyên liệu"
-);
-
-return;
-
-}
-
-APP.user.inventory[
-anyCard
-]--;
-
-addMarketCard(card);
-
-}
-
-/* HUY MARKET */
-
-else if(
-card==="HUY_MARKET"
-){
-
-const anyCard=
-
-NORMAL_CARDS.find(c=>
-(APP.user.inventory[c]||0)>0
-);
-
-if(!anyCard){
-
-alert(
-"Thiếu nguyên liệu"
-);
-
-return;
-
-}
-
-APP.user.inventory[
-anyCard
-]--;
-
-addMarketCard(card);
-
-}
-
-/* CÁC THẺ KHÁC */
-
-else{
-
-for(
-const need
-of recipe.need
-){
-
-const ok=
-removeCardPriority(
-need
-);
-
-if(!ok){
-
-alert(
-"Thiếu "+need
-);
-
-return;
-
-}
-
-}
-
-addMarketCard(
-card
-);
-
-}
-
-await addMarketLog(
-
-"Đổi "+card
-
-);
-
-await addNotification(
-
-"Market",
-
-card
-
-);
-
-await saveUser();
-
-await refreshUI();
-
 };
 
-/* =========================
-ANTI DOUBLE CLAIM
-========================= */
+/* ==================================================
+RANDOM REVOKE
+KHÔNG ĐỤNG MARKET
+================================================== */
 
-let claimLock=false;
+window.adminRandomRevoke=
+async function(userId){
 
-const oldClaim=
-claimReward;
+const ref=
 
-claimReward=
-async function(){
+doc(
+db,
+COLLECTIONS.users,
+userId
+);
+
+const snap=
+await getDoc(ref);
 
 if(
-claimLock
+!snap.exists()
 )
 return;
 
-claimLock=true;
+const user=
+snap.data();
+
+const available=
+
+INVENTORY_ORDER.filter(card=>
+
+(user.inventory?.[card]||0)>0
+
+);
+
+if(
+available.length===0
+){
+
+alert(
+"Không có thẻ"
+);
+
+return;
+
+}
+
+const selected=
+
+available[
+Math.floor(
+Math.random()*
+available.length
+)
+];
+
+user.inventory[
+selected
+]--;
+
+await updateDoc(
+
+ref,
+
+{
+inventory:
+user.inventory
+}
+
+);
+
+alert(
+"Đã thu hồi "+selected
+);
+
+};
+
+/* ==================================================
+EVENT
+================================================== */
+
+document.addEventListener(
+"click",
+e=>{
+
+if(
+e.target.id==="adminSearchBtn"
+){
+
+adminSearchUser();
+
+}
+
+});
+
+/* ==================================================
+READY
+================================================== */
+
+console.log(
+"ADMIN ENGINE READY"
+);
+  /* ==================================================
+FINAL BOOTSTRAP
+FC PREMIUM V4 PRODUCTION
+================================================== */
+
+/* ==================================================
+ACCORDION
+CHỈ MỞ 1 MỤC
+================================================== */
+
+function initAccordion(){
+
+const headers=
+document.querySelectorAll(
+".accordion-header"
+);
+
+headers.forEach(header=>{
+
+header.onclick=()=>{
+
+const parent=
+header.parentElement;
+
+document
+.querySelectorAll(
+".accordion-item"
+)
+.forEach(item=>{
+
+if(item!==parent){
+
+item.classList.remove(
+"active"
+);
+
+}
+
+});
+
+parent.classList.toggle(
+"active"
+);
+
+};
+
+});
+
+}
+
+/* ==================================================
+SAFE REFRESH
+================================================== */
+
+let REFRESH_LOCK=false;
+
+async function safeRefresh(){
+
+if(REFRESH_LOCK)
+return;
+
+REFRESH_LOCK=true;
 
 try{
 
-await oldClaim();
+await refreshUI();
+
+}
+catch(err){
+
+console.error(
+"REFRESH ERROR",
+err
+);
 
 }
 finally{
 
-setTimeout(()=>{
-
-claimLock=false;
-
-},1000);
+REFRESH_LOCK=false;
 
 }
 
-};
+}
 
-/* =========================
-SAFE REFRESH
-========================= */
+/* ==================================================
+AUTO SAVE
+================================================== */
 
-let refreshLock=false;
+setInterval(
 
-const originalRefresh=
-refreshUI;
+async()=>{
 
-refreshUI=
-async function(){
-
-if(
-refreshLock
-)
+if(!APP.user)
 return;
-
-refreshLock=true;
 
 try{
 
-await originalRefresh();
-
-renderMarket();
+await saveUser();
 
 }
 catch(err){
@@ -4218,31 +5244,199 @@ err
 );
 
 }
-finally{
 
-refreshLock=false;
+},
+
+30000
+
+);
+
+/* ==================================================
+MEMORY CLEANUP
+================================================== */
+
+function cleanupListeners(){
+
+APP.listeners.forEach(fn=>{
+
+try{
+
+fn();
+
+}
+catch{}
+
+});
+
+APP.listeners=[];
 
 }
 
-};
+window.addEventListener(
 
-/* =========================
-STARTUP
-========================= */
+"beforeunload",
 
-await refreshUI();
+()=>{
 
-/* =========================
-VERSION
-========================= */
+cleanupListeners();
 
-console.log(
-"FC PREMIUM V4 FIXED EDITION READY"
+}
+
 );
 
-/* =========================
-END
-========================= */
+/* ==================================================
+AUTO RECOVERY
+================================================== */
+
+function recoverUserData(){
+
+if(!APP.user)
+return;
+
+if(!APP.user.inventory)
+APP.user.inventory={};
+
+if(!APP.user.marketInventory)
+APP.user.marketInventory={};
+
+if(
+typeof APP.user.opensLeft
+!=="number"
+){
+APP.user.opensLeft=0;
+}
+
+if(
+typeof APP.user.pity10
+!=="number"
+){
+APP.user.pity10=0;
+}
+
+if(
+typeof APP.user.pity30
+!=="number"
+){
+APP.user.pity30=0;
+}
+
+}
+
+/* ==================================================
+PACK IMAGE FALLBACK
+================================================== */
+
+const packImage=
+document.getElementById(
+"packImage"
+);
+
+packImage.onerror=()=>{
+
+packImage.src=
+"https://via.placeholder.com/300x420?text=FC+PACK";
+
+};
+
+/* ==================================================
+VIDEO FALLBACK
+================================================== */
+
+function safeVideo(video){
+
+video.onerror=()=>{
+
+console.warn(
+"VIDEO NOT FOUND"
+);
+
+};
+
+}
+
+/* ==================================================
+GLOBAL ERROR
+================================================== */
+
+window.addEventListener(
+
+"error",
+
+(event)=>{
+
+console.error(
+"GLOBAL ERROR",
+event.error
+);
+
+}
+
+);
+
+window.addEventListener(
+
+"unhandledrejection",
+
+(event)=>{
+
+console.error(
+"PROMISE ERROR",
+event.reason
+);
+
+}
+
+);
+
+/* ==================================================
+STARTUP SEQUENCE
+================================================== */
+
+async function bootstrap(){
+
+try{
+
+console.log(
+"BOOTSTRAP START"
+);
+
+recoverUserData();
+
+initAccordion();
+
+await safeRefresh();
+
+console.log(
+"FC PREMIUM V4 READY"
+);
+
+}
+catch(err){
+
+console.error(
+"BOOT ERROR",
+err
+);
+
+}
+
+}
+
+bootstrap();
+
+/* ==================================================
+VERSION
+================================================== */
+
+console.log(`
+====================================
+FC PREMIUM V4 PRODUCTION
+Version: 4.0 Fixed Production
+Status: Stable
+====================================
+`);
   </script>
+
 </body>
 </html>
+  
