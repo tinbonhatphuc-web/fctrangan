@@ -936,46 +936,34 @@ pool.length
 
 function renderRatePanel(){
 
-let html="";
+let total = 0;
 
-cards.forEach(
-card=>{
-
-html+=`
-
-<div
-class="inventoryItem">
-
-<b>
-
-${card.name}
-
-</b>
-
-<br>
-
-Thường:
-${card.chance}%
-
-<br>
-
-Chợ:
-${card.marketChance}%
-
-</div>
-
-`;
-
+cards.forEach(card=>{
+total += card.chance + card.marketChance;
 });
 
-document
-.getElementById(
-"ratePanel"
-)
-.innerHTML=
-html;
+let html="";
 
+cards.forEach(card=>{
+
+const normalRate =
+((card.chance/total)*100).toFixed(2);
+
+const marketRate =
+((card.marketChance/total)*100).toFixed(2);
+
+html += `
+<div class="inventoryItem">
+<b>${card.name}</b><br>
+Thường: ${normalRate}%<br>
+Chợ: ${marketRate}%
+</div>
+`;
+});
+
+document.getElementById("ratePanel").innerHTML=html;
 }
+
 async function initUser(){
 
 deviceId=
@@ -1408,11 +1396,11 @@ card.name
 ]||0
 );
 
-html+=`
+html += `
 <div class="inventoryItem">
 
 <img
-src="cards/${card.name.toLowerCase()}.png"
+src="./cards/${card.name.toLowerCase()}.png"
 style="
 width:80px;
 border-radius:10px;
@@ -1428,7 +1416,7 @@ showCardPreview('${card.name}')
 
 <br>
 
-${owned>0?"✅ Đã sở hữu":"❌ Chưa sở hữu"}
+${owned > 0 ? "✅ Đã sở hữu" : "❌ Chưa sở hữu"}
 
 </div>
 `;
@@ -1937,51 +1925,30 @@ await getDoc(
 userRef
 );
 
-const user=
+const user =
 userSnap.data();
 
 if(
-(user.inventory[cardName]||0)
-< amount
+(user.inventory[cardName] || 0) < amount
 ){
 alert("Không đủ thẻ");
 return;
 }
 
 await addDoc(
-collection(
-db,
-"transfers"
-),
+collection(db,"transfers"),
 {
-
-from:
-username,
-
-fromId:
-deviceId,
-
-to:
-receiver,
-
-card:
-cardName,
-
-amount,
-
-status:
-"pending",
-
-time:
-new Date()
-.toLocaleString()
-
+from: username,
+fromId: deviceId,
+to: receiver,
+card: cardName,
+amount: amount,
+status: "pending",
+time: new Date().toLocaleString()
 }
 );
 
-alert(
-"Đã gửi yêu cầu"
-);
+alert("Đã gửi yêu cầu");
 
 };
 
@@ -2153,8 +2120,7 @@ return;
 
 sender.inventory[
 transfer.card
-]-=
-transfer.amount;
+] -= transfer.amount;
 
 await updateDoc(
 senderRef,
@@ -2206,70 +2172,17 @@ alert(
 };
 
 window.rejectTransfer=
-async function(
-id
-){
-
-const transferRef=
-doc(
-db,
-"transfers",
-id
-);
-
-const transferSnap=
-await getDoc(
-transferRef
-);
-
-if(
-!transferSnap.exists()
-)return;
-
-const transfer=
-transferSnap.data();
-
-const senderRef=
-doc(
-db,
-"users",
-transfer.fromId
-);
-
-const senderSnap=
-await getDoc(
-senderRef
-);
-
-if(
-senderSnap.exists()
-){
-
-const sender=
-senderSnap.data();
-
-sender.inventory[
-transfer.card
-]+=
-transfer.amount;
-
-await updateDoc(
-senderRef,
-{
-inventory:
-sender.inventory
-}
-);
-
-}
+async function(id){
 
 await deleteDoc(
-transferRef
+doc(db,"transfers",id)
 );
 
 await loadNotifications();
 
-};
+alert("Đã từ chối");
+
+}
 
 window.adminLogin=
 async function(){
@@ -2663,6 +2576,191 @@ username;
 
 }
 );
+
+window.exchangeCard =
+async function(resultCard){
+
+const userRef =
+doc(db,"users",deviceId);
+
+const snap =
+await getDoc(userRef);
+
+const data =
+snap.data();
+
+const inv =
+data.inventory;
+
+function take(card){
+
+if((inv[card] || 0) <= 0)
+return false;
+
+inv[card]--;
+return true;
+
+}
+
+switch(resultCard){
+
+case "BOLON":
+case "HUY":
+
+const anyCard =
+Object.keys(inv)
+.find(
+c => inv[c] > 0
+);
+
+if(!anyCard){
+alert("Không đủ nguyên liệu");
+return;
+}
+
+inv[anyCard]--;
+break;
+
+case "BONHO":
+
+if(
+!take("BOLON") &&
+!take("HUY")
+){
+alert(
+"Cần BOLON hoặc HUY"
+);
+return;
+}
+
+break;
+
+case "BU":
+
+if(
+!take("BONHO")
+){
+alert(
+"Cần BONHO"
+);
+return;
+}
+
+if(
+!take("BOLON") &&
+!take("HUY")
+){
+inv["BONHO"]++;
+alert(
+"Cần BOLON hoặc HUY"
+);
+return;
+}
+
+break;
+
+case "GAO":
+
+if(
+!take("BU")
+){
+alert("Cần BU");
+return;
+}
+
+if(
+!take("BONHO")
+){
+inv["BU"]++;
+alert("Cần BONHO");
+return;
+}
+
+if(
+!take("BOLON") &&
+!take("HUY")
+){
+inv["BU"]++;
+inv["BONHO"]++;
+alert("Cần BOLON hoặc HUY");
+return;
+}
+
+break;
+
+case "PHI":
+case "TIN":
+case "TAN":
+
+if(!take("GAO")){
+alert("Cần GAO");
+return;
+}
+
+if(!take("BU")){
+inv["GAO"]++;
+alert("Cần BU");
+return;
+}
+
+if(!take("BONHO")){
+inv["GAO"]++;
+inv["BU"]++;
+alert("Cần BONHO");
+return;
+}
+
+if(
+!take("BOLON") &&
+!take("HUY")
+){
+inv["GAO"]++;
+inv["BU"]++;
+inv["BONHO"]++;
+alert(
+"Cần BOLON hoặc HUY"
+);
+return;
+}
+
+break;
+
+default:
+return;
+
+}
+
+data.marketInventory[resultCard]++;
+
+if(!data.marketHistory)
+data.marketHistory=[];
+
+data.marketHistory.unshift({
+card: resultCard + " 🔒",
+time: new Date().toLocaleString()
+});
+
+await updateDoc(
+userRef,
+{
+inventory:data.inventory,
+marketInventory:data.marketInventory,
+marketHistory:data.marketHistory
+}
+);
+
+await renderInventory();
+await renderMarketInventory();
+await renderCollection();
+await renderHistory();
+
+alert(
+"Đổi thành công " +
+resultCard +
+" 🔒"
+);
+
+};
 
 initAccordion();
 
