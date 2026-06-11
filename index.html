@@ -876,7 +876,7 @@ document.getElementById(
 "videoHolder"
 ).innerHTML="";
 
-document.getElementById(
+*document.getElementById(
 "cardHolder"
 ).innerHTML=
 
@@ -1770,6 +1770,16 @@ document
 .style.display=
 "none";
 
+window.closeOverlay = function () {
+    const overlay = document.getElementById("overlay");
+    const videoHolder = document.getElementById("videoHolder");
+    const cardHolder = document.getElementById("cardHolder");
+
+    overlay.style.display = "none";
+    videoHolder.innerHTML = "";
+    cardHolder.innerHTML = "";
+};
+
 await renderInventory();
 
 await renderMarketInventory();
@@ -1780,156 +1790,74 @@ await renderHistory();
 
 };
 
-window.openPack=
-async function(){
+window.openPack = async function(){
 
-if(
-!isAdmin
-&&
-opensLeft<=0
-){
-
-alert(
-"Bạn đã hết lượt mở!"
-);
-
-return;
-
+if(!isAdmin && opensLeft <= 0){
+    alert("Bạn đã hết lượt mở!");
+    return;
 }
 
-const reward=
-randomCard();
+const reward = randomCard();
+rewardClaimed = false;
 
-rewardClaimed=
-false;
+if(!isAdmin){
+    opensLeft--;
+    updateOpenText();
 
-if(
-!isAdmin
-){
-
-opensLeft--;
-
-updateOpenText();
-
-await updateDoc(
-doc(
-db,
-"users",
-deviceId
-),
-{
-opensLeft
-}
-);
-
+    await updateDoc(doc(db,"users",deviceId),{
+        opensLeft
+    });
 }
 
-document
-.getElementById(
-"lastReward"
-)
-.innerHTML=
+document.getElementById("lastReward").innerHTML =
+`<h2>${reward.name} ${reward.market ? " 🔒" : ""}</h2>`;
 
-`
-<h2>
+// overlay
+const overlay = document.getElementById("overlay");
+const videoHolder = document.getElementById("videoHolder");
+const cardHolder = document.getElementById("cardHolder");
 
-${reward.name}
+overlay.style.display = "flex";
+videoHolder.innerHTML = "";
+cardHolder.innerHTML = "";
 
-${reward.market?" 🔒":""}
+// video
+const video = document.createElement("video");
+video.src = videoMap[reward.name];
+video.autoplay = true;
+video.muted = true;
+video.playsInline = true;
+video.controls = false;
 
-</h2>
-`;
+video.style.maxWidth = "80vw";
+video.style.maxHeight = "80vh";
 
-const overlay=
-document.getElementById(
-"overlay"
-);
+function showCard(){
+    cardHolder.innerHTML = `
+        <div class="cardResult">
+            <img src="cards/${reward.name.toLowerCase()}.png">
+            <br><br>
+            <h2>${reward.name}${reward.market ? " 🔒" : ""}</h2>
+            <br>
+            <button onclick="closeOverlay()">NHẬN THẺ</button>
+        </div>
+    `;
+}
 
-overlay.style.display=
-"flex";
+video.onended = showCard;
+video.onerror = showCard;
 
-document
-.getElementById(
-"videoHolder"
-)
-.innerHTML=
-
-`
-<video
-id="packVideo"
-autoplay
-playsinline>
-
-<source
-src="${videoMap[reward.name]}"
-type="video/mp4">
-
-</video>
-`;
-
-document
-.getElementById(
-"cardHolder"
-)
-.innerHTML="";
-
-const video=
-document.getElementById(
-"packVideo"
-);
-
-video.onended=
-function(){
-
-document
-.getElementById(
-"videoHolder"
-)
-.innerHTML="";
-
-document
-.getElementById(
-"cardHolder"
-)
-.innerHTML=
-
-`
-
-<div
-class="cardResult">
-
-<img
-src="cards/${reward.name.toLowerCase()}.png">
-
-<br><br>
-
-<h2>
-
-${reward.name}
-
-${reward.market?" 🔒":""}
-
-</h2>
-
-<br>
-
-<button
-onclick="
-closeReward(
-'${reward.name}',
-${reward.market}
-)
-">
-
-NHẬN THẺ
-
-</button>
-
-</div>
-
-`;
-
+overlay.onclick = (e)=>{
+    if(e.target === overlay){
+        showCard();
+    }
 };
+
+videoHolder.appendChild(video);
+
+video.play().catch(()=>{
+    showCard();
+});
 
 };
 window.sendCardPrompt=
