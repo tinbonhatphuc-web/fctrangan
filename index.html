@@ -1770,15 +1770,6 @@ document
 .style.display=
 "none";
 
-window.closeOverlay = function () {
-    const overlay = document.getElementById("overlay");
-    const videoHolder = document.getElementById("videoHolder");
-    const cardHolder = document.getElementById("cardHolder");
-
-    overlay.style.display = "none";
-    videoHolder.innerHTML = "";
-    cardHolder.innerHTML = "";
-};
 
 await renderInventory();
 
@@ -1839,7 +1830,9 @@ function showCard(){
             <br><br>
             <h2>${reward.name}${reward.market ? " 🔒" : ""}</h2>
             <br>
-            <button onclick="closeOverlay()">NHẬN THẺ</button>
+            <button onclick="closeReward('${reward.name}', ${reward.market})">
+    NHẬN THẺ
+</button>
         </div>
     `;
 }
