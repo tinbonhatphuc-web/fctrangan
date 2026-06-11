@@ -1743,24 +1743,14 @@ data.marketHistory
 
 }
 
-documentF
-.getElementById(
-"overlay"
-)
-.style.display=
-"none";
-
+document.getElementById("overlay").style.display = "none";
 
 await renderInventory();
-
 await renderMarketInventory();
-
 await renderCollection();
-
 await renderHistory();
 
 };
-
 window.openPack = async function(){
 
 if(!isAdmin && opensLeft <= 0){
