@@ -1741,28 +1741,6 @@ data.marketHistory
 
 }
 
-window.closeReward=
-async function(
-cardName,
-market
-){
-
-if(
-rewardClaimed
-)return;
-
-rewardClaimed=
-true;
-
-await addCard({
-
-name:
-cardName,
-
-market
-
-});
-
 document
 .getElementById(
 "overlay"
@@ -1824,35 +1802,34 @@ video.style.maxWidth = "80vw";
 video.style.maxHeight = "80vh";
 
 function showCard(){
+
+    videoHolder.innerHTML = "";
+
+    if(!rewardClaimed){
+
+        rewardClaimed = true;
+
+        addCard({
+            name: reward.name,
+            market: reward.market
+        });
+    }
+
     cardHolder.innerHTML = `
         <div class="cardResult">
             <img src="cards/${reward.name.toLowerCase()}.png">
             <br><br>
             <h2>${reward.name}${reward.market ? " 🔒" : ""}</h2>
             <br>
-            <button onclick="closeReward('${reward.name}', ${reward.market})">
-    NHẬN THẺ
-</button>
+            <button onclick="
+                document.getElementById('overlay').style.display='none'
+            ">
+                ĐÓNG
+            </button>
         </div>
     `;
 }
 
-video.onended = showCard;
-video.onerror = showCard;
-
-overlay.onclick = (e)=>{
-    if(e.target === overlay){
-        showCard();
-    }
-};
-
-videoHolder.appendChild(video);
-
-video.play().catch(()=>{
-    showCard();
-});
-
-};
 window.sendCardPrompt=
 async function(
 cardName
