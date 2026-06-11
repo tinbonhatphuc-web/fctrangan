@@ -236,24 +236,24 @@ max-height .3s ease;
 }
 
 .overlay{
-
 display:none;
-
 position:fixed;
-
 inset:0;
-
-background:
-rgba(0,0,0,.92);
-
+background:rgba(0,0,0,.92);
 z-index:9999;
 
 justify-content:center;
-
 align-items:center;
-
 flex-direction:column;
 
+overflow-y:auto;
+padding:20px;
+}
+
+.cardResult{
+text-align:center;
+max-height:90vh;
+overflow-y:auto;
 }
 
 .cardResult img{
@@ -1200,13 +1200,9 @@ if(changed){
 await updateDoc(
 userRef,
 {
-
-marketInventory:
-data.marketInventory,
-
-marketHistory:
-data.marketHistory
-
+inventory:data.inventory,
+marketInventory:data.marketInventory,
+marketHistory:data.marketHistory
 }
 );
 
@@ -1757,7 +1753,7 @@ await renderCollection();
 
 await renderHistory();
 
-}
+};
 
 window.openPack = async function(){
 
@@ -1803,8 +1799,6 @@ video.style.maxHeight = "80vh";
 
 function showCard(){
 
-    videoHolder.innerHTML = "";
-
     if(!rewardClaimed){
 
         rewardClaimed = true;
@@ -1813,23 +1807,38 @@ function showCard(){
             name: reward.name,
             market: reward.market
         });
+
     }
 
     cardHolder.innerHTML = `
-        <div class="cardResult">
-            <img src="cards/${reward.name.toLowerCase()}.png">
-            <br><br>
-            <h2>${reward.name}${reward.market ? " 🔒" : ""}</h2>
-            <br>
-            <button onclick="
-                document.getElementById('overlay').style.display='none'
-            ">
-                ĐÓNG
-            </button>
-        </div>
+    <div class="cardResult">
+
+        <img src="cards/${reward.name.toLowerCase()}.png">
+
+        <br><br>
+
+        <h2>
+            ${reward.name}${reward.market ? " 🔒" : ""}
+        </h2>
+
+        <br>
+
+        <button onclick="
+            document.getElementById('overlay').style.display='none'
+        ">
+            NHẬN THẺ
+        </button>
+
+    </div>
     `;
 }
 
+video.onended = showCard;
+
+video.onerror = showCard;
+
+videoHolder.appendChild(video);
+};
 window.sendCardPrompt=
 async function(
 cardName
@@ -2772,7 +2781,7 @@ userRef,
 inventory:data.inventory,
 marketInventory:data.marketInventory,
 marketHistory:data.marketHistory
-}
+
 );
 
 await renderInventory();
