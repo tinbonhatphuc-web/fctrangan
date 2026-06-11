@@ -1197,21 +1197,19 @@ changed=true;
 
 if(changed){
 
-await updateDoc(
-    userRef,
-    {
-        inventory: data.inventory,
-        marketInventory: data.marketInventory,
-        marketHistory: data.marketHistory
-    }
-);
+    await updateDoc(
+        userRef,
+        {
+            inventory: data.inventory,
+            marketInventory: data.marketInventory,
+            marketHistory: data.marketHistory
+        }
+    );
 
-await renderInventory();
-await renderMarketInventory();
-await renderCollection();
-await renderHistory();
-}
-
+    await renderInventory();
+    await renderMarketInventory();
+    await renderCollection();
+    await renderHistory();
 }
 
 }
@@ -1629,149 +1627,92 @@ document
 html;
 
 }
-async function addCard(
-reward
-){
+async function addCard(reward){
 
-const userRef=
-doc(
-db,
-"users",
-deviceId
-);
+    const userRef =
+    doc(db,"users",deviceId);
 
-const snap=
-await getDoc(
-userRef
-);
+    const snap =
+    await getDoc(userRef);
 
-const data=
-snap.data();
+    const data =
+    snap.data();
 
-if(
-reward.market
-){
+    if(reward.market){
 
-data.marketInventory[
-reward.name
-]++;
+        data.marketInventory[reward.name]++;
 
-if(
-!data.marketHistory
-){
+        if(!data.marketHistory){
+            data.marketHistory = [];
+        }
 
-data.marketHistory=
-[];
+        data.marketHistory.unshift({
+            card: reward.name + " 🔒",
+            time: new Date().toLocaleString()
+        });
 
-}
+        if(data.marketHistory.length > 100){
+            data.marketHistory.pop();
+        }
 
-data.marketHistory.unshift({
+    }else{
 
-card:
-reward.name+
-" 🔒",
+        data.inventory[reward.name]++;
 
-time:
-new Date()
-.toLocaleString()
+    }
 
-});
+    if(!data.history){
+        data.history = [];
+    }
 
-if(
-data.marketHistory.length
->100
-){
+    data.history.unshift({
+        card: reward.name + (reward.market ? " 🔒" : ""),
+        time: new Date().toLocaleString()
+    });
 
-data.marketHistory.pop();
+    if(data.history.length > 100){
+        data.history.pop();
+    }
 
-}
+    await updateDoc(
+        userRef,
+        {
+            inventory: data.inventory,
+            marketInventory: data.marketInventory,
+            history: data.history,
+            marketHistory: data.marketHistory
+        }
+    );
 
-}else{
+    document.getElementById("overlay").style.display = "none";
 
-data.inventory[
-reward.name
-]++;
-
-}
-
-data.history.unshift({
-
-card:
-reward.name+
-
-(
-reward.market
-?
-" 🔒"
-:
-""
-),
-
-time:
-new Date()
-.toLocaleString()
-
-});
-
-if(
-data.history.length
->100
-){
-
-data.history.pop();
-
-}
-
-await updateDoc(
-userRef,
-{
-
-inventory:
-data.inventory,
-
-marketInventory:
-data.marketInventory,
-
-history:
-data.history,
-
-marketHistory:
-data.marketHistory
-
-}
-);
-
-}
-
-document.getElementById("overlay").style.display = "none";
-
-await renderInventory();
-await renderMarketInventory();
-await renderCollection();
-await renderHistory();
+    await renderInventory();
+    await renderMarketInventory();
+    await renderCollection();
+    await renderHistory();
 
 };
 window.openPack = async function(){
 
-if(!isAdmin && opensLeft <= 0){
-    alert("Bạn đã hết lượt mở!");
-    return;
-}
+    if(!isAdmin && opensLeft <= 0){
+        alert("Bạn đã hết lượt mở!");
+        return;
+    }
 
-const reward = randomCard();
-rewardClaimed = false;
+    const reward = randomCard();
+    rewardClaimed = false;
 
-if(!isAdmin){
-    opensLeft--;
-    updateOpenText();
+    if(!isAdmin){
+        opensLeft--;
+        updateOpenText();
 
-    await updateDoc(doc(db,"users",deviceId),{
-        opensLeft
-    });
-}
+        await updateDoc(doc(db,"users",deviceId),{
+            opensLeft
+        });
+    }
 
-document.getElementById("lastReward").innerHTML =
-`<h2>${reward.name} ${reward.market ? " 🔒" : ""}</h2>`;
+    document.getElementById("lastReward").innerHTML =
+    `<h2>${reward.name} ${reward.market ? " 🔒" : ""}</h2>`;
 
 // overlay
 const overlay = document.getElementById("overlay");
@@ -2777,7 +2718,7 @@ userRef,
 inventory:data.inventory,
 marketInventory:data.marketInventory,
 marketHistory:data.marketHistory
-
+}
 );
 
 await renderInventory();
