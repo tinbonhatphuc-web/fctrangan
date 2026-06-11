@@ -1198,11 +1198,18 @@ changed=true;
 if(changed){
 
 await updateDoc(
-userRef,
-{
-inventory:data.inventory,
-marketInventory:data.marketInventory,
-marketHistory:data.marketHistory
+    userRef,
+    {
+        inventory: data.inventory,
+        marketInventory: data.marketInventory,
+        marketHistory: data.marketHistory
+    }
+);
+
+await renderInventory();
+await renderMarketInventory();
+await renderCollection();
+await renderHistory();
 }
 );
 
