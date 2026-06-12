@@ -1644,16 +1644,25 @@ html;
 }
 async function addCard(reward){
 
-    const userRef =
-    doc(db,"users",deviceId);
+    const userRef = doc(db,"users",deviceId);
 
-    const snap =
-    await getDoc(userRef);
+    const snap = await getDoc(userRef);
 
-    const data =
-    snap.data();
+    const data = snap.data();
+
+    if(!data.inventory){
+        data.inventory = {};
+    }
+
+    if(!data.marketInventory){
+        data.marketInventory = {};
+    }
 
     if(reward.market){
+
+        if(data.marketInventory[reward.name] == null){
+            data.marketInventory[reward.name] = 0;
+        }
 
         data.marketInventory[reward.name]++;
 
@@ -1672,6 +1681,10 @@ async function addCard(reward){
 
     }else{
 
+        if(data.inventory[reward.name] == null){
+            data.inventory[reward.name] = 0;
+        }
+
         data.inventory[reward.name]++;
 
     }
@@ -1689,15 +1702,12 @@ async function addCard(reward){
         data.history.pop();
     }
 
-    await updateDoc(
-        userRef,
-        {
-            inventory: data.inventory,
-            marketInventory: data.marketInventory,
-            history: data.history,
-            marketHistory: data.marketHistory
-        }
-    );
+    await updateDoc(userRef,{
+        inventory:data.inventory,
+        marketInventory:data.marketInventory,
+        history:data.history,
+        marketHistory:data.marketHistory
+    });
 
     document.getElementById("overlay").style.display = "none";
 
@@ -1706,7 +1716,7 @@ async function addCard(reward){
     await renderCollection();
     await renderHistory();
 
-};
+}
 window.openPack = async function(){
 
     if(!isAdmin && opensLeft <= 0){
